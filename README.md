@@ -1,0 +1,2 @@
+# aritab2c
+manage
