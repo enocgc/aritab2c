@@ -18,6 +18,10 @@
 				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
 					<div class="uk-width-1-1">
 						<h4>Itinerary Information</h4>
+						<div class="uk-card uk-card-default uk-padding">
+							<h4>Arrival Location</h4>
+						</div>
+						
 					</div>
 					<div>
 						<div class="uk-margin ">
@@ -82,6 +86,12 @@
            						 </select>
 							</div>
 						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Total Days</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="number" disabled placeholder="00">
+							</div>
+						</div>
 					</div>
 					<div class="uk-width-1-1">
 						<h4>Package</h4>
@@ -120,6 +130,58 @@
 						<button class="uk-button uk-button-primary" type="submit">Create Itinerary</button>
 						<button class="uk-button uk-button-danger" type="submit">Cancel</button>
 					</div>
+					<div class="uk-width-1-1">
+						<hr>
+						<!-- DIA DE INICIO -->
+						<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+							<span class="days-da uk-background-primary">Day 1</span>
+							<p class="uk-h4">Arrival</p>
+							<div class="uk-margin">
+								 <label class="uk-form-label" for="form-stacked-text">Arrival place</label>
+								<div class="uk-form-controls">
+									<input class="uk-input" type="text" placeholder="Ex. Juan Santamaria International Airport">
+								</div>
+							</div>
+						</div>
+						
+						<!-- TRANSFER 01 -->
+						<div id="transfer" class="uk-text-center">
+							<p class=""><span uk-icon="icon: forward"></span> Transfer to first location</p>
+						</div>
+						
+						<h3>First Location</h3>
+						
+						<!-- DIA 02 -->
+						<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+							<span class="days-da uk-background-primary">Day 2</span>
+							<a class="link-product"><div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add a Product (Activity)</span></div></a>
+						</div>
+						
+						<!-- DIA 03 -->
+						<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+							<span class="days-da uk-background-primary">Day 3</span>
+							<p class="uk-h4">Departure Location</p>
+						</div>
+						
+						<!-- DIA 04 -->
+						<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+							<span class="days-da uk-background-primary">Day 4</span>
+							<p class="uk-h4">Departure Location</p>
+						</div>
+						
+						
+						<!-- TRANSFER 01 -->
+						<div id="transfer" class="uk-text-center">
+							<p class=""><span uk-icon="icon: forward"></span> Transfer to first location</p>
+						</div>
+						
+						<h3>Second Location</h3>
+						<!-- DIA FINAL -->
+						<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+							<span class="days-da uk-background-primary">Day 11</span>
+							<p class="uk-h4">Departure Location</p>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -127,92 +189,4 @@
 </div>
 
 
-
-<!-- MODAL MEDIA -->
-<div id="modal-media" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Media Files</h2>
-		<div class="uk-child-width-1-4@m uk-child-width-1-2 uk-grid-small" uk-grid>
-			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
-			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
-			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
-		</div>
-		<!-- DRAG AND DROP FUNCION -->
-		<div class="js-upload uk-placeholder uk-text-center">
-			<span uk-icon="icon: cloud-upload"></span>
-			<span class="uk-text-middle">Attach binaries by dropping them here or</span>
-			<div uk-form-custom>
-				<input type="file" multiple>
-				<span class="uk-link">selecting one</span>
-			</div>
-		</div>
-
-		<progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-
-		<script>
-
-			var bar = document.getElementById('js-progressbar');
-
-			UIkit.upload('.js-upload', {
-
-				url: '',
-				multiple: true,
-
-				beforeSend: function () {
-					console.log('beforeSend', arguments);
-				},
-				beforeAll: function () {
-					console.log('beforeAll', arguments);
-				},
-				load: function () {
-					console.log('load', arguments);
-				},
-				error: function () {
-					console.log('error', arguments);
-				},
-				complete: function () {
-					console.log('complete', arguments);
-				},
-
-				loadStart: function (e) {
-					console.log('loadStart', arguments);
-
-					bar.removeAttribute('hidden');
-					bar.max = e.total;
-					bar.value = e.loaded;
-				},
-
-				progress: function (e) {
-					console.log('progress', arguments);
-
-					bar.max = e.total;
-					bar.value = e.loaded;
-				},
-
-				loadEnd: function (e) {
-					console.log('loadEnd', arguments);
-
-					bar.max = e.total;
-					bar.value = e.loaded;
-				},
-
-				completeAll: function () {
-					console.log('completeAll', arguments);
-
-					setTimeout(function () {
-						bar.setAttribute('hidden', 'hidden');
-					}, 1000);
-
-					alert('Upload Completed');
-				}
-
-			});
-
-		</script>
-        <p class="uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-            <button class="uk-button uk-button-primary" type="button">Save</button>
-        </p>
-    </div>
-</div>
 

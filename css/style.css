@@ -25,3 +25,10 @@
 .uk-checkbox:hover { background-color: rgba(0,0,0,0.3) !important; }
 .label-location-package input.uk-checkbox:checked:focus, .label-location-package input.uk-checkbox:indeterminate:focus, .label-location-package input.uk-radio:checked:focus, .label-location-package input.uk-checkbox:checked, .label-location-package input.uk-checkbox:indeterminate, .label-location-package input.uk-radio:checked { background-color: rgba(0,127,58,0.15) !important; border: 2px solid green; }
 
+/* TITULO DE DIAS DEL ITINERARY */ 
+.days-da { color: white; font-size: 22px; padding: 3px 25px; position: absolute; top: 3px; left: 3px; }
+
+/* LINK A AGREGAR UN PRODUCT */
+a.link-product { text-decoration: none; }
+a.link-product div { background: lightgrey; }
+a.link-product div:hover { color: white; background: grey; }
