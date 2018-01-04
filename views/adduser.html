@@ -1,0 +1,165 @@
+<!-- ELIMINAR ESTO DESPUES --><head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../libs/uikit/css/uikit.min.css" />
+        <script src="../libs/uikit/js/uikit.min.js"></script>
+        <script src="../libs/uikit/js/uikit-icons.min.js"></script>
+</head>
+<!-- ELIMINAR ESTO DESPUES -->
+
+
+
+
+<div class="uk-section uk-padding">
+	<div class="uk-background-muted uk-padding uk-panel">
+    	<div class="uk-container uk-container-expand">
+			<h3>Add User</h3>
+			<form method="post" class="uk-form-horizontal ">
+				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
+					<div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Name</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="text" placeholder="Name">
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">User Name</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="text" placeholder="User Name">
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Password</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="password" placeholder="Password">
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text"></label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="password" placeholder="Repeat Password">
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Email</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="email" placeholder="Email">
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Phone</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="text" placeholder="Phone">
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Country</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="text" placeholder="Country">
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Company</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="text" placeholder="Company">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- MODAL MEDIA -->
+<div id="modal-media" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Media Files</h2>
+		<div class="uk-child-width-1-4@m uk-child-width-1-2 uk-grid-small" uk-grid>
+			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
+			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
+			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
+		</div>
+		<!-- DRAG AND DROP FUNCION -->
+		<div class="js-upload uk-placeholder uk-text-center">
+			<span uk-icon="icon: cloud-upload"></span>
+			<span class="uk-text-middle">Attach binaries by dropping them here or</span>
+			<div uk-form-custom>
+				<input type="file" multiple>
+				<span class="uk-link">selecting one</span>
+			</div>
+		</div>
+
+		<progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+
+		<script>
+
+			var bar = document.getElementById('js-progressbar');
+
+			UIkit.upload('.js-upload', {
+
+				url: '',
+				multiple: true,
+
+				beforeSend: function () {
+					console.log('beforeSend', arguments);
+				},
+				beforeAll: function () {
+					console.log('beforeAll', arguments);
+				},
+				load: function () {
+					console.log('load', arguments);
+				},
+				error: function () {
+					console.log('error', arguments);
+				},
+				complete: function () {
+					console.log('complete', arguments);
+				},
+
+				loadStart: function (e) {
+					console.log('loadStart', arguments);
+
+					bar.removeAttribute('hidden');
+					bar.max = e.total;
+					bar.value = e.loaded;
+				},
+
+				progress: function (e) {
+					console.log('progress', arguments);
+
+					bar.max = e.total;
+					bar.value = e.loaded;
+				},
+
+				loadEnd: function (e) {
+					console.log('loadEnd', arguments);
+
+					bar.max = e.total;
+					bar.value = e.loaded;
+				},
+
+				completeAll: function () {
+					console.log('completeAll', arguments);
+
+					setTimeout(function () {
+						bar.setAttribute('hidden', 'hidden');
+					}, 1000);
+
+					alert('Upload Completed');
+				}
+
+			});
+
+		</script>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-primary" type="button">Save</button>
+        </p>
+    </div>
+</div>
+
