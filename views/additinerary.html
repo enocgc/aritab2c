@@ -150,7 +150,7 @@
 						<!-- DIA 02 -->
 						<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
 							<span class="days-da uk-background-primary">Day 2</span>
-							<a class="link-product"><div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add a Product (Activity)</span></div></a>
+							<a href="#modal-activities" uk-toggle class="link-product"><div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add a Product (Activity)</span></div></a>
 						</div>
 						
 						<!-- DIA 03 -->
@@ -185,4 +185,39 @@
 </div>
 
 
+
+
+
+
+<!-- MODAL MEDIA -->
+<div id="modal-activities" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Select a Product (Activity)</h2>
+		<div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
+			<!-- CUADRO DE ACTIVIDADES -->
+			<div class="">
+				 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+					<h3 class="uk-card-title">Activity 01</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				</div>
+			</div>
+			<div class="">
+				 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+					<h3 class="uk-card-title">Activity 02</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				</div>
+			</div>
+			<div class="">
+				 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+					<h3 class="uk-card-title">Activity 03</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				</div>
+			</div>
+		</div>		
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-primary" type="button">Save</button>
+        </p>
+    </div>
+</div>
 
