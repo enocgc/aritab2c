@@ -1,2 +1,2 @@
 # aritab2c
-manage
+web itineraries management system using: Angular, PHP, CSS, HTML, UIKIT, JQUERY
