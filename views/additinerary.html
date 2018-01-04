@@ -1,6 +1,7 @@
 <!-- ELIMINAR ESTO DESPUES --><head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../libs/uikit/css/uikit.min.css" />
+        <link rel="stylesheet" href="../css/style.css" />
         <script src="../libs/uikit/js/uikit.min.js"></script>
         <script src="../libs/uikit/js/uikit-icons.min.js"></script>
 </head>
@@ -12,9 +13,12 @@
 <div class="uk-section uk-padding">
 	<div class="uk-background-muted uk-padding uk-panel">
     	<div class="uk-container uk-container-expand">
-			<h3>Add Location</h3>
+			<h3>Add Itinerary</h3>
 			<form method="post" class="uk-form-horizontal ">
 				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
+					<div class="uk-width-1-1">
+						<h4>Itinerary Information</h4>
+					</div>
 					<div>
 						<div class="uk-margin ">
 							 <label class="uk-form-label" >Name</label>
@@ -30,18 +34,6 @@
 									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
 									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
 								</ul>
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Latitude</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="gpsLat">
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Longitude</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="gpsLong">
 							</div>
 						</div>
 						<div class="uk-margin">
@@ -65,14 +57,6 @@
 					</div>
 					<div>
 						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Media</label>
-							<div class="uk-form-controls">
-								<img src="http://fakeimg.pl/120x120/" alt="">
-								&nbsp;&nbsp;
-								<button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button>
-							</div>
-						</div>
-						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Country</label>
 							<div class="uk-form-controls">
 								  <select class="uk-select">
@@ -84,21 +68,56 @@
 							</div>
 						</div>
 						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Min. Nights</label>
+							 <label class="uk-form-label" for="form-stacked-text">Number of persons included</label>
 							<div class="uk-form-controls">
 								  <select class="uk-select">
-									<option class="uk-selected">Select a Min. Nights</option>
-                					<option>1</option>
-                					<option>2</option>
-               						<option>3</option>
-               						<option>4</option>
+									<option class="uk-selected">Select a number of persons</option>
+                					<option>1 person</option>
+               						 <option>2 persons</option>
+               						 <option>3 persons</option>
+               						 <option>4 persons</option>
+               						 <option>5 persons</option>
+               						 <option>6 persons</option>
+               						 <option>7 persons</option>
            						 </select>
 							</div>
 						</div>
 					</div>
+					<div class="uk-width-1-1">
+						<h4>Package</h4>
+					</div>
+					<div class="uk-width-1-1">
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Select a Package</label>
+								 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+									<label class="label-location-package"><input class="uk-checkbox" checked type="radio" name="radio-package" ><div class="selector-package"><h4>Package title</h4><p>Accomodation type <br> Transportation type</p></div></label>
+									<label class="label-location-package"><input class="uk-checkbox"  type="radio" name="radio-package" ><div class="selector-package"><h4>Package title</h4><p>Accomodation type <br> Transportation type</p></div></label>
+									<label class="label-location-package"><input class="uk-checkbox"  type="radio" name="radio-package" ><div class="selector-package"><h4>Package title</h4><p>Accomodation type <br> Transportation type</p></div></label>
+								</div>
+							
+						</div>
+					</div>
+					<div class="uk-width-1-1">
+						<h4>Locations</h4>
+					</div>
+					<div class="uk-width-1-1">
+							
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Select Locations</label>
+								 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+									<label class="label-location"><input class="uk-checkbox" type="checkbox" checked > <div class="selector" style="background-image: url(https://www.riu.com/es/binaris/DestinoGuanacaste_tcm49-176472.jpg);"><h4>Hola Mundo</h4></div></label>
+									<label class="label-location"><input class="uk-checkbox" type="checkbox" > <div class="selector" style="background-image: url(https://www.riu.com/es/binaris/DestinoGuanacaste_tcm49-176472.jpg);"><h4>Hola Mundo</h4></div></label>
+									<label class="label-location"><input class="uk-checkbox" type="checkbox" > <div class="selector" style="background-image: url(https://www.riu.com/es/binaris/DestinoGuanacaste_tcm49-176472.jpg);"><h4>Hola Mundo</h4></div></label>
+									<label class="label-location"><input class="uk-checkbox" type="checkbox" > <div class="selector" style="background-image: url(https://www.riu.com/es/binaris/DestinoGuanacaste_tcm49-176472.jpg);"><h4>Hola Mundo</h4></div></label>
+									<label class="label-location"><input class="uk-checkbox" type="checkbox" > <div class="selector" style="background-image: url(https://www.riu.com/es/binaris/DestinoGuanacaste_tcm49-176472.jpg);"><h4>Hola Mundo</h4></div></label>
+								</div>
+							
+						</div>
+						
+					</div>
 					
 					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit">Save</button>
+						<button class="uk-button uk-button-primary" type="submit">Create Itinerary</button>
 						<button class="uk-button uk-button-danger" type="submit">Cancel</button>
 					</div>
 				</div>

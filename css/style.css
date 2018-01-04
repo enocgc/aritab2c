@@ -1,0 +1,27 @@
+
+
+/*                              ┈╭━━━━━━━━━━━╮┈                               */
+/*                              ┈┃╭━━━╮┊╭━━━╮┃┈                               */
+/*                              ╭┫┃┈▇┈┃┃┈▇┈┃┣╮                              */
+/*                              ┃┃╰━━━╯┊╰━━━╯┃┃                               */
+/*                              ╰┫╭━╮╰━━━╯╭━╮┣╯                               */
+/*                              ┈┃┃┣┳┳┳┳┳┳┳┫┃┃┈                               */
+/*                              ┈┃┃╰┻┻┻┻┻┻┻╯┃┃┈                               */
+/*                              ┈╰━━━━━━━━━━━╯┈                               */
+
+/* ----------------- --- TRABAJO POR ENOC Y CSAR ----------------------- */
+
+
+/* SELECTOR CHECK DEL LOCATION EN EL FORM ITINERARY */
+.label-location { position: relative; margin-bottom: 5px; }
+.label-location input {position: absolute; right: 0px; bottom: 0px; width: 160px; height: 120px;}
+.label-location-package { position: relative; margin-bottom: 5px; }
+.label-location-package input {position: absolute; right: 0px; bottom: 0px; width: 180px; height: 220px;}
+.selector { width: 160px; height: 120px; background: grey; background-position: center center; background-size: cover; }
+.selector h4 { color: white; margin-left: 8px;}
+.selector-package { width: 180px; height: 220px; background: rgb(211, 226, 232); background-position: center center; background-size: cover; }
+.selector-package h4, .selector-package p {  margin-left: 8px;}
+.uk-checkbox:checked:focus, .uk-checkbox:indeterminate:focus, .uk-radio:checked:focus, .uk-checkbox:checked, .uk-checkbox:indeterminate, .uk-radio:checked { background-color: rgba(0,0,0,0.6) !important; }
+.uk-checkbox:hover { background-color: rgba(0,0,0,0.3) !important; }
+.label-location-package input.uk-checkbox:checked:focus, .label-location-package input.uk-checkbox:indeterminate:focus, .label-location-package input.uk-radio:checked:focus, .label-location-package input.uk-checkbox:checked, .label-location-package input.uk-checkbox:indeterminate, .label-location-package input.uk-radio:checked { background-color: rgba(0,127,58,0.15) !important; border: 2px solid green; }
+
