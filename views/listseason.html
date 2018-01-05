@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="../libs/datatable/datatables.min.css"/>
 		<script type="text/javascript" src="../libs/datatable/datatables.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../libs/datatable/DataTables-1.10.16/css/jquery.dataTables.min.css"/>
-
+<script defer src="../libs/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
 </head>
 <!-- ELIMINAR ESTO DESPUES -->
 
@@ -24,53 +24,43 @@
 } );
       </script>
 			<!--tabla datatables-->
-      <table id="example" class="display" cellspacing="0" width="100%">
+      <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>Actions</th>
                 <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Start Date</th>
+                <th>End Date</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
+                <th>Actions</th>
                 <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Start Date</th>
+                <th>End Date</th>
             </tr>
         </tfoot>
         <tbody>
+
             <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
+                <td> <a href=""> <i class="fas fa-eye fa-lg"></i></a>   <a href="">  <i class="fas fa-edit fa-lg" ></i></a> <a href="">  <i class="fas fa-trash fa-lg"></i></a></td>
+                 <td>Higth season</td>
+                <td>15/11/2017</td>
+                <td>15/04/2017</td>
             </tr>
             <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
+              <td> <a href=""> <i class="fas fa-eye fa-lg"></i></a>   <a href="">  <i class="fas fa-edit fa-lg"></i></a> <a href="">  <i class="fas fa-trash fa-lg"></i></a></td>
+                <td>Low season</td>
+                <td>16/04/2017</td>
+                <td>14/11/2017</td>
             </tr>
             <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-                <td>2009/01/12</td>
-                <td>$86,000</td>
+                <td> <a href=""> <i class="fas fa-eye-slash fa-lg gray"></i></a>   <a href="">  <i class="fas fa-edit fa-lg"></i></a> <a href="">  <i class="fas fa-trash fa-lg"></i></a></td>
+                <td>Peak season </td>
+                <td>16/12/2017</td>
+                <td>16/01/2017</td>
             </tr>
-          
         </tbody>
     </table>
 		</div>
