@@ -12,6 +12,12 @@
 		<link rel="stylesheet" type="text/css" href="../libs/datatables/datatables.min.css"/>
 		<script type="text/javascript" src="../libs/datatables/datatables.min.js"></script>
 
+	
+	<script>
+		  	function load_home() {
+				 document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 120px);" data="adduser.html" ></object>';
+			}
+	</script>
 </head>
 <body>
 	<!-- HEADER DESKTOP -->
@@ -77,7 +83,7 @@
 													<li><a href="#">Media</a></li>
 													<li><a href="#">Tags</a></li>
 													<li><a href="#">Languages</a></li>
-													<li><a href="#">Users</a></li>
+													<li><a href="#" onclick="load_home()">Users</a></li>
 												</ul>
 											</div>
 										</div>
