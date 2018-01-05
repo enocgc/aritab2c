@@ -1,5 +1,4 @@
-<!-- ELIMINAR ESTO DESPUES -->
-<head>
+<!-- ELIMINAR ESTO DESPUES --><head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../libs/uikit/css/uikit.min.css" />
         <script src="../libs/uikit/js/uikit.min.js"></script>
@@ -8,6 +7,7 @@
 				
 </head>
 <!-- ELIMINAR ESTO DESPUES -->
+
 
 
 
@@ -72,7 +72,14 @@
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
 						<button class="uk-button uk-button-primary" type="submit">Save</button>
-						<button class="uk-button uk-button-danger" type="submit" onclick="cancel()">Cancel</button>
+						<button class="uk-button uk-button-danger" type="submit" onclick="canceluser()">Cancel</button>
+						<script>
+						$(document).ready(function(){
+							function canceluser(){
+						$( "#contenedor-1" ).load( "listusers.html" );
+							}
+							});
+						</script>
 					</div>
 				</div>
 			</form>
