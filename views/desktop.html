@@ -11,13 +11,9 @@
         <script src="../libs/uikit/js/uikit-icons.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../libs/datatables/datatables.min.css"/>
 		<script type="text/javascript" src="../libs/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="../js/desktop-menu-links.js"></script>
 
-	
-	<script>
-		  	function load_home() {
-				 document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 120px);" data="adduser.html" ></object>';
-			}
-	</script>
+
 </head>
 <body>
 	<!-- HEADER DESKTOP -->
@@ -68,7 +64,7 @@
 												<ul class="uk-nav uk-navbar-dropdown-nav">
 													<li><a href="#">Packages</a></li>
 													<li><a href="#">Services</a></li>
-													<li><a href="#">Seasons</a></li>
+													<li><a href="#" onclick="load_listseason()">Seasons</a></li>
 												</ul>
 											</div>
 										</div>
@@ -83,7 +79,7 @@
 													<li><a href="#">Media</a></li>
 													<li><a href="#">Tags</a></li>
 													<li><a href="#">Languages</a></li>
-													<li><a href="#" onclick="load_home()">Users</a></li>
+													<li><a href="#" onclick="load_userlist()">Users</a></li>
 												</ul>
 											</div>
 										</div>
