@@ -39,4 +39,6 @@ a.link-product div:hover { color: white; background: grey; }
 .contenedor-object { width: 100%; height: calc(100vh - 120px; }
 
 /* CONTENEDOR TAMAÑOS */
-#contenedor-1 { height: calc(100vh - 80px);
+#contenedor-1 { height: calc(100vh - 80px) !important; }
+.contenedor-alto { min-height: calc(100vh - 80px) !important; }
+.card-menu { box-shadow: none !important; height: calc(100vh - 80px); padding: 20px 0 0 80px; }
