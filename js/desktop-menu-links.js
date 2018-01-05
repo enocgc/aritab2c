@@ -22,13 +22,13 @@ function load_addproduct() {
  document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="addproduct.html" ></object>';
 }
 $(document).ready(function() {
-  $("#listausuario").click(function() {
+  $("#listausuario").click(function(event) {
     $("#contenedor-1").load("listusers.html");
   });
-  $("#calcelar").click(function() {
+  $("#calcelar").click(function(event) {
     $("#contenedor-1").load("listusers.html");
   });
-  $("#addusuario").click(function() {
+  $("#addusuario").click(function(event) {
     $("#contenedor-1").load("adduser.html");
   });
 });
