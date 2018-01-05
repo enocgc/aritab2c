@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function load_userslist() {
  document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="listusers.html" ></object>';
 }
@@ -38,3 +39,45 @@ $(document).ready(function() {
     $("#contenedor-1").load("addcountry.html");
   });
 });
+=======
+function load_userslist() {
+ document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="listusers.html" ></object>';
+}
+
+function load_listseason() {
+ document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="listseason.html" ></object>';
+}
+function load_adduser() {
+ document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="adduser.html" ></object>';
+}
+function cancel() {
+  window.history.back();
+}
+
+function load_listlanguage() {
+ document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="listlanguages.html" ></object>';
+}
+function load_listproduct() {
+ document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="listproduct.html" ></object>';
+}
+function load_addproduct() {
+ document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="addproduct.html" ></object>';
+}
+$(document).ready(function() {
+  $("#listausuario").click(function(event) {
+    $("#contenedor-1").load("listusers.html");
+  });
+  $("#calcelar").click(function(event) {
+    $("#contenedor-1").load("listusers.html");
+  });
+  $("#addusuario").click(function(event) {
+    $("#contenedor-1").load("adduser.html");
+  });
+  $("#listcountries").click(function(event) {
+    $("#contenedor-1").load("listcountries.html");
+  });
+  $("#addcountry").click(function(event) {
+    $("#contenedor-1").load("addcountry.html");
+  });
+});
+>>>>>>> cea532c21181af9bfb436e35f8dd5ef03ee4dcc6
