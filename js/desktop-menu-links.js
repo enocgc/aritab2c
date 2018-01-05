@@ -31,4 +31,10 @@ $(document).ready(function() {
   $("#addusuario").click(function(event) {
     $("#contenedor-1").load("adduser.html");
   });
+  $("#listcountries").click(function(event) {
+    $("#contenedor-1").load("listcountries.html");
+  });
+  $("#addcountry").click(function(event) {
+    $("#contenedor-1").load("addcountry.html");
+  });
 });
