@@ -13,19 +13,20 @@
 </head>
 <!-- ELIMINAR ESTO DESPUES -->
 
-
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable();
 } );
+
 </script>
+
 <div class="uk-section uk-padding" id="contenedor-1">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Users</h3>
             <div class="uk-margin-small">
-                <button onclick="addluser1()" class="uk-button uk-button-primary uk-button-small"><i class="fas fa-plus fa-lg"></i> Add User</button>
-				
+                <button onclick="load_adduser()" class="uk-button uk-button-primary uk-button-small"><i class="fas fa-plus fa-lg"></i> Add User</button>
+
             </div>
             <!--tabla datatables-->
             <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
