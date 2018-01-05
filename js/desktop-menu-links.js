@@ -15,6 +15,9 @@ function cancel() {
 function load_listlanguage() {
  document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="listlanguages.html" ></object>';
 }
+function load_listproduct() {
+ document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="listproduct.html" ></object>';
+}
 function load_addproduct() {
  document.getElementById("contenedor-1").innerHTML='<object type="text/html" style="width: 100%; height: calc(100vh - 86px);" data="addproduct.html" ></object>';
 }
