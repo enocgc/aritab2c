@@ -11,7 +11,6 @@
 
 /* ----------------- --- TRABAJO POR ENOC Y CSAR ----------------------- */
 
-
 /* SELECTOR CHECK DEL LOCATION EN EL FORM ITINERARY */
 .label-location { position: relative; margin-bottom: 5px; }
 .label-location input {position: absolute; right: 0px; bottom: 0px; width: 160px; height: 120px;}
@@ -35,10 +34,10 @@ a.link-product div:hover { color: white; background: grey; }
 
 
 /* CARD DEL TRANSFER */
-.uk-card-transfer { background: rgb(212, 228, 247); box-shadow: 0 5px 15px rgba(0,0,0,.08); margin-top: 40px !important; transition: box-shadow .1s ease-in-out; border: rgba(0,0,0,0.0.5) solid 0.5px; } 
-.contenedor-object { width: 100%; height: calc(100vh - 120px; }
+.uk-card-transfer { background: rgb(212, 228, 247); box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-top: 40px !important; transition: box-shadow .1s ease-in-out; border: rgba(0,0,0,0.5) solid 0.5px; } 
+.contenedor-object { width: 100%; height: calc(100vh - 120px); }
 
 /* CONTENEDOR TAMAÑOS */
 #contenedor-1 { height: calc(100vh - 80px) !important; }
 .contenedor-alto { min-height: calc(100vh - 80px) !important; }
-.card-menu { box-shadow: none !important; height: calc(100vh - 80px); padding: 20px 0 0 80px; }
+.card-menu { box-shadow: none !important; height: calc(100vh - 80px); padding: 20px 10px 0 60px; }
