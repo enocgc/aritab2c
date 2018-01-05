@@ -32,3 +32,7 @@
 a.link-product { text-decoration: none; }
 a.link-product div { background: lightgrey; }
 a.link-product div:hover { color: white; background: grey; }
+
+
+/* CARD DEL TRANSFER */
+.uk-card-transfer { background: rgb(212, 228, 247); box-shadow: 0 5px 15px rgba(0,0,0,.08); margin-top: 40px !important; transition: box-shadow .1s ease-in-out; border: rgba(0,0,0,0.0.5) solid 0.5px; } 
