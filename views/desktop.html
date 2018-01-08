@@ -6,15 +6,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../libs/uikit/css/uikit.min.css" />
 	<link rel="stylesheet" href="../css/style.css" />
-	<script src="../libs/jquery/jquery-3.2.1.min.js"></script>
+	<!--	<script src="../libs/jquery/jquery-3.2.1.min.js"></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="../libs/uikit/js/uikit.min.js"></script>
 	<script src="../libs/uikit/js/uikit-icons.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../libs/datatables/datatables.min.css"/>
-	<script type="text/javascript" src="../libs/datatables/datatables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../libs/datatable/datatables.min.css"/>
+	<script type="text/javascript" src="../libs/datatable/datatables.min.js"></script>
     <script type="text/javascript" src="../js/desktop-menu-links.js"></script>
 	<script defer src="../libs/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
+ <!-- movi aqui -->
+
+  <script  src="../libs/angular/angular.min.js"></script>
+  <script  src="../libs/angular/angular-route.js"></script>
+   
+
+ <!-- movi aqui -->
+
 </head>
-<body>
+<body ng-app="aritab2c" ng-controller="arita">
 	<!-- HEADER DESKTOP -->
 	<div class="tm-header uk-visible@m" uk-header>
         <div uk-sticky media="768" show-on-up animation="uk-animation-slide-top" cls-active="uk-navbar-sticky" sel-target=".uk-navbar-container">
@@ -36,7 +45,7 @@
 											<ul class="uk-nav uk-navbar-dropdown-nav">
 												<li><a href="#" id="listcountries">Country</a></li>
 												<li><a href="#">Location</a></li>
-												<li><a href="#" onclick="load_listproduct()">Product (Activity)</a></li>
+												<li><a href="#listproduct" >Product (Activity)</a></li>
 											</ul>
 										</div>
 									</div>
@@ -167,11 +176,18 @@
 
 		</div>
 	</div>
-
-
-
+<!-- agrege aqui -->
+	
+<!-- agrege aqui -->
 	<div id="modals">
 
 	</div>
+	<!-- agrege aqui -->
+	<script defer src="../js/app.js"></script>
+	  <script defer src="../js/rutas.js"></script>
+	  <script defer src="../js/controlerDesktop.js"></script>
+	  <script defer src="../js/controlLista.js"></script>
+
+	  <!-- agrege aqui -->
 </body>
 </html>
