@@ -43,5 +43,7 @@ appRouter.config(function($routeProvider) {
     })
 		.when("/additineries", {
         templateUrl : "additinerary.html"
+    }).when("/media", {
+        templateUrl : "media.html"
     });
 });

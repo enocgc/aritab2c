@@ -11,7 +11,6 @@
 	<script src="../libs/uikit/js/uikit-icons.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../libs/datatable/datatables.min.css"/>
 	<script type="text/javascript" src="../libs/datatable/datatables.min.js"></script>
-    <script type="text/javascript" src="../js/desktop-menu-links.js"></script>
 	<script defer src="../libs/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
  <!-- movi aqui -->
 
@@ -19,8 +18,13 @@
   <script  src="../libs/angular/angular-route.js"></script>
 
 
- <!-- movi aqui -->
+ <!-- script listas -->
+ <script type="text/javascript">
+ $(document).ready(function() {
+     $('#example').DataTable();
+ } );
 
+ </script>
 </head>
 <body  ng-controller="arita">
 	<!-- HEADER DESKTOP -->
