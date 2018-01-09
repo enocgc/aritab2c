@@ -43,7 +43,11 @@ appRouter.config(function($routeProvider) {
     })
 		.when("/additineries", {
         templateUrl : "additinerary.html"
-    }).when("/media", {
+    })
+    .when("/media", {
         templateUrl : "media.html"
-    });
+    }).otherwise({
+		templateUrl : 'home.html',
+		//controller : 'tablaMateriales'
+	});
 });
