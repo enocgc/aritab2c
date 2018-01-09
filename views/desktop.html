@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html  ng-app="aritab2c">
+<head>
+    <meta charset="utf-8">
+    <title>Aritab2c</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../libs/uikit/css/uikit.min.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+	<script src="../libs/jquery/jquery-3.0.0.min.js"></script>
+	<script src="../libs/uikit/js/uikit.min.js"></script>
+	<script src="../libs/uikit/js/uikit-icons.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../libs/datatable/datatables.min.css"/>
+	<script type="text/javascript" src="../libs/datatable/datatables.min.js"></script>
+    <script type="text/javascript" src="../js/desktop-menu-links.js"></script>
+	<script defer src="../libs/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
+ <!-- movi aqui -->
+
+  <script  src="../libs/angular/angular.min.js"></script>
+  <script  src="../libs/angular/angular-route.js"></script>
+
+
+ <!-- movi aqui -->
+
+</head>
+<body  ng-controller="arita">
+	<!-- HEADER DESKTOP -->
+	<div class="tm-header uk-visible@m" uk-header>
+        <div uk-sticky media="768" show-on-up animation="uk-animation-slide-top" cls-active="uk-navbar-sticky" sel-target=".uk-navbar-container">
+        <div class="uk-navbar-container">
+            <div class="uk-container uk-container-expand">
+                <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;}">
+					<div class="uk-navbar-left">
+						<a href="#" class="uk-navbar-item uk-logo">
+							<img src="../media/logo.png" class="uk-responsive-height" alt="Arita B2C">
+						</a>
+                    </div>
+                    <div class="uk-navbar-right">
+						<ul class="uk-navbar-nav">
+							<li class="uk-active"><a href="#">Home</a></li>
+							<li class="uk-parent"><a href="#">Destinations</a>
+								<div class="uk-navbar-dropdown">
+									<div class="uk-navbar-dropdown-grid uk-child-width-1-1" uk-grid>
+										<div>
+											<ul class="uk-nav uk-navbar-dropdown-nav">
+												<li><a href="#contrieslist" >Country</a></li>
+												<li><a href="#locationlist">Location</a></li>
+												<li><a href="#listproduct" >Product (Activity)</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="uk-parent">
+								<a href="#">Logistics</a>
+									<div class="uk-navbar-dropdown">
+										<div class="uk-navbar-dropdown-grid uk-child-width-1-1" uk-grid>
+											<div>
+												<ul class="uk-nav uk-navbar-dropdown-nav">
+													<li><a href="#transportationlist">Transportations</a></li>
+													<li><a href="#acomodationlist">Accomodations</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+							</li>
+							<li class="uk-parent">
+								<a href="#">Itineraries</a>
+									<div class="uk-navbar-dropdown">
+										<div class="uk-navbar-dropdown-grid uk-child-width-1-1" uk-grid>
+											<div>
+												<ul class="uk-nav uk-navbar-dropdown-nav">
+													<li><a href="#packageslist">Packages</a></li>
+													<li><a href="#serviceslist">Services</a></li>
+													<li><a href="#seasonlist" >Seasons</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+							</li>
+							<li class="uk-parent">
+								<a href="">System</a>
+									<div class="uk-navbar-dropdown">
+										<div class="uk-navbar-dropdown-grid uk-child-width-1-1" uk-grid>
+											<div>
+												<ul class="uk-nav uk-navbar-dropdown-nav">
+													<li><a href="#media">Media</a></li>
+													<li><a href="#taglist">Tags</a></li>
+													<li><a href="#listlanguage" >Languages</a></li>
+													<li><a href="#listuser" >Users</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+							</li>
+						</ul>
+						<div class="uk-navbar-item" id="">
+							<a  href="#form-contacto" uk-toggle class="uk-button uk-button-small uk-button-danger" type="button">Contact Us</a>
+						</div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+		</div>
+	</div>
+	<!-- HEADER MOBILE -->
+	<div class="tm-header-mobile uk-hidden@m">
+		<nav class="uk-navbar-container" uk-navbar>
+			<div class="uk-navbar-left">
+				<a class="uk-navbar-toggle" href="#tm-mobile" uk-toggle>
+					<div uk-navbar-toggle-icon></div>
+				</a>
+			</div>
+			<div class="uk-navbar-center">
+				<a class="uk-navbar-item uk-logo" href="http://www.digitalcr.com/2018">
+					<img src="../media/logo.png" class="uk-responsive-height" alt="Arita B2C">
+				</a>
+			</div>
+		</nav>
+		<!-- MENU OFFCANVAS MOBILE RESPONSIVE -->
+		<div id="tm-mobile" uk-offcanvas mode="push" overlay>
+			<div class="uk-offcanvas-bar">
+				<button class="uk-offcanvas-close" type="button" uk-close></button>
+				<div class="uk-child-width-1-1" uk-grid>
+					<div class="uk-panel" id="">
+						<!-- AQUI VA EL MENU RESPONSIVE -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--DIV CONTENEDOR PRINCIPAL -->
+	<div class="uk-section uk-padding-remove">
+    	<div class="uk-container uk-container-expand uk-padding-remove ">
+			<div uk-grid class="uk-padding-remove contenedor-alto">
+				<!-- ENLACES RAPIDOS -->
+				<div class="uk-width-1-4@m uk-visible@m uk-padding-remove uk-card-secondary contenedor-alto">
+					<div class="uk-card uk-card-secondary uk-card-body card-menu" style="">
+						<h3 class="uk-card-title">Quick Links</h3>
+            			<ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+							<li class="uk-nav-header">Itineraries</li>
+							<li class="uk-parent">
+								<a href="#">Creation commands</a>
+								<ul class="uk-nav-sub">
+									<li><a href="#additineries"><span uk-icon="icon: plus-circle"></span> Create Itinerary</a></li>
+									<li><a href="#addproduct"><span uk-icon="icon: plus-circle"></span> Create Product (Activity) </a></li>
+									<li><a href="#addlocation"><span uk-icon="icon: plus-circle"></span> Create Location </a></li>
+								</ul>
+							</li>
+							<li class="uk-parent">
+								<a href="#">Edition commands</a>
+								<ul class="uk-nav-sub">
+									<li><a href="#"><span uk-icon="icon: pencil"></span> Edit Itinerary</a></li>
+									<li><a href="#"><span uk-icon="icon: pencil"></span> Edit Product (Activity) </a></li>
+									<li><a href="#"><span uk-icon="icon: pencil"></span> Edit Location </a></li>
+								</ul>
+							</li>
+							<li class="uk-nav-header">Administration</li>
+							<li><a href="#contrieslist"><span class="uk-margin-small-right" uk-icon="icon: location"></span> Countries</a></li>
+							<li><a href="#locationlist"><span class="uk-margin-small-right" uk-icon="icon: image"></span> Locations</a></li>
+							<li><a href="#listproduct"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span> Products (Activities)</a></li>
+							<li class="uk-nav-divider"></li>
+							<li><a href="#listuser"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Users</a></li>
+							<li><a href="../login.html"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Logout</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- CONTENEDOR PRINCIPAL -->
+				<div class="uk-width-3-4@m uk-padding-remove" ng-view>
+					<div id="contenedor-1" style="height: calc(100vh - 80px);">
+						<h1>Bienvenido a Arita B2C</h1>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+<!-- agrege aqui -->
+
+<!-- agrege aqui -->
+	<div id="modals">
+
+	</div>
+	<!-- agrege aqui -->
+	<script defer src="../js/app.js"></script>
+	<script defer src="../js/rutas.js"></script>
+	  <script defer src="../js/controlerDesktop.js"></script>
+	  <script defer src="../js/controlLista.js"></script>
+
+	  <!-- agrege aqui -->
+</body>
+</html>
