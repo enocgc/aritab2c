@@ -11,6 +11,7 @@
 	<script src="../libs/uikit/js/uikit-icons.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../libs/datatable/datatables.min.css"/>
 	<script type="text/javascript" src="../libs/datatable/datatables.min.js"></script>
+    <script type="text/javascript" src="../js/desktop-menu-links.js"></script>
 	<script defer src="../libs/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
  <!-- movi aqui -->
 
@@ -18,13 +19,8 @@
   <script  src="../libs/angular/angular-route.js"></script>
 
 
- <!-- script listas -->
- <script type="text/javascript">
- $(document).ready(function() {
-     $('#example').DataTable();
- } );
+ <!-- movi aqui -->
 
- </script>
 </head>
 <body  ng-controller="arita">
 	<!-- HEADER DESKTOP -->
@@ -40,7 +36,7 @@
                     </div>
                     <div class="uk-navbar-right">
 						<ul class="uk-navbar-nav">
-							<li class="uk-active"><a href="desktop.html" target="_parent">Home</a></li>
+							<li class="uk-active"><a href="#">Home</a></li>
 							<li class="uk-parent"><a href="#locationlist">Destinations</a>
 								<div class="uk-navbar-dropdown">
 									<div class="uk-navbar-dropdown-grid uk-child-width-1-1" uk-grid>
@@ -74,9 +70,8 @@
 											<div>
 												<ul class="uk-nav uk-navbar-dropdown-nav">
 													<li><a href="#packageslist">Packages</a></li>
-													<li hidden><a href="#serviceslist">Services</a></li>
+													<li><a href="#serviceslist">Services</a></li>
 													<li><a href="#seasonlist" >Seasons</a></li>
-													<li><a href="#itineraries" >Itineraries</a></li>
 												</ul>
 											</div>
 										</div>
@@ -98,8 +93,8 @@
 									</div>
 							</li>
 						</ul>
-						<div class="uk-navbar-item" id="" >
-							<a href="desktop.html" target="_parent" class="uk-button uk-button-small uk-button-danger" >Contact Support</a>
+						<div class="uk-navbar-item" id="">
+							<a  href="#form-contacto" uk-toggle class="uk-button uk-button-small uk-button-danger" type="button">Contact Support</a>
 						</div>
                     </div>
                 </nav>
@@ -172,15 +167,18 @@
 				</div>
 				<!-- CONTENEDOR PRINCIPAL -->
 				<div class="uk-width-3-4@m uk-padding-remove" ng-view>
-					<div id="contenedor-1" style="height: calc(100vh - 80px);">
-						<h1>Bienvenido a Arita B2C</h1>
-					</div>
+
 				</div>
 			</div>
 
 		</div>
 	</div>
+<!-- agrege aqui -->
 
+<!-- agrege aqui -->
+	<div id="modals">
+
+	</div>
 	<!-- agrege aqui -->
 	<script defer src="../js/app.js"></script>
 	<script defer src="../js/rutas.js"></script>
