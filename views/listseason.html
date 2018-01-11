@@ -88,19 +88,15 @@ $(document).ready(function() {
 				<div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
 					<div>
 						<div class="uk-margin ">
-							 <label class="uk-form-label" >Name</label>
+							<script>
+								$(document).ready(function() {
+									$year = (new Date()).getFullYear();
+									$("#year").attr('value',$year);
+								});
+							</script>
+							 <label class="uk-form-label" >Year</label>
 							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
-								</ul>
-
-								<ul class="uk-switcher uk-margin">
-									<li><input class="uk-input" type="text" placeholder="English Name" name="name-en"></li>
-									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
-									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
-								</ul>
+								<input id="year" class="uk-input" type="number" value="" name="name-en">
 							</div>
 						</div>
 						<div class="uk-margin">
