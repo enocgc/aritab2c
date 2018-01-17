@@ -27,6 +27,7 @@ appRouter.config(function($routeProvider) {
         templateUrl : "addcountry.html"
     }).when("/addlocation", {
         templateUrl : "addlocation.html"
+
     })
 		.when("/addproduct", {
         templateUrl : "addproduct.html"
@@ -46,8 +47,15 @@ appRouter.config(function($routeProvider) {
     })
     .when("/media", {
         templateUrl : "media.html"
+    }).when("/listservices", {
+        templateUrl : "listservices.html"
+    }).when("/listtransport", {
+        templateUrl : "listtransport.html"
+    }).when("/listocupation", {
+        templateUrl : "listocupation.html"
     }).otherwise({
 		templateUrl : 'home.html',
 		//controller : 'tablaMateriales'
 	});
+
 });

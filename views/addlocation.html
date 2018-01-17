@@ -4,7 +4,7 @@
     	<div class="uk-container uk-container-expand">
 			<h3>Add Location</h3>
 			<form method="post" class="uk-form-horizontal ">
-				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
+				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider " uk-grid>
 					<div>
 						<div class="uk-margin ">
 							 <label class="uk-form-label" >Name</label>
@@ -20,18 +20,6 @@
 									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
 									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
 								</ul>
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Latitude</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="gpsLat">
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Longitude</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="gpsLong">
 							</div>
 						</div>
 						<div class="uk-margin">
@@ -51,6 +39,7 @@
 
 							</div>
 						</div>
+
 
 					</div>
 					<div>
@@ -73,20 +62,49 @@
            						 </select>
 							</div>
 						</div>
+
 						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Min. Nights</label>
+							 <label class="uk-form-label" for="form-stacked-text">Template</label>
 							<div class="uk-form-controls">
 								  <select class="uk-select">
-									<option class="uk-selected">Select a Min. Nights</option>
-                					<option>1</option>
-                					<option>2</option>
-               						<option>3</option>
-               						<option>4</option>
+									<option class="uk-selected">Select a Country</option>
+                					<option>200x200</option>
+               						 <option>560x400</option>
+               						 <option>1920x760</option>
            						 </select>
 							</div>
 						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Position</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="number" placeholder="position">
+							</div>
+						</div>
 					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Latitude</label>
+ 					<div class="uk-form-controls">
+ 						<input class="uk-input" type="text" name="lat" id="lat" value="0">
+ 					</div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Longitude</label>
+					 <div class="uk-form-controls">
+						 <input class="uk-input" type="text" name="lng" id="lng" value="0">
+					 </div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Zoom</label>
+					 <div class="uk-form-controls">
+						 <input class="uk-input" name="zoom" type="text" id="zoom" value="0">
+					 </div>
+					</div>
+					<div class="uk-width-1-1 uk-text-center">
+						<div class="contenedormapa">
 
+								<div id="map-canvas"/>
+							</div>
+					</div>
 					<div class="uk-width-1-1 uk-text-center">
 						<button class="uk-button uk-button-primary" type="submit">Save</button>
 						<a href="#locationlist" class="uk-button uk-button-danger" type="submit">Cancel</a>

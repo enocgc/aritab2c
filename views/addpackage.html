@@ -4,9 +4,9 @@
     	<div class="uk-container uk-container-expand">
 			<h3>Add Package</h3>
 			<form method="post" class="uk-form-horizontal ">
-				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
+				<div uk-grid class="uk-child-width-1-1@m uk-grid-divider ">
 					<div class="uk-width-1-1">
-						<h4>Package Information</h4>
+
 					</div>
 					<div>
 						<div class="uk-margin ">
@@ -42,105 +42,147 @@
 
 							</div>
 						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Accomadation</label>
+							<div class="uk-form-controls">
+									<select class="uk-select">
+									<option class="uk-selected">Select Accomodation Type</option>
+													<option> ★★★★</option>
+													 <option> ★★★★</option>
+													 <option> ★★★</option>
+											 </select>
+							</div>
+						</div>
+					</div>
 
 					</div>
-					<div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Country</label>
-							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Country</option>
-                					<option>Costa Rica</option>
-               						 <option>Guatemala</option>
-               						 <option>Nicaragua</option>
-           						 </select>
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Season</label>
-							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Season</option>
-                					<option>High Season</option>
-               						<option>Low Season</option>
-               						<option>Peak Season</option>
-           						 </select>
-							</div>
-						</div>
-					</div>
-					<div class="uk-width-1-1">
-						<h4>Accommodation</h4>
-					</div>
-					<div class="uk-width-1-1">
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Accommodation Type</label>
-							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Accommodation</option>
-                					<option>★★★</option>
-               						<option>★★★★</option>
-               						<option>★★★★★</option>
-           						 </select>
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Room Type</label>
-							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Room Type</option>
-                					<option>Standard</option>
-               						<option>Double</option>
-               						<option>Suite</option>
-           						 </select>
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Price per night</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="number" placeholder="Only numbers in dollars please. Ex: 600">
-							</div>
-						</div>
-					</div>
-					<div class="uk-width-1-1">
-						<h4>Transportation</h4>
-					</div>
-					<div class="uk-width-1-1">
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Transportation Type</label>
-							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Transportation</option>
-                					<option>Private Transfer</option>
-               						<option>Shuttle</option>
-               						<option>Car Rental</option>
-           						 </select>
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Description</label>
-							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
-								</ul>
 
-								<ul class="uk-switcher uk-margin">
-									<li><textarea class="uk-textarea" rows="4" placeholder="English Description" name="description-en"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="German Description" name="description-de"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="Spanish Description" name="description-es"></textarea></li>
-								</ul>
+
+
+							<hr>
+
+						<div class="uk-width-1-1">
+
+							<!-- DIA DE INICIO -->
+							<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+								<span class="days-da uk-background-primary">Day 1</span>
+								<p class="uk-h4">Arrival</p>
+								<div class="uk-margin">
+									<label class="uk-form-label" for="form-stacked-text">Arrival place</label>
+									<div class="uk-form-controls">
+										<input class="uk-input" type="text" placeholder="Ex. Juan Santamaria International Airport">
+									</div>
+								</div>
+							</div>
+							<!--ADD LOCATION-->
+							<div class="uk-margin" id="addlocation01">
+								<div id="dia" class=" uk-padding-small uk-margin-small ">
+									<a href="#modal-location" uk-toggle class="link-product">
+										<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add Location</span></div>
+									</a>
+								</div>
 
 							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Price per day</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="number" placeholder="Only numbers in dollars please. Ex: 600">
+
+
+
+							<div class="" id="locations" style="display:none;">
+								<!-- TRANSFER 01 -->
+								<div id="transfer" class="uk-card uk-padding-small uk-margin-small uk-card-transfer uk-text-center">
+									<span class="days-da uk-background-primary">Day 2</span>
+									<p class=""><span uk-icon="icon: forward"></span> Transfer to first location</p>
+								</div>
+
+								<h3>First Location</h3>
+								<!-- DIA 03 -->
+								<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+									<span class="days-da uk-background-primary">Day 3</span>
+									<a href="#modal-activities" uk-toggle class="link-product">
+										<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add a Product (Activity)</span></div>
+									</a>
+								</div>
+
+								<!-- DIA 04 -->
+								<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+									<span class="days-da uk-background-primary">Day 4</span>
+									<a href="#modal-activities" uk-toggle class="link-product">
+										<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add a Product (Activity)</span></div>
+									</a>
+								</div>
+
+								<!-- DIA 05 -->
+								<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+									<span class="days-da uk-background-primary">Day 5</span>
+									<a href="#modal-activities" uk-toggle class="link-product">
+										<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add a Product (Activity)</span></div>
+									</a>
+								</div>
+				<p class="uk-text-center"><a href="#"class="uk-button uk-button-danger" style="width:100%;">Add New Day</a> </p>
+
+								<!-- TRANSFER 02 -->
+								<div id="transfer" class="uk-card uk-padding-small uk-margin-small uk-card-transfer uk-text-center">
+									<span class="days-da uk-background-primary">Day 6</span>
+									<p class=""><span uk-icon="icon: forward"></span> Transfer to second location</p>
+								</div>
+
+								<div class="uk-margin" id="addlocation01">
+									<div id="dia" class=" uk-padding-small uk-margin-small ">
+										<a href="#modal-location" uk-toggle class="link-product">
+											<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add Location</span></div>
+										</a>
+									</div>
+
+								</div>
 							</div>
+				<!--aqui se crean los location-->
+
+
+
+
+
+							<!-- DIA FINAL -->
+
+							<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+								<span class="days-da uk-background-primary">Day 7</span>
+								<p class="uk-h4">Departure Location</p>
+							</div>
+							<div class="uk-width-1-1@m uk-text-left">
+								<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
+								<div class="uk-inline">
+									<label><input class="uk-checkbox" type="checkbox" checked> Shuttle </label>
+									<label><input class="uk-checkbox" type="checkbox"> Rent a car </label>
+								</div>
+
+							</div><br>
+							<div class="uk-width-1-1@m uk-text-left">
+								<label class="uk-h4 uk-margin-small-right" for="">Tags:  </label>
+								<div class="uk-inline">
+									<label><input class="uk-checkbox" type="checkbox" checked> Adventure </label>
+									<label><input class="uk-checkbox" type="checkbox"> Familiar </label>
+								</div>
+
+							</div><br>
+
+
+							<div class="uk-width-1-2@m uk-text-left">
+								<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger">7 Days</span></p>
+
+							</div>
+							<div class="uk-width-1-2@m uk-text-left">
+								<div class="uk-margin">
+									<label class="uk-h3" for="">Price: </label>
+									<div class="uk-inline">
+													<span class="uk-form-icon" style="color: black;">$</span>
+										<input class="uk-input" type="number" placeholder="Ex.100">
+									</div>
+								</div>
+
+							</div>
+							<hr>
 						</div>
 
-					</div>
+
+
 					<div class="uk-width-1-1 uk-text-center">
 						<button class="uk-button uk-button-primary" type="submit">Save</button>
 						<a href="#packageslist"class="uk-button uk-button-danger">Cancel</a>
@@ -150,3 +192,88 @@
 		</div>
 	</div>
 </div>
+
+
+
+	<!-- MODAL Activity -->
+	<div id="modal-activities" uk-modal>
+		<div class="uk-modal-dialog uk-modal-body">
+			<h2 class="uk-modal-title">Select a Product (Activity)</h2>
+			<div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
+				<!-- CUADRO DE ACTIVIDADES -->
+				<div class="">
+					<div class="uk-card uk-card-default uk-card-hover uk-card-body">
+						<h3 class="uk-card-title">Activity 01</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+				<div class="">
+					<div class="uk-card uk-card-default uk-card-hover uk-card-body">
+						<h3 class="uk-card-title">Activity 02</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+				<div class="">
+					<div class="uk-card uk-card-default uk-card-hover uk-card-body">
+						<h3 class="uk-card-title">Activity 03</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+			</div>
+			<p class="uk-text-right">
+				<button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+				<button class="uk-button uk-button-primary" type="button">Save</button>
+			</p>
+		</div>
+	</div>
+
+
+
+	<!--MODAL LOCATION-->
+	<div id="modal-location" uk-modal>
+		<div class="uk-modal-dialog uk-modal-body">
+			<h2 class="uk-modal-title">Select a Location</h2>
+			<div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
+				<!-- CUADRO DE ACTIVIDADES -->
+				<div class="">
+					<div class="uk-card uk-card-default uk-card-hover uk-card-body">
+						<h3 class="uk-card-title">Guanacaste</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+				<div class="">
+					<div class="uk-card uk-card-default uk-card-hover uk-card-body">
+						<h3 class="uk-card-title">Puntarenas</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+				<div class="">
+					<div class="uk-card uk-card-default uk-card-hover uk-card-body">
+						<h3 class="uk-card-title">Monte verde</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+			</div>
+<div class="" uk-grid>
+
+
+				<div class="uk-margin uk-width-2-5@m ">
+					 <label class="uk-h5 " for="form-stacked-text">Min Nights</label>
+					<div class="uk-form-controls">
+						<input class="uk-input" type="number" value="3">
+					</div>
+				</div>
+<div class="uk-margin uk-width-3-5@m uk-text-right">
+	<button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+	<button class="uk-button uk-button-primary  uk-modal-close" type="button" id="addloc">Add</button>
+</div>
+</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	$("#addloc").click(function(){
+		console.log("click add location");
+		$("#locations").show();
+		$("#addlocation01").hide();
+	});
+</script>
