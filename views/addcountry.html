@@ -23,18 +23,6 @@
 							</div>
 						</div>
 						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Latitude</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="gpsLat">
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Longitude</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="gpsLong">
-							</div>
-						</div>
-						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Description</label>
 							<div class="uk-form-controls">
 								<ul uk-tab>
@@ -62,6 +50,47 @@
 								<button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button>
 							</div>
 						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Template</label>
+							<div class="uk-form-controls">
+								  <select class="uk-select">
+									<option class="uk-selected">Select a Template</option>
+                					<option>200x200</option>
+               						 <option>560x400</option>
+               						 <option>1920x760</option>
+           						 </select>
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Position</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="number" placeholder="position">
+							</div>
+						</div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Latitude</label>
+ 					<div class="uk-form-controls">
+ 						<input class="uk-input" type="text" name="lat" id="lat" value="0">
+ 					</div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Longitude</label>
+					 <div class="uk-form-controls">
+						 <input class="uk-input" type="text" name="lng" id="lng" value="0">
+					 </div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Zoom</label>
+					 <div class="uk-form-controls">
+						 <input class="uk-input" name="zoom" type="text" id="zoom" value="0">
+					 </div>
+					</div>
+					<div class="uk-width-1-1 uk-text-center">
+						<div class="contenedormapa">
+
+								<div id="map-canvas"/>
+							</div>
 					</div>
 
 					<div class="uk-width-1-1 uk-text-center">
