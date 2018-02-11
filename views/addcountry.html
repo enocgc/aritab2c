@@ -1,6 +1,5 @@
-
-<div class="uk-section uk-padding">
-	<div class="uk-background-muted uk-padding uk-panel">
+<div class="uk-section uk-padding" data-ng-controller="controlCountries">
+  <div class="uk-background-muted uk-padding uk-panel">
     	<div class="uk-container uk-container-expand">
 			<h3>Add Country</h3>
 			<form method="post" class="uk-form-horizontal ">
@@ -9,186 +8,88 @@
 						<div class="uk-margin ">
 							 <label class="uk-form-label" >Name</label>
 							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
-								</ul>
+                    <ul uk-tab>
+                      <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                      <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
 
-								<ul class="uk-switcher uk-margin">
-									<li><input class="uk-input" type="text" placeholder="English Name" name="name-en"></li>
-									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
-									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
-								</ul>
-							</div>
+                    </ul>
+                  </div>
 						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Description</label>
-							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
-								</ul>
+					<div class="uk-margin">
+                   <label class="uk-form-label" for="form-stacked-text">Description</label>
+                  <div class="uk-form-controls">
+                    <ul uk-tab>
+                      <li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                      <li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description-{{language.short}}"></textarea></li>
+                    </ul>
 
-								<ul class="uk-switcher uk-margin">
-									<li><textarea class="uk-textarea" rows="4" placeholder="English Description" name="description-en"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="German Description" name="description-de"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="Spanish Description" name="description-es"></textarea></li>
-								</ul>
-
-							</div>
-						</div>
+                  </div>
+                </div>
 
 					</div>
 					<div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Media</label>
 							<div class="uk-form-controls">
-								<img src="http://fakeimg.pl/120x120/" alt="">
+								<img src="http://fakeimg.pl/120x120/" alt="" id="img">
 								&nbsp;&nbsp;
-								<button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button>
+								<!-- <button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button> -->
+								<button class="uk-button" type="button" onclick="alert('Boton media')"><span uk-icon="icon: image"></span> Select Media</button>
 							</div>
 						</div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Template</label>
 							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Template</option>
-                					<option>200x200</option>
-               						 <option>560x400</option>
-               						 <option>1920x760</option>
-           						 </select>
+								
+                       <select class="uk-select" ng-model="data" ng-options="opt as opt.label for opt in units ">
+                      </select>
+                       
 							</div>
 						</div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Position</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="number" placeholder="position">
+							<input class="uk-input" type="text" ng-model="position" value="0"/>
 							</div>
 						</div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Latitude</label>
  					<div class="uk-form-controls">
- 						<input class="uk-input" type="text" name="lat" id="lat" value="0">
+ 						<input id="lat" class="uk-input" type="text" ng-model="latitude" value="0"/>
  					</div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Longitude</label>
 					 <div class="uk-form-controls">
-						 <input class="uk-input" type="text" name="lng" id="lng" value="0">
+						 <input id="lng" class="uk-input" type="text" ng-model="longitude" value="0"/>
 					 </div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Zoom</label>
 					 <div class="uk-form-controls">
-						 <input class="uk-input" name="zoom" type="text" id="zoom" value="0">
+						 <input id="zoom" class="uk-input" type="text" ng-model="zoom" value="0"/>
 					 </div>
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
 						<div class="contenedormapa">
-
 								<div id="map-canvas"/>
 							</div>
 					</div>
 
 					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit">Save</button>
-						<a href="#contrieslist" class="uk-button uk-button-danger"  >Cancel</a>
+						<button class="uk-button uk-button-primary uk-modal-close" type="submit" ng-click="addCountry(languages);">Save</button>
+						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
-</div>
-
-
-
-<!-- MODAL MEDIA -->
-<div id="modal-media" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Media Files</h2>
-		<div class="uk-child-width-1-4@m uk-child-width-1-2 uk-grid-small" uk-grid>
-			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
-			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
-			<div><a href="#"><img src="http://fakeimg.pl/250x200/" alt=""></a></div>
-		</div>
-		<!-- DRAG AND DROP FUNCION -->
-		<div class="js-upload uk-placeholder uk-text-center">
-			<span uk-icon="icon: cloud-upload"></span>
-			<span class="uk-text-middle">Attach binaries by dropping them here or</span>
-			<div uk-form-custom>
-				<input type="file" multiple>
-				<span class="uk-link">selecting one</span>
-			</div>
-		</div>
-
-		<progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-
-		<script>
-
-			var bar = document.getElementById('js-progressbar');
-
-			UIkit.upload('.js-upload', {
-
-				url: '',
-				multiple: true,
-
-				beforeSend: function () {
-					console.log('beforeSend', arguments);
-				},
-				beforeAll: function () {
-					console.log('beforeAll', arguments);
-				},
-				load: function () {
-					console.log('load', arguments);
-				},
-				error: function () {
-					console.log('error', arguments);
-				},
-				complete: function () {
-					console.log('complete', arguments);
-				},
-
-				loadStart: function (e) {
-					console.log('loadStart', arguments);
-
-					bar.removeAttribute('hidden');
-					bar.max = e.total;
-					bar.value = e.loaded;
-				},
-
-				progress: function (e) {
-					console.log('progress', arguments);
-
-					bar.max = e.total;
-					bar.value = e.loaded;
-				},
-
-				loadEnd: function (e) {
-					console.log('loadEnd', arguments);
-
-					bar.max = e.total;
-					bar.value = e.loaded;
-				},
-
-				completeAll: function () {
-					console.log('completeAll', arguments);
-
-					setTimeout(function () {
-						bar.setAttribute('hidden', 'hidden');
-					}, 1000);
-
-					alert('Upload Completed');
-				}
-
-			});
-
-		</script>
-        <p class="uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-            <button class="uk-button uk-button-primary" type="button">Save</button>
-        </p>
-    </div>
+	<script type="text/javascript">
+		initialize();
+	</script>
 </div>

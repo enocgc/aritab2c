@@ -4,13 +4,11 @@ require_once ("../includes/constantes.php");
  class Countries extends Conexion
  {
 
-	public function __construct(){
+  public function __construct(){
      parent::__construct(__HOST__, __USER__, __PASSWD__, __DB_NAME__);
-	}//fin del constructor
+  }//fin del constructor
 
   function getCountries(){
-    //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
-    // $sql="SELECT a.id, b.tag_id,b.name,b.description,a.enabled FROM tags AS a, tagdetails AS b WHERE a.id=b.tag_id and b.language_id=1  ORDER BY a.id";
     $sql="SELECT a.name,a.language_id,b.gpslat,b.gpslong,a.enabled,b.id  FROM countrydetails AS a,countries AS b WHERE a.language_id=1 AND a.country_id=b.id AND b.enabled=1";
     $result = $this->cone->query($sql);
     $array=array();
@@ -57,9 +55,31 @@ require_once ("../includes/constantes.php");
     return 1;
   }// end to delete
 
-  function addCountry(){
-    return 1;
-  }
+  function addCountry($gpslat,$gpslong,$gpszoom,$enabled){
+    $stmt= $this->cone->prepare("INSERT INTO countries(gpslat,gpslong,gpszoom,enabled) VALUES(?,?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iiii',$gpslat,$gpslong,$gpszoom,$enabled);
+    $stmt->execute();
+    $stmt->close();
+    //return true;
+    $sql="SELECT (MAX(id)) AS id ,enabled As enabled FROM countries";
+    $result = $this->cone->query($sql);
+    $array=array();
+    while($row = $result->fetch_assoc()){
+      $array[]=array(
+        'id'=>$row['id'],
+        'enabled'=>$row['enabled']
+      );
+    }//fin del while
+     if($result->num_rows > 0){
+    return json_encode($array);
+     }
+    $this->close();
+    return false;
+  }// end to addCountry
 
 }// fin de la clase
  ?>

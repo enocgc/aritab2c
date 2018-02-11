@@ -40,7 +40,7 @@ function initialize() {
 
 
 }
-google.maps.event.addDomListener(window, 'load', initialize);
+// google.maps.event.addDomListener(window, 'load', initialize);
 
 // Function that creates the marker.
 function createMarker(lat, lng) {
@@ -87,15 +87,17 @@ function createMarker(lat, lng) {
 function getCoords(lat, lng, zoom) {
 
    // Reference input html element with id="lat".
-   var coords_lat = document.getElementById('lat');
-var czoomd = document.getElementById('zoom');
-czoomd.value=zoom;
-   // Update latitude text box.
-   coords_lat.value = lat;
-
-   // Reference input html element with id="lng".
-   var coords_lng = document.getElementById('lng');
-
-   // Update longitude text box.
-   coords_lng.value = lng;
+   // var coords_lat = document.getElementById('lat');
+   // var coords_lat = $('#lat');
+   $('#lat').val(lat).trigger('input').trigger('change');
+   $('#zoom').val(zoom).trigger('input').trigger('change');
+   $('#lng').val(lng).trigger('input').trigger('change');
+   // var czoomd = document.getElementById('zoom');
+   // czoomd.value=zoom;
+   // // Update latitude text box.
+   // // coords_lat.value = lat;
+   // // Reference input html element with id="lng".
+   // var coords_lng = document.getElementById('lng');
+   // // Update longitude text box.
+   // coords_lng.value = lng;
 }

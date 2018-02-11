@@ -5,34 +5,50 @@ $scope.languages;
 getCountries();
 getLanguage();
 
+$scope.units = [
+         {'id': 10, 'label': '200x200'},
+         {'id': 27, 'label': '560x400'},
+         {'id': 39, 'label': '1920x760'},
+      ];
 
+$scope.data= $scope.units[0]; // Set by default the value "test1"
 //funcion para agregar detalles
   $scope.addCountry = function($lang){
+    alert($scope.data.label);
+    alert($scope.position);
+    alert($scope.latitude);
+    alert($scope.longitude);
+    alert($scope.zoom);
     var action=4;
-    $http.post('../php/countries.php', {'action':action})//creo el tag
+    var data={
+        'action':action,
+        'gpslat':$scope.latitude,
+        'gpslong':$scope.longitude,
+        'gpszoom':zoom
+      };
+    $http.post('../php/countries.php',data)//creo el tag
     .success(function(data){
-      $scope.newTag = data;
-      //crear funcion para anadir detalle por idioma el siclo me jala los datos y podemos mandar el id del idioma como parametro
+      // $scope.newTag = data;
       for (var i = 0; i <  $lang.length; i++) {
         console.log("entro "+i+$scope.languages[i].short);
         var name= document.getElementById('name-'+$scope.languages[i].short).value;
         var description= document.getElementById('description-'+$scope.languages[i].short).value;
         var langid = $scope.languages[i].id;
-        console.log("langid1");
-        console.log(langid);
+        console.log("name" + i);
+        console.log(name);
         console.log("Vector vuelta "+i);
         console.log($scope.languages[i]);
-        $http.post('../php/countries.php', {'action':4,'id': $scope.newTag[0].id,'language_id':langid,'name':name,'description':description})//creo el tag
-        .success(function(data){
-          console.log("se agrego el tag correctamente");
-        }).error(function(response){
-          alert("No nserto tag");
-        });
+        // $http.post('../php/countries.php', {'action':4,'id': $scope.newTag[0].id,'language_id':langid,'name':name,'description':description})//creo el tag
+        // .success(function(data){
+        //   console.log("se agrego el tag correctamente");
+        // }).error(function(response){
+        //   alert("No nserto tag");
+        // });
       }//fin del for
       setTimeout(function () {//para que actualice los campos de forma eficiente
           $scope.$apply(function () {
             // getTags();
-            console.log("se agrego nuevo tag");
+            console.log("final");
           });
       }, 100);
 

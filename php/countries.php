@@ -21,8 +21,12 @@ switch ($action) {
   echo $bd->deleteCountryDetails($language_id);
   break;
   case 4:
+  $gpslat= $data->gpslat;
+  $gpslong = $data->gpslong;
+  $gpszoom= $data->gpszoom;
+  $enabled= 1;
   $bd = new Countries();
-  echo $bd->addCountry();
+  echo $bd->addCountry($gpslat,$gpslong,$gpszoom,$enabled);
   break;
 
 
