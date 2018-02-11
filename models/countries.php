@@ -81,5 +81,29 @@ require_once ("../includes/constantes.php");
     return false;
   }// end to addCountry
 
+  function addCountryDetails($country_id,$language_id,$name,$description,$enabled){
+    $stmt= $this->cone->prepare("INSERT INTO countrydetails(country_id,language_id,name,description,enabled) VALUES(?,?,?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iissi',$country_id,$language_id,$name,$description,$enabled);
+    $stmt->execute();
+    $stmt->close();
+    return 1;
+  }//end to addCountryDetails
+
+  function addCountryMedia($country_id,$media_id,$template_id,$position){
+    $stmt= $this->cone->prepare("INSERT INTO country_media(country_id,media_id,template_id,position) VALUES(?,?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iiii',$country_id,$media_id,$template_id,$position);
+    $stmt->execute();
+    $stmt->close();
+    return 1;
+  }// end to addCountryMedia
+
 }// fin de la clase
  ?>

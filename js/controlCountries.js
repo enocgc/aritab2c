@@ -6,9 +6,8 @@ getCountries();
 getLanguage();
 
 $scope.units = [
-         {'id': 10, 'label': '200x200'},
-         {'id': 27, 'label': '560x400'},
-         {'id': 39, 'label': '1920x760'},
+         {'id': 19, 'label': '200x100'},
+         {'id': 21, 'label': '800x600'},
       ];
 
 $scope.data= $scope.units[0]; // Set by default the value "test1"
@@ -24,27 +23,47 @@ $scope.data= $scope.units[0]; // Set by default the value "test1"
         'action':action,
         'gpslat':$scope.latitude,
         'gpslong':$scope.longitude,
-        'gpszoom':zoom
+        'gpszoom':$scope.zoom
       };
     $http.post('../php/countries.php',data)//creo el tag
     .success(function(data){
-      // $scope.newTag = data;
+      $scope.newTag = data;
       for (var i = 0; i <  $lang.length; i++) {
         console.log("entro "+i+$scope.languages[i].short);
         var name= document.getElementById('name-'+$scope.languages[i].short).value;
         var description= document.getElementById('description-'+$scope.languages[i].short).value;
         var langid = $scope.languages[i].id;
-        console.log("name" + i);
-        console.log(name);
-        console.log("Vector vuelta "+i);
-        console.log($scope.languages[i]);
-        // $http.post('../php/countries.php', {'action':4,'id': $scope.newTag[0].id,'language_id':langid,'name':name,'description':description})//creo el tag
-        // .success(function(data){
-        //   console.log("se agrego el tag correctamente");
-        // }).error(function(response){
-        //   alert("No nserto tag");
-        // });
+        var datos={
+          'action':5,
+          'country_id':$scope.newTag[0].id,
+          'language_id':langid,
+          'name':name,
+          'description':description
+        };
+        console.log("agregando en id "+$scope.newTag[0].id);
+        $http.post('../php/countries.php',datos)//creo el tag
+        .success(function(data){
+          console.log("se agrego el country details correctamente"+data);
+        }).error(function(response){
+          alert("No agrego el countrie details");
+        });
       }//fin del for
+
+      // $country_id,$media_id,$template_id,$position
+      var datos={
+          'action':6,
+          'country_id':$scope.newTag[0].id,
+          'media_id':777,
+          'template_id':$scope.data.id,
+          'position':$scope.position
+        };
+        $http.post('../php/countries.php',datos)//creo el tag
+        .success(function(data){
+          console.log("se agrego el country media correctamente"+data);
+        }).error(function(response){
+          alert("No agrego el country media");
+        });
+
       setTimeout(function () {//para que actualice los campos de forma eficiente
           $scope.$apply(function () {
             // getTags();

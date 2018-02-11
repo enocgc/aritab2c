@@ -28,6 +28,23 @@ switch ($action) {
   $bd = new Countries();
   echo $bd->addCountry($gpslat,$gpslong,$gpszoom,$enabled);
   break;
+  case 5:
+  $country_id= $data->country_id;
+  $language_id = $data->language_id;
+  $name= $data->name;
+  $description= $data->description;
+  $enabled= 1;
+  $bd = new Countries();
+  echo $bd->addCountryDetails($country_id,$language_id,$name,$description,$enabled);
+  break;
+  case 6:
+  $country_id= $data->country_id;
+  $media_id = $data->media_id;
+  $template_id= $data->template_id;
+  $position= $data->position;
+  $bd = new Countries();
+  echo $bd->addCountryMedia($country_id,$media_id,$template_id,$position);
+  break;
 
 
 }
