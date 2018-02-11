@@ -1,12 +1,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#tags').DataTable();
 } );
 
 </script>
 
-<div class="uk-section uk-padding" id="contenedor-1">
+<div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlTags">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Tags</h3>
@@ -15,7 +15,7 @@ $(document).ready(function() {
 
             </div>
             <!--tabla datatables-->
-            <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
+            <table  datatable="ng" ng-if="tags.length" id="tags" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
                 <thead>
                     <tr>
                         <th>Actions</th>
@@ -32,83 +32,130 @@ $(document).ready(function() {
                 </tfoot>
                 <tbody>
 
-                    <tr>
-                        <td> <a class="toggle-eye0" uk-toggle="target: .toggle-eye0"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye0" uk-toggle="target: .toggle-eye0" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Costa Rica</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye1" uk-toggle="target: .toggle-eye1"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye1" uk-toggle="target: .toggle-eye1" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Monte Verde</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye2" uk-toggle="target: .toggle-eye2" hidden><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye2" uk-toggle="target: .toggle-eye2" ><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Tortuguero</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
-                    </tr>
+                    <tr ng-repeat="tag in tags " role="row" class="odd">
+
+                      <td > <a  ng-click="changeenabled(tag.id,tag.enabled)" class="toggle-eye0" ng-if="tag.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i>
+                      </a><a ng-click="changeenabled(tag.id,tag.enabled)" class="toggle-eye0" ng-if="tag.enabled == 1"><i class="fas fa-eye fa-lg"></i></a> <a ng-click="getTagtoModal(languages,tag.id)" href="#edit-tags" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a  ng-click="deleteTag(tag.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
+                      <td>{{tag.name}} </td>
+                      <td>{{tag.description}}</td>
+
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
 
-
-
-
-
-
-<!--MODAL DELETE COUNTRY-->
-<div id="modal-delete" uk-modal>
-    <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-body">
-            <p>Are you sure you want to delete this item?</p>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-            <a href="#modal-group-2" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg" ></i> Delete</a>
-            <button class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</button>
+    <!--MODAL DELETE USER-->
+    <div id="modal-delete" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <a  id="confirmdelete" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</button>
+            </div>
         </div>
     </div>
-</div>
 
 
 
+<!--MODAL ADD Tag-->
+
+    <div class="" id="add-tags" uk-modal>
+    	<div class="uk-background-muted uk-padding uk-modal-dialog">
+             <button class="uk-modal-close-default" type="button" uk-close></button>
+        	<div class="">
+    			<h3>Add Tag</h3>
+    			<form method="post" class="uk-form-horizontal ">
+    				<div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+    					<div>
+
+                <div class="uk-margin ">
+    							 <label class="uk-form-label" >Name</label>
+    							<div class="uk-form-controls">
+    								<ul uk-tab>
+    									<li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+    								</ul>
+    								<ul class="uk-switcher uk-margin">
+    									<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
+
+    								</ul>
+    							</div>
+    						</div>
+    						<div class="uk-margin">
+    							 <label class="uk-form-label" for="form-stacked-text">Description</label>
+    							<div class="uk-form-controls">
+    								<ul uk-tab>
+    									<li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+    								</ul>
+    								<ul class="uk-switcher uk-margin">
+    									<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description-{{language.short}}"></textarea></li>
+    								</ul>
+
+    							</div>
+    						</div>
+    					</div>
 
 
-<!--MODAL ADD SEASON-->
+    					<div class="uk-width-1-1 uk-text-center">
+    						<button class="uk-button uk-button-primary" ng-click="addTag(languages);" type="button">Save</button>
+    						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
+    					</div>
+    				</div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
 
-<div class="" id="add-tags" uk-modal>
-	<div class="uk-background-muted uk-padding uk-modal-dialog">
-         <button class="uk-modal-close-default" type="button" uk-close></button>
-    	<div class="">
-			<h3>Add Tag</h3>
-			<form method="post" class="uk-form-horizontal ">
-				<div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
-					<div>
+    <!--MODAL edit Tag-->
+        <div class="" id="edit-tags" uk-modal>
+        	<div class="uk-background-muted uk-padding uk-modal-dialog">
+                 <button class="uk-modal-close-default" type="button" uk-close></button>
+            	<div class="">
+        			<h3>Edit Tag</h3>
+        			<form method="post" class="uk-form-horizontal ">
+        				<div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+                  <div>
 
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Tag</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Tag">
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Description</label>
-							<div class="uk-form-controls">
-                <li><textarea class="uk-textarea" rows="4" placeholder="Description" name="description"></textarea></li>
+                    <div class="uk-margin ">
+        							 <label class="uk-form-label" >Name</label>
+        							<div class="uk-form-controls">
+        								<ul uk-tab>
+        									<li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+        								</ul>
+        								<ul class="uk-switcher uk-margin">
+        									<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="nameE-{{language.short}}"></li>
 
-							</div>
-						</div>
-					</div>
+        								</ul>
+        							</div>
+        						</div>
+        						<div class="uk-margin">
+        							 <label class="uk-form-label" for="form-stacked-text">Description</label>
+        							<div class="uk-form-controls">
+        								<ul uk-tab>
+        									<li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+        								</ul>
+        								<ul class="uk-switcher uk-margin">
+        									<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="descriptionE-{{language.short}}"></textarea></li>
+        								</ul>
+
+        							</div>
+        						</div>
+                    <input type="text" name="" value="" ng-model="idTagE" hidden>
+        					</div>
 
 
-					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit">Save</button>
-						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+        					<div class="uk-width-1-1 uk-text-center">
+        						<button class="uk-button uk-button-primary" ng-click="editTag(languages);" type="button">Save</button>
+        						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
+        					</div>
+        				</div>
+        			</form>
+        		</div>
+        	</div>
+        </div>
+
+
 </div>

@@ -2,21 +2,27 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#countries').DataTable();
 } );
 
 </script>
 
-<div class="uk-section uk-padding" id="contenedor-1">
+<div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlCountries">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Countries</h3>
+            <script type="text/javascript">
+            $("#addcountry").click(function(){
+              location.reload();
+           });
+            </script>
             <div class="uk-margin-small">
-                <a href="#addcountry" class="uk-button uk-button-primary uk-button-small"><i class="fas fa-plus fa-lg"></i> Add Country</a>
+                <a  href="#country-add" uk-toggle class="uk-button uk-button-primary uk-button-small"><i class="fas fa-plus fa-lg"></i> Add Country</a>
 
             </div>
             <!--tabla datatables-->
-            <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
+            <table  datatable="ng" ng-if="countries.length" id="countries" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
+            <!-- <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%"> -->
                 <thead>
                     <tr>
                         <th>Actions</th>
@@ -35,28 +41,195 @@ $(document).ready(function() {
                 </tfoot>
                 <tbody>
 
-                    <tr>
-                        <td> <a class="toggle-eye0" uk-toggle="target: .toggle-eye0"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye0" uk-toggle="target: .toggle-eye0" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Costa Rica</td>
-                        <td>9.978419</td>
-                        <td>-84.098354</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye1" uk-toggle="target: .toggle-eye1"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye1" uk-toggle="target: .toggle-eye1" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Panamá</td>
-                        <td>8.523501</td>
-                        <td>-80.043262</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye2" uk-toggle="target: .toggle-eye2" hidden><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye2" uk-toggle="target: .toggle-eye2" ><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Perú</td>
-                        <td>-12.325028</td>
-                        <td>-74.579986</td>
-                    </tr>
+                  <tr ng-repeat="country in countries" role="row" class="odd">
+                    <td >
+                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i></a>
+                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
+                      <a ng-click="getTagtoModal(languages,country.id)" href="#edit-country-details" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a>
+                      <a ng-click="deleteCountryDetails(country.language_id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
+                    </td>
+                    <td>
+                      {{country.name}}
+                    </td>
+                    <td>
+                        {{country.gpslat}}
+                    </td>
+                    <td>
+                      {{country.gpslong}}
+                    </td>
+                  </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <!--MODAL DELETE COUNTRY-->
+    <div id="modal-delete" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <a ng-click="confirmdelete()" href="#modal-group-2" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg" ></i> Delete</a>
+                <a class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</a>
+            </div>
+        </div>
+    </div><!-- fin del modal -->
+
+    <!-- Falta funcionalidad de edita -->
+    <!--MODAL edit country-->
+        <div class="" id="edit-country-details" uk-modal>
+          <div class="uk-background-muted uk-padding uk-modal-dialog">
+                 <button class="uk-modal-close-default" type="button" uk-close></button>
+              <div class="">
+              <h3>Edit Country</h3>
+              <form method="post" class="uk-form-horizontal ">
+                <div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+                  <div>
+
+                    <div class="uk-margin ">
+                       <label class="uk-form-label" >Name</label>
+                      <div class="uk-form-controls">
+                        <ul uk-tab>
+                          <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                        </ul>
+                        <ul class="uk-switcher uk-margin">
+                          <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="nameE-{{language.short}}"></li>
+
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="uk-margin">
+                       <label class="uk-form-label" for="form-stacked-text">Description</label>
+                      <div class="uk-form-controls">
+                        <ul uk-tab>
+                          <li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                        </ul>
+                        <ul class="uk-switcher uk-margin">
+                          <li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="descriptionE-{{language.short}}"></textarea></li>
+                        </ul>
+
+                      </div>
+                    </div>
+                    <input type="text" name="" value="" ng-model="idTagE" hidden>
+                  </div>
+
+
+                  <div class="uk-width-1-1 uk-text-center">
+                    <button class="uk-button uk-button-primary" ng-click="editTag(languages);" type="button">Save</button>
+                    <button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+<!-- modal agregar -->
+
+
+<div id="country-add" uk-modal>
+	<div class="uk-background-muted uk-padding uk-panel">
+    	<div class="uk-container uk-container-expand">
+			<h3>Add Country</h3>
+			<form method="post" class="uk-form-horizontal ">
+				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
+					<div>
+						<div class="uk-margin ">
+							 <label class="uk-form-label" >Name</label>
+							<div class="uk-form-controls">
+								<ul uk-tab>
+									<li><a href="#">English</a></li>
+									<li><a href="#">German</a></li>
+									<li><a href="#">Spanish</a></li>
+								</ul>
+
+								<ul class="uk-switcher uk-margin">
+									<li><input class="uk-input" type="text" placeholder="English Name" name="name-en"></li>
+									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
+									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Description</label>
+							<div class="uk-form-controls">
+								<ul uk-tab>
+									<li><a href="#">English</a></li>
+									<li><a href="#">German</a></li>
+									<li><a href="#">Spanish</a></li>
+								</ul>
+
+								<ul class="uk-switcher uk-margin">
+									<li><textarea class="uk-textarea" rows="4" placeholder="English Description" name="description-en"></textarea></li>
+									<li><textarea class="uk-textarea" rows="4" placeholder="German Description" name="description-de"></textarea></li>
+									<li><textarea class="uk-textarea" rows="4" placeholder="Spanish Description" name="description-es"></textarea></li>
+								</ul>
+
+							</div>
+						</div>
+
+					</div>
+					<div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Media</label>
+							<div class="uk-form-controls">
+								<img src="http://fakeimg.pl/120x120/" alt="">
+								&nbsp;&nbsp;
+								<!-- <button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button> -->
+								<button class="uk-button" type="button" onclick="alert('Boton media')"><span uk-icon="icon: image"></span> Select Media</button>
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Template</label>
+							<div class="uk-form-controls">
+								  <select class="uk-select">
+									<option class="uk-selected">Select a Template</option>
+                					<option>200x200</option>
+               						 <option>560x400</option>
+               						 <option>1920x760</option>
+           						 </select>
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Position</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="number" placeholder="position">
+							</div>
+						</div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Latitude</label>
+ 					<div class="uk-form-controls">
+ 						<input class="uk-input" type="text" name="lat" id="lat" value="0">
+ 					</div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Longitude</label>
+					 <div class="uk-form-controls">
+						 <input class="uk-input" type="text" name="lng" id="lng" value="0">
+					 </div>
+					</div>
+					<div class="uk-width-1-2@m uk-text-center">
+						<label class="uk-form-label" for="form-stacked-text">Zoom</label>
+					 <div class="uk-form-controls">
+						 <input class="uk-input" name="zoom" type="text" id="zoom" value="0">
+					 </div>
+					</div>
+					<div class="uk-width-1-1 uk-text-center">
+						<div class="contenedormapa">
+								<div id="map-canvas"/>
+							</div>
+					</div>
+
+					<div class="uk-width-1-1 uk-text-center">
+						<button class="uk-button uk-button-primary uk-modal-close" type="submit" ng-click="addCountry(languages);">Save</button>
+						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 
@@ -64,16 +237,26 @@ $(document).ready(function() {
 
 
 
-<!--MODAL DELETE COUNTRY-->
-<div id="modal-delete" uk-modal>
-    <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-body">
-            <p>Are you sure you want to delete this item?</p>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-            <a href="#modal-group-2" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg" ></i> Delete</a>
-            <a class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</a>
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ultima etiqueta -->
 </div>
+<!-- fin del controller -->

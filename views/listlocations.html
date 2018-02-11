@@ -1,18 +1,24 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#locations').DataTable();
 } );
 </script>
-<div class="uk-section uk-padding">
+<div class="uk-section uk-padding" data-ng-controller="controlLocations">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Locations</h3>
+            <script type="text/javascript">
+                  $("#addlocation2").click(function(){
+                      console.log("click location add");
+                    location.reload();
+                 });
+                  </script>
             <div class="uk-margin-small">
-				<a href="#addlocation" class="uk-button uk-button-primary uk-button-small" type="submit"> <i class="fas fa-plus fa-lg"></i> Add a Location</a>
+				<a href="#addlocation" id="addlocation2" class="uk-button uk-button-primary uk-button-small"> <i class="fas fa-plus fa-lg"></i> Add a Location</a>
             </div>
             <!--tabla datatables-->
-            <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
+            <table  datatable="ng" ng-if="countries.length" id="locations" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
                 <thead>
                     <tr>
                         <th>Actions</th>
@@ -30,6 +36,24 @@ $(document).ready(function() {
                     </tr>
                 </tfoot>
                 <tbody>
+
+                  <!-- <tr ng-repeat="location in locations" role="row" class="odd">
+                    <td >
+                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i></a>
+                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
+                      <a ng-click="getTagtoModal(languages,country.id)" href="#edit-country-details" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a>
+                      <a ng-click="deleteCountryDetails(country.language_id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
+                    </td>
+                    <td>
+                      {{country.name}}
+                    </td>
+                    <td>
+                        {{country.gpslat}}
+                    </td>
+                    <td>
+                      {{country.gpslong}}
+                    </td>
+                  </tr> -->
 
                     <tr>
                         <td> <a class="toggle-eye0" uk-toggle="target: .toggle-eye0"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye0" uk-toggle="target: .toggle-eye0" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>

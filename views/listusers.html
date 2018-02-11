@@ -1,9 +1,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#users').DataTable();
 } );
 </script>
-<div class="uk-section uk-padding" id="contenedor-1">
+<div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlUser">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Users</h3>
@@ -12,7 +12,7 @@ $(document).ready(function() {
 
             </div>
             <!--tabla datatables-->
-            <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
+            <table   datatable="ng" ng-if="users.length" id="users" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt"  >
                 <thead>
                     <tr>
                         <th>Actions</th>
@@ -31,44 +31,138 @@ $(document).ready(function() {
                         <th>Company</th>
                     </tr>
                 </tfoot>
-                <tbody>
+                <tbody  >
+                    <tr ng-repeat="user in users " role="row" class="odd">
 
-                    <tr>
-                        <td> <a class="toggle-eye0" uk-toggle="target: .toggle-eye0"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye0" uk-toggle="target: .toggle-eye0" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>cesar</td>
-                        <td>Cesar Otarola</td>
-                        <td>cesar@digitalcr.com</td>
-                        <td>DigitalArts</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye1" uk-toggle="target: .toggle-eye1"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye1" uk-toggle="target: .toggle-eye1" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>enoc</td>
-                        <td>Enoc Galagarza</td>
-                        <td>enoc@digitalcr.com</td>
-                        <td>DigitalArts</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye2" uk-toggle="target: .toggle-eye2" hidden><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye2" uk-toggle="target: .toggle-eye2" ><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>edgar</td>
-                        <td>Edgar Monastel</td>
-                        <td>edgar@digitalcr.com</td>
-                        <td>DigitalArts</td>
+                    <td >
+                         <a  ng-click="changeenabled(user.iduser,user.enabled)" class="toggle-eye0" ng-if="user.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i>
+                        </a><a ng-click="changeenabled(user.iduser,user.enabled)" class="toggle-eye0" ng-if="user.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
+                        <a ng-click="getUsertoModal(user.iduser)" href="#edit-user" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a>
+                     <a  ng-click="deleteUser(user.iduser)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
+                     <a  ng-click="getUsertoModal(user.iduser)"  href="#edit-pass" uk-toggle >  <i class="fas fa-lock fa-lg"></i></a>
+                    </td>
+                        <td>{{user.user}} </td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.company}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-<!--MODAL DELETE SEASON-->
-<div id="modal-delete" uk-modal>
-    <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-body">
-            <p>Are you sure you want to delete this item?</p>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-            <a href="#modal-group-2" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg" ></i> Delete</a>
-            <button class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</button>
+    <!--MODAL DELETE USER-->
+    <div id="modal-delete" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <a  id="confirmdelete" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</button>
+            </div>
         </div>
     </div>
+    <!--MODAL UPDATE USER-->
+
+
+    <div class="uk-modal-container" id="edit-user" uk-modal>
+        <div class="uk-background-muted uk-padding uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="">
+                <h3>Edit User</h3>
+                <form method="post" class="uk-form-horizontal ">
+                    <div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
+                        <div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Name</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" type="text" ng-model="nameE" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">User Name</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" type="text" ng-model="userE" placeholder="User Name" >
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Email</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" type="email" ng-model="emailE" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Phone</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" type="text" ng-model="phoneE" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Country</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" type="text"  ng-model="countryE" placeholder="Country">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label"  for="form-stacked-text">Company</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" type="text" ng-model="companyE" placeholder="Company">
+                                    <input class="uk-input" type="text" ng-model="idUserE" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-1 uk-text-center">
+                            <button class="uk-button uk-button-primary "  ng-click="editUser();" type="button">Save</button>
+                            <a class="uk-button uk-button-danger uk-modal-close" type="button" >Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!--Modal edit password-->
+        <div class="" id="edit-pass" uk-modal>
+            <div class="uk-background-muted uk-padding uk-modal-dialog">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <div class="">
+                    <h3>Edit User</h3>
+                    <form method="post" class="uk-form-horizontal ">
+                        <div uk-grid class="uk-child-width-1-1@m uk-grid-divider ">
+                            <div>
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="form-stacked-text">Actual Password</label>
+                                    <div class="uk-form-controls">
+                                        <input class="uk-input" type="password" ng-model="actualPass" placeholder="Actual Password" >
+                                        <input class="uk-input" type="text" ng-model="idUserE" hidden>
+                                    </div>
+                                </div>
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="form-stacked-text">New Password</label>
+                                    <div class="uk-form-controls">
+                                        <input class="uk-input" type="password" ng-model="newPass" placeholder="Password" required>
+                                    </div>
+                                </div>
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="form-stacked-text"></label>
+                                    <div class="uk-form-controls">
+                                        <input class="uk-input" type="password" ng-model="reNewPass" placeholder="Repeat Password" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-width-1-1 uk-text-center">
+                                <button class="uk-button uk-button-primary "  ng-click="editPassword();" type="button">Save</button>
+                                <a class="uk-button uk-button-danger uk-modal-close" type="button" >Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 </div>

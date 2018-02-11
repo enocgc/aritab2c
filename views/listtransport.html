@@ -2,12 +2,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#transport').DataTable();
 } );
 
 </script>
 
-<div class="uk-section uk-padding" id="contenedor-1">
+<div class="uk-section uk-padding" id="contenedor-1"data-ng-controller="controlTransport">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Transport</h3>
@@ -16,106 +16,118 @@ $(document).ready(function() {
 
             </div>
             <!--tabla datatables-->
-            <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
+            <table datatable="ng" ng-if="transports.length" id="transport" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
                 <thead>
                     <tr>
                         <th>Actions</th>
                         <th>Name</th>
-                        <th>Transport</th>
+                        <th>State</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                       <th>Actions</th>
                       <th>Name</th>
-                      <th>Transport</th>
+                      <th>State</th>
                     </tr>
                 </tfoot>
                 <tbody>
 
-                    <tr>
-                        <td> <a class="toggle-eye0" uk-toggle="target: .toggle-eye0"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye0" uk-toggle="target: .toggle-eye0" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Guanacaste</td>
-                        <td>Rent a car</td>
+                  <tr ng-repeat="transport in transports " role="row" class="odd">
 
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye1" uk-toggle="target: .toggle-eye1"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye1" uk-toggle="target: .toggle-eye1" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Puntarenas</td>
-                        <td>Shuttle</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye2" uk-toggle="target: .toggle-eye2" hidden><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye2" uk-toggle="target: .toggle-eye2" ><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Transvisa</td>
-                        <td>Shuttle</td>
-                    </tr>
+                    <td > <a  ng-click="changeenabled(transport.id,transport.enabled)" class="toggle-eye0" ng-if="transport.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i>
+                    </a><a ng-click="changeenabled(transport.id,transport.enabled)" class="toggle-eye0" ng-if="transport.enabled == 1"><i class="fas fa-eye fa-lg"></i></a> <a ng-click="getTransporttoModal(languages,transport.id)" href="#edit-transport" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a  ng-click="deleteTransport(transport.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
+                      <td>{{transport.name}} </td>
+                      <td ng-if="transport.enabled == 0">Disabled</td>
+                      <td ng-if="transport.enabled == 1">Enabled</td>
+                  </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
-
-
-
-
-
-<!--MODAL DELETE COUNTRY-->
-<div id="modal-delete" uk-modal>
-    <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-body">
-            <p>Are you sure you want to delete this item?</p>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-            <a href="#modal-group-2" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg" ></i> Delete</a>
-            <a class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</a>
+    <!--MODAL DELETE USER-->
+    <div id="modal-delete" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <a  id="confirmdelete" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</button>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- modal add  -->
+    <div class="" id="add-transport" uk-modal>
+      <div class="uk-background-muted uk-padding uk-modal-dialog">
+             <button class="uk-modal-close-default" type="button" uk-close></button>
+          <div class="">
+          <h3>Add Transport</h3>
+          <form method="post" class="uk-form-horizontal ">
+            <div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+              <div>
+                <div class="uk-margin ">
+                   <label class="uk-form-label" >Name</label>
+                  <div class="uk-form-controls">
+                    <ul uk-tab>
+                      <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                    </ul>
+
+                    <ul class="uk-switcher uk-margin">
+                        <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
 
 
-
-<!-- modal add service -->
-<div class="" id="add-transport" uk-modal>
-  <div class="uk-background-muted uk-padding uk-modal-dialog">
-         <button class="uk-modal-close-default" type="button" uk-close></button>
-      <div class="">
-      <h3>Add Transport</h3>
-      <form method="post" class="uk-form-horizontal ">
-        <div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
-          <div>
-            <div class="uk-margin ">
-               <label class="uk-form-label" >Name</label>
-              <div class="uk-form-controls">
-                <ul uk-tab>
-                  <li><a href="#">English</a></li>
-                  <li><a href="#">German</a></li>
-                  <li><a href="#">Spanish</a></li>
-                </ul>
-
-                <ul class="uk-switcher uk-margin">
-                  <li><input class="uk-input" type="text" placeholder="English Name" name="name-en"></li>
-                  <li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
-                  <li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
-                </ul>
+              <div class="uk-width-1-1 uk-text-center">
+                <button class="uk-button uk-button-primary" ng-click="addTransport(languages);"type="button">Save</button>
+                <button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
               </div>
             </div>
-            <div class="uk-margin">
-               <label class="uk-form-label" for="form-stacked-text">Default</label>
-              <div class="uk-form-controls">
-                <input class="uk-input" type="text" placeholder="gpsLat" value="Shuttle">
-              </div>
-            </div>
-          </div>
-
-
-          <div class="uk-width-1-1 uk-text-center">
-            <button class="uk-button uk-button-primary" type="submit">Save</button>
-            <button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
+
+    <!-- modal edit  -->
+    <div class="" id="edit-transport" uk-modal>
+      <div class="uk-background-muted uk-padding uk-modal-dialog">
+             <button class="uk-modal-close-default" type="button" uk-close></button>
+          <div class="">
+          <h3>Edit Transport</h3>
+          <form method="post" class="uk-form-horizontal ">
+            <div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+              <div>
+                <div class="uk-margin ">
+                   <label class="uk-form-label" >Name</label>
+                  <div class="uk-form-controls">
+                    <ul uk-tab>
+                      <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                    </ul>
+
+                    <ul class="uk-switcher uk-margin">
+                        <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="nameT-{{language.short}}"></li>
+
+                    </ul>
+                  </div>
+                </div>
+                  <input type="text" name="" value="" ng-model="idTransportE" hidden>
+              </div>
+
+
+              <div class="uk-width-1-1 uk-text-center">
+                <button class="uk-button uk-button-primary" ng-click="editTransport(languages);" type="submit">Save</button>
+                <button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
 </div>

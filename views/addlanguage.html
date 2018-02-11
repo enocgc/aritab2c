@@ -1,5 +1,5 @@
 
-<div class="uk-section uk-padding">
+<div class="uk-section uk-padding" ng-controller="controlLanguage">
 	<div class="uk-background-muted uk-padding uk-panel">
     	<div class="uk-container uk-container-expand">
 			<h3>Add Language</h3>
@@ -9,25 +9,25 @@
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Name</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Name">
+								<input class="uk-input" type="text" placeholder="Name" ng-model="name">
 							</div>
 						</div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Short code</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Ex. en-GB">
+								<input class="uk-input" type="text" placeholder="Ex. en-GB" ng-model="short">
 							</div>
 						</div>
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text">Upload Flag</label>
 							<div class="js-upload" uk-form-custom>
-								<input type="file" multiple>
+								<input type="file" multiple ng-model="icon">
 								<button class="uk-button uk-button-default" type="file" tabindex="-1"><span uk-icon="icon: cloud-upload"></span> Select a file</button>
 							</div>
 						</div>
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit">Save</button>
+						<button  ng-click="addLanguage();"class="uk-button uk-button-primary" type="button">Save</button>
 						<a href="#listlanguage"class="uk-button uk-button-danger" >Cancel</a>
 					</div>
 				</div>

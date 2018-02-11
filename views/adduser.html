@@ -1,4 +1,4 @@
-<div class="uk-section uk-padding" id="contenedor-1">
+<div class="uk-section uk-padding" id="contenedor-1" ng-controller="controlUser">
 	<div class="uk-background-muted uk-padding uk-panel">
 		<div class="uk-container uk-container-expand">
 			<h3>Add User</h3>
@@ -8,25 +8,25 @@
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text">Name</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Name">
+								<input class="uk-input" type="text" ng-model="name" placeholder="Name" >
 							</div>
 						</div>
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text">User Name</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="User Name">
+								<input class="uk-input" type="text" ng-model="user" placeholder="User Name" >
 							</div>
 						</div>
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text">Password</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="password" placeholder="Password">
+								<input class="uk-input" type="password" ng-model="password" placeholder="Password">
 							</div>
 						</div>
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text"></label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="password" placeholder="Repeat Password">
+								<input class="uk-input" type="password" ng-model="repassword" placeholder="Repeat Password">
 							</div>
 						</div>
 					</div>
@@ -34,30 +34,30 @@
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text">Email</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="email" placeholder="Email">
+								<input class="uk-input" type="email" ng-model="email" placeholder="Email">
 							</div>
 						</div>
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text">Phone</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Phone">
+								<input class="uk-input" type="text" ng-model="phone" placeholder="Phone">
 							</div>
 						</div>
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-stacked-text">Country</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Country">
+								<input class="uk-input" type="text"  ng-model="country" placeholder="Country">
 							</div>
 						</div>
 						<div class="uk-margin">
-							<label class="uk-form-label" for="form-stacked-text">Company</label>
+							<label class="uk-form-label"  for="form-stacked-text">Company</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Company">
+								<input class="uk-input" type="text" ng-model="company" placeholder="Company">
 							</div>
 						</div>
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit">Save</button>
+						<button class="uk-button uk-button-primary"  ng-click="addUser();" type="button">Save</button>
 						<a href="#listuser"class="uk-button uk-button-danger" type="button" >Cancel</a>
 					</div>
 				</div>

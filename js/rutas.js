@@ -1,4 +1,5 @@
 appRouter.config(function($routeProvider) {
+
     $routeProvider
     .when("/listproduct", {
         templateUrl : "listproduct.html"
@@ -54,6 +55,7 @@ appRouter.config(function($routeProvider) {
     }).when("/listocupation", {
         templateUrl : "listocupation.html"
     }).otherwise({
+
 		templateUrl : 'home.html',
 		//controller : 'tablaMateriales'
 	});

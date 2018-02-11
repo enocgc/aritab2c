@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="admin-themes-lab">
+    <meta name="author" content="themes-lab">
+    <link rel="icon" type="image/png" href="/assets/images/lc-icon.png">
+    <title>LC Media</title>
+    <link href="http://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://root.latinconnect.com/assets/css/style.css" rel="stylesheet"> <!-- MANDATORY -->
+    <link href="http://root.latinconnect.com/assets/css/theme.css" rel="stylesheet"> <!-- MANDATORY -->
+    <link href="http://root.latinconnect.com/assets/css/ui.css" rel="stylesheet"> <!-- MANDATORY -->
+    <link href="http://root.latinconnect.com/assets/css/custom.css" rel="stylesheet">
+    <link href="http://root.latinconnect.com/assets/plugins/datatables/dataTables.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="http://root.latinconnect.com/assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<![endif]-->
+</head>
+<!-- BEGIN BODY -->
+<body class="">
+    <section>
+        <div class="main-content">
+
+            <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/magnific/magnific-popup.min.css">
+            <link rel="stylesheet" href="http://root.latinconnect.com/lc_media/assets/css/lcMedia.css">
+            <!--You need this(dropzone) css for uploader-->
+            <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/dropzone/dropzone.css">
+            <!--You need this cropper API(Cropping)-->
+            <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/cropper/cropper.min.css">
+
+            <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/prettify/prettify.css">
+
+            <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/codemirror/lib/codemirror.css" type="text/css">
+            <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/codemirror/theme/lesser-dark.css" type="text/css">
+            <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/codemirror/theme/railscasts.css" type="text/css">
+
+            <style>
+            .CodeMirror{height: auto !important}
+        </style>
+        <!-- BEGIN PAGE CONTENT -->
+        <!-- Button trigger modal -->
+        <div class="page-content">
+            <div class="header">
+                <h2><strong>LC Media</strong> API Documentation</h2>
+            </div>
+            <!--Main container LC_Media-->
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <br>
+                    </div>
+                    <!---->
+                    <div class="col-md-12" id="insert-media" data-files="">
+                    </div>
+                    <!---->
+                    <div class="col-md-12">
+                        <h2>Resources <b>for working with LCMedia</b></h2>
+                        <p>Hojas de estilos y librerias para cargar LC media:</p>
+                        <textarea id="areaCodeHTML" class="w-100" data-lang="text/html">
+
+<!--CSS-->
+<link href="http://root.latinconnect.com/lc_media/assets/css/lcMedia.css" rel="stylesheet">
+
+
+<!--apiTags Script-->
+<script src="http://root.latinconnect.com/content/tags/assets/js/apiTags.js" type="text/javascript"></script>
+<!--apiMedia Script-->
+<script src="http://root.latinconnect.com/lc_media/assets/js/apiMedia.js" type="text/javascript"></script>
+                        </textarea>
+                        <br>
+                        <p>Para poder ejecutar LC Media se necesita un contenedor  <code> DIV </code> con un id especifico y un data-tag llamado <code> data-files="" </code>, en el cual se cargaran los recursos del API:</p>
+                        <textarea id="areaCodeHTML2" class="w-100" data-lang="text/html">
+<div class="col-md-12" id="insertMedia" data-files=""> </div>
+                        </textarea>
+                            <hr>
+                        </div>
+                        <!--Code Mirror-->
+                        <div class="col-md-12">
+                            <h2>Get <b>LC Media</b>
+                                <button class="btn btn-sm btn-default" id="btnGetApiMediaA"  data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get LcMedia</button>
+                                <button class="btn btn-sm btn-default" id="btnGetApiMediaB"  data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get LcMedia without multiselect</button>
+                            </h2>
+                            <p>Recursos adicionales para poder ejecutar <code> .lcMedia(); </code> </p>
+                            <textarea id="areaCodeHTML3" class="w-100" data-lang="text/html">
+<!--CSS-->
+<link href="http://root.latinconnect.com/assets/plugins/magnific/magnific-popup.min.css" rel="stylesheet">
+<!--Scripts-->
+<script src="http://root.latinconnect.com/assets/plugins/magnific/jquery.magnific-popup.min.js"></script>
+                            </textarea>
+                                <br>
+                                <p><code> .lcMedia(); </code> necesita varios parametros para funcionar de manera correcta.</p>
+                                <p>jQuery code:</p>
+                                <textarea id="areaCode" class="w-100" data-lang="text/javascript">
+
+            jQuery('#btnGetApiMedia').click(function(){
+                jQuery('#insertMedia').lcMedia({
+                    ids:[], //Array de las imagenes que se necesitan
+                    filetype:'all', //El tipo de archivo que se necesita: '' (vacio), 'all', 'images', 'videos'.
+                    selectedFiles:[73,50], //Array de archivos con selección
+                    templates:[9,8], //Array de templates necesarios
+                    multiselected: true, // Bool si se requiere que el LC Media sea multiselector
+                    language: 1, //Numerico del lenguaje en el que se necesita LC Media
+                    urls:true, //Bool
+                    partner:[0,1], //Array de los partners del usuario.
+                    extfn: function(){
+                        //Funcion adicional, se ejecuta antes de ejecutar .lcmedia()
+                    },
+                    callback: function(){
+                        //Callback, funcion para ejecutar algun evento despues de levantar LC Media.
+                    }
+                });
+            });
+                </textarea>
+                <hr>
+            </div>
+
+            <div class="col-md-12">
+                <h2>Get <b>Media Selected</b>
+                    <button class="btn btn-sm btn-default" id="btnGetdataFilesA" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Media Selected</button>
+                </h2>
+                <p class="alert alert-warning media fade in">Antes de utilizar la instancia <code> .getMediaSelected(); </code>, es necesario haber ejecutado <code> .lcMedia(); </code> seguidamente de haber hecho una selección de archivos en el LC Media.</p>
+                <p>Esta función retorna un arreglo con una colección de objetos, la cual debe de almacenarse en una variable.</p>
+                <p>jQuery code:</p>
+                <textarea id="areaCode2" class="w-100" data-lang="text/javascript">
+
+jQuery('#btnGetdataFiles').click(function(){
+    var datos = jQuery('#insertMedia').getMediaSelected();
+    console.log(datos);
+});
+            </textarea>
+            <br>
+            <p>Retorna: </p>
+            <textarea id="areaCodeHTML4" class="w-100" data-lang="text/html">
+<script>
+[{
+    "id":"73",
+    "templateId":"9",
+    "url":"http://media.latinconnect.com/cache/Trip-descriptor-LARGE/000000/69433d2a-a06f-11e6-a9d6-a0e4954184d3.jpeg"
+}, {
+    "id":"71",
+    "templateId":"9",
+    "url":"http://media.latinconnect.com/cache/Trip-descriptor-LARGE/000000/05863f13-a06c-11e6-a9d6-a0e4954184d3.jpeg"
+}]
+</script>
+            </textarea>
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <h2>Get <b>Media URL</b>
+                    <button class="btn btn-sm btn-default" id="btnGetPairDataFilesA" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get URLs</button>
+                </h2>
+                <p><code>.getMediaURL();</code> recibe un arreglo con una colección de objetos <code> [{'id': 1, 'temp':1}] </code>. Y retorna un arreglo con sus respectivos ids y la url del archivo.</p>
+                <p></p>
+
+                <p>jQuery code:</p>
+                <textarea id="areaCode3" class="w-100" data-lang="text/javascript">
+
+jQuery('#btnGetPairDataFiles').click(function(){
+    datos = jQuery('#insertMedia').getMediaURL({
+        pairIds:[
+        {'id':1,'temp':8},
+        {'id':73,'temp':9}
+        ],
+        callback: fucntion(){}
+    });
+    console.log(datos);
+});
+        </textarea>
+        <br>
+        <p>Retorna: </p>
+        <textarea id="areaCodeHTML5" class="w-100" data-lang="text/html">
+<script>
+    [{
+        "id":"1",
+        "templateId":"8",
+        "url":"http://media.latinconnect.com/cache/Trip-descriptor-SMALL/000000/c3290795-899a-11e6-9337-576a0d05f1ac.jpeg"
+    },{
+        "id":"73",
+        "templateId":"9",
+        "url":"http://media.latinconnect.com/cache/Trip-descriptor-LARGE/000000/69433d2a-a06f-11e6-a9d6-a0e4954184d3.jpeg"
+    }]
+</script>
+        </textarea>
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <h2>Get <b>Uploader</b>
+                <button class="btn btn-sm btn-default" id="btnGetUploaderA" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Uploader</button>
+            </h2>
+            <p>Es necesario agregar estos CSS y JS para el funcionamiento del Uploader</p>
+            <textarea id="areaCodeHTML6" class="w-100" data-lang="text/html">
+<!--CSS-->
+<link href="http://root.latinconnect.com/assets/plugins/dropzone/dropzone.css" rel="stylesheet">
+<!--Script-->
+<script src="http://root.latinconnect.com/assets/plugins/dropzone/dropzone.min.js"></script>
+            </textarea>
+                <p><br>
+                    <code>.getMediaUploader(); </code> Instancia para subir archivos con LC Media.
+                    <br>
+                    <code> templatesIds: [] </code> puede ir vacio, para no asig un template fijo.
+                </p>
+                <p>jQuery code:</p>
+                <textarea id="areaCode4" class="w-100" data-lang="text/javascript">
+
+jQuery('#btnGetUploader').click(function(){
+    jQuery('#insertMedia').getMediaUploader({
+        language: 1,
+        partner: [0],
+        filetype: '',
+        templatesIds: [],
+        maxFiles:999,
+        disableEditBtn:false,
+        callback: function (){}
+    });
+});
+    </textarea>
+    <hr>
+</div>
+<div class="col-md-12">
+    <h2>Get <b>Uploaded Media</b>
+        <button class="btn btn-sm btn-default" id="btnGetUploaderB" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Uploaded Media Id</button>
+    </h2>
+    <p><br>
+        Instancia para subir archivos con LC Media.
+        <br>
+        <code> templatesIds: [] </code>
+    </p>
+    <p>jQuery code:</p>
+    <textarea id="areaCode12" class="w-100" data-lang="text/javascript">
+
+var uploadedMedia = jQuery('#insertMedia').getUploadedMedia();
+console.log(uploadedMedia);
+    </textarea>
+    <hr>
+</div>
+<div class="col-md-12">
+    <h2>Get <b>Editor</b>
+        <button class="btn btn-sm btn-default" id="btnGetEditorA" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Editor</button>
+    </h2>
+    <p>Instancia el editor de LC Media. Recibe el id del archivo y el id del template.</p>
+    <p>Como parametros recibe: <code> ids:[1,2] </code> &nbsp; <code> templatesIds:[] </code></p>
+    <p> Recibe templates para posteriormente llevarlo al editor con los id de los templates, si no lo necesita entonces puede dejarse en blanco.</p>
+    <p>jQuery code:</p>
+    <textarea id="areaCode5" class="w-100" data-lang="text/javascript">
+
+jQuery('#btnGetEditor').click(function(){
+    jQuery('#insertMedia').getMediaEditor({
+        ids:[1,2],
+        templatesIds: [6,13],
+        partner:[1],
+        language: 1,
+        callback: function(){}
+    });
+});
+</textarea>
+<hr>
+</div>
+<div class="col-md-12">
+    <h2>Get <b>Edited Media</b>
+        <button class="btn btn-sm btn-default" id="btnGetEditorB" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Edited Media</button>
+    </h2>
+    <p>Obtener los ids de los archivos modificados.</p>
+    <p>jQuery code:</p>
+    <textarea id="areaCode10" class="w-100" data-lang="text/javascript">
+
+var editedMediaIds =  jQuery('#insertMedia').getEditedMedia();
+console.log(editedMediaIds);
+    </textarea>
+    <hr>
+</div>
+<div class="col-md-12">
+    <h2>Get <b>Cropper</b>
+        <button class="btn btn-sm btn-default" id="btnGetCropperA" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Cropper</button>
+    </h2>
+    <textarea id="areaCodeHTML7" class="w-100" data-lang="text/html">
+<!--CSS-->
+<link href="http://root.latinconnect.com/assets/plugins/cropper/cropper.min.css" rel="stylesheet">
+<!--Script-->
+<script src="http://root.latinconnect.com/assets/plugins/cropper/cropper.min.js"></script>
+    </textarea>
+        <p>Llama al cropper para realizar cortes en el archivo solicitado y con sus templates respectivos.</p>
+
+        <p>jQuery code:</p>
+        <textarea id="areaCode6" class="w-100" data-lang="text/javascript">
+
+jQuery('#btnGetCropper').click(function(){
+    jQuery('#insertMedia').getMediaCropper({
+        id:32,
+        templateId:[6,13],
+        language: 1,
+        extfn: function(){},
+        callback: function () {}
+    });
+});
+</textarea>
+<hr><br>
+</div>
+<div class="col-md-12">
+    <h2>Get <b>Cropped Media</b>
+        <button class="btn btn-sm btn-default" id="btnGetCropperB" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Cropped Media</button>
+    </h2>
+    <p>Obtener el id de la la ultima imagen croppeada.</p>
+    <p>jQuery code:</p>
+    <textarea id="areaCode11" class="w-100" data-lang="text/javascript">
+
+jQuery('#btnGetCroppedMedia').click(function(){
+    jQuery('#insertMedia').getCroppedMedia();
+});
+</textarea>
+<hr><br>
+</div>
+
+<div class="col-md-12">
+    <h2>Get <b>Order Media</b>
+        <button class="btn btn-sm btn-default" id="btnGetOrderMediaA" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get Order Media</button>
+        <button class="btn btn-sm btn-default" id="btnGetOrderMediaB" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Get order Selected | Ver consola</button>
+    </h2>
+    <p> <code> .getOrderMedia() </code> Funciona para ordenar de forma acendente archivos que se encuentren en LC Media.</p>
+
+    <p>jQuery code:</p>
+    <textarea id="areaCode8" class="w-100" data-lang="text/javascript">
+
+jQuery('#insert-media').getOrderMedia({
+    ids:[73,50,10,11,18,21],
+    language:1,
+    callback: function(){}
+});
+</textarea>
+<p> <code> .getOrderMediaSelected() </code> Para obtener el orden de los ids se utilizar esta función</p>
+<textarea id="areaCode9" class="w-100" data-lang="text/javascript">
+
+var orderMedia = jQuery('#insert-media').getOrderMediaSelected();
+console.log(orderMedia);
+</textarea>
+<hr><br>
+</div>
+
+<div class="col-md-12">
+    <h2>Create <b>template image</b>
+        <button class="btn btn-sm btn-default" id="btnSendTemplatesToImageB" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Send templates to image</button>
+    </h2>
+    <p> <code> .sendTemplatesToImage() </code> esta es una funcion para crear templates de una imagen, nada mas se necesita enviar el media ID y un arreglo con los ids de los templates que le quiere asignar al archivo.
+        <br>Si el template ya exite o se encuentra asignado, ignora la creacion del template, pero sin embargo retorna el valor en el arreglo.</p>
+
+
+        <p>jQuery code:</p>
+        <textarea id="areaCode13" class="w-100" data-lang="text/javascript">
+
+jQuery('#insert-media').sendTemplatesToImage({
+        id:32,
+        templateIds:[6,13],
+        callback: function(){
+        values = JSON.parse(jQuery('#insert-media').attr('data-templatesToImage'));
+        console.log('File id: '+values[0].id+'\n');
+        console.log('Template id: '+values[0].template_id+'\n');
+        console.log('Url: '+values[0].url+'\n');
+    }
+});
+</textarea>
+
+<hr><br>
+</div>
+
+
+<div class="col-md-12">
+    <h2>Download <b>files</b>
+        <button class="btn btn-sm btn-default" id="btnDownloadFilesB" data-toggle="tooltip" data-placement="bottom" title="Ejemplo">Descargar archivos</button>
+    </h2>
+    <p> <code> .getDownloader() </code> Esta función es para descargar archivos de LC Media, nada mas necesita enviarle el <code>array</code> los archivos que necesita descargar.</p>
+
+
+    <p>jQuery code:</p>
+    <textarea id="areaCode14" class="w-100" data-lang="text/javascript">
+jQuery('#insertedia').getDownloader({
+    media_ids: [32,26],
+    getDir:true or false,
+    zipName: 'Nombre del archivo',
+    callback: function(){}
+});
+</textarea>
+
+<hr><br>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- END PAGE CONTENT -->
+</div>
+<!-- END MAIN CONTENT -->
+</section>
+
+<div class="loader-overlay">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+<script src="http://root.latinconnect.com/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/gsap/main-gsap.min.js"></script> <!-- HTML Animations -->
+<script src="http://root.latinconnect.com/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src='http://root.latinconnect.com/assets/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js' type='text/javascript'></script>
+<script src="http://root.latinconnect.com/assets/plugins/jquery-block-ui/jquery.blockUI.min.js"></script> <!-- simulate synchronous behavior when using AJAX -->
+<script src="http://root.latinconnect.com/assets/plugins/bootbox/bootbox.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script> <!-- Custom Scrollbar sidebar -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script> <!-- Show Dropdown on Mouseover -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> <!-- Animated Progress Bar -->
+<script src="http://root.latinconnect.com/assets/plugins/switchery/switchery.min.js"></script> <!-- IOS Switch -->
+<script src="http://root.latinconnect.com/assets/plugins/charts-sparkline/sparkline.min.js"></script> <!-- Charts Sparkline -->
+<script src="http://root.latinconnect.com/assets/plugins/retina/retina.min.js"></script>  <!-- Retina Display -->
+<script src="http://root.latinconnect.com/assets/plugins/jquery-cookies/jquery.cookies.js"></script> <!-- Jquery Cookies, for theme -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap/js/jasny-bootstrap.min.js"></script> <!-- File Upload and Input Masks -->
+<script src="http://root.latinconnect.com/assets/plugins/select2/select2.min.js"></script> <!-- Select Inputs -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-tags-input/bootstrap-tagsinput.min.js"></script> <!-- Select Inputs -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-loading/lada.min.js"></script> <!-- Buttons Loading State -->
+<script src="http://root.latinconnect.com/assets/plugins/timepicker/jquery-ui-timepicker-addon.min.js"></script> <!-- Time Picker -->
+<script src="http://root.latinconnect.com/assets/plugins/multidatepicker/multidatespicker.min.js"></script> <!-- Multi dates Picker -->
+<script src="http://root.latinconnect.com/assets/plugins/colorpicker/spectrum.min.js"></script> <!-- Color Picker -->
+<script src="http://root.latinconnect.com/assets/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script> <!-- A mobile and touch friendly input spinner component for Bootstrap -->
+<script src="http://root.latinconnect.com/assets/plugins/autosize/autosize.min.js"></script> <!-- Textarea autoresize -->
+<script src="http://root.latinconnect.com/assets/plugins/icheck/icheck.min.js"></script> <!-- Icheck -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-editable/js/bootstrap-editable.min.js"></script> <!-- Inline Edition X-editable -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-context-menu/bootstrap-contextmenu.min.js"></script> <!-- File Upload and Input Masks -->
+<script src="http://root.latinconnect.com/assets/plugins/prettify/prettify.min.js"></script> <!-- Show html code -->
+<script src="http://root.latinconnect.com/assets/plugins/slick/slick.min.js"></script> <!-- Slider -->
+<script src="http://root.latinconnect.com/assets/plugins/countup/countUp.min.js"></script> <!-- Animated Counter Number -->
+<script src="http://root.latinconnect.com/assets/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+<script src="http://root.latinconnect.com/assets/plugins/backstretch/backstretch.min.js"></script> <!-- Background Image -->
+<script src="http://root.latinconnect.com/assets/plugins/charts-chartjs/Chart.min.js"></script>  <!-- ChartJS Chart -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-slider/bootstrap-slider.js"></script> <!-- Bootstrap Input Slider -->
+<script src="http://root.latinconnect.com/assets/plugins/visible/jquery.visible.min.js"></script> <!-- Visible in Viewport -->
+<script src="http://root.latinconnect.com/assets/js/sidebar_hover.js"></script>
+<script src="http://root.latinconnect.com/assets/js/application.js"></script> <!-- Main Application Script -->
+<script src="http://root.latinconnect.com/assets/js/plugins.js"></script> <!-- Main Plugin Initialization Script -->
+<script src="http://root.latinconnect.com/assets/js/widgets/notes.js"></script>
+<script src="http://root.latinconnect.com/assets/js/quickview.js"></script> <!-- Quickview Script -->
+<script src="http://root.latinconnect.com/assets/js/pages/search.js"></script> <!-- Search Script -->
+<!--<script src="http://root.latinconnect.com/assets/js/builder.js"></script>-->
+<!-- END PAGE SCRIPTS -->
+<script src="http://root.latinconnect.com/assets/js/custom.js"></script>
+
+
+
+
+<!-- END PAGE SPECIFIC SCRIPTS -->
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/magnific/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/content/tags/assets/js/apiTags.js" ></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/prettify/prettify.min.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/addon/edit/matchbrackets.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/css/css.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/clike/clike.js"></script>
+
+<script src="http://root.latinconnect.com/lc_media/assets/js/apiMedia.js" type="text/javascript"></script>
+<!--You need this Js for uploder (dropzone)-->
+<script src="http://root.latinconnect.com/assets/plugins/dropzone/dropzone.min.js"></script>
+<!--You need this cropper API(Cropping)-->
+<script src="http://root.latinconnect.com/assets/plugins/cropper/cropper.min.js"></script>
+<script src="http://root.latinconnect.com/lc_media/assets/js/customCropper.js"></script>
+
+
+<script>
+    jQuery(document).ready(function(){
+        jQuery('button').tooltip();
+
+        /*Call LC Media*/
+        jQuery('#btnGetApiMediaA').click(function(){
+            jQuery('#insert-media').lcMedia({
+                ids:[],
+                selectedFiles:[73,50],
+                templates:[9,8],
+                multiselected: true,
+                language:1,
+                urls:true,
+                partner:[0,1,2],
+                callback: function(){
+                }
+            });
+        });
+
+        /*Call LC Media*/
+        jQuery('#btnGetApiMediaB').click(function(){
+            jQuery('#insert-media').lcMedia({
+                ids:[73,50],
+                filetype:'all',
+                selectedFiles:[],
+                templates:[9,8],
+                multiselected: false,
+                language:1,
+                urls:true,
+                partner:[0,1,2],
+                callback: function(){
+                }
+            });
+        });
+
+        /*Get media selected*/
+        jQuery('#btnGetdataFilesA').click(function(){
+            var datos = jQuery('#insert-media').getMediaSelected();
+            console.log(datos);
+        });
+
+        /*Get media ids & urls*/
+        jQuery('#btnGetUrlA').click(function(){
+            datos = jQuery('#insert-media').getMediaURL({
+                ids:[73,72],
+                templates:[8,9]
+            });
+//console.log(datos);
+});
+
+        /*Get media ids & urls*/
+        jQuery('#btnGetPairDataFilesA').click(function(){
+            datos = jQuery('#insert-media').getMediaURL({
+                pairIds:[
+                {'id':1,'temp':8},
+                {'id':73,'temp':9}
+                ]
+            });
+            console.log(datos);
+        });
+
+        /*load uploader*/
+        jQuery('#btnGetUploaderA').click(function(){
+            jQuery('#insert-media').getMediaUploader({
+                templatesIds: [2,3],
+                partner: [0,1],
+                language:1
+            });
+        });
+        /*load uploader*/
+        jQuery('#btnGetUploaderB').click(function(){
+            var mediaUploadedMedia = jQuery('#insert-media').getUploadedMedia();
+            console.log(mediaUploadedMedia);
+        });
+        /*Get Editor*/
+        jQuery('#btnGetEditorA').click(function(){
+            jQuery('#insert-media').getMediaEditor({
+                ids:[2],
+                templatesIds: [6,13],
+                language:1
+            });
+        });
+        /*Get Media Edited*/
+        jQuery('#btnGetEditorB').click(function(){
+            var mediaEdited = jQuery('#insert-media').getEditedMedia();
+            console.log(mediaEdited);
+        });
+
+        /*Get Cropper*/
+        jQuery('#btnGetCropperA').click(function(){
+            jQuery('#insert-media').getMediaCropper({
+                id:2,
+                templateId:[8,9],
+                language:1
+            });
+        });
+
+        /*Get Order Media*/
+        jQuery('#btnGetCropperB').click(function(){
+            var croppedMedia = jQuery('#insert-media').getCroppedMedia();
+            console.log(croppedMedia);
+        });
+
+        /*Get Order Media*/
+        jQuery('#btnGetOrderMediaA').click(function(){
+            jQuery('#insert-media').getOrderMedia({
+                ids:[73,50,10,11,18,21],
+                language:1
+            });
+        });
+        /*Get Order Media*/
+        jQuery('#btnGetOrderMediaB').click(function(){
+            var orderMedia = jQuery('#insert-media').getOrderMediaSelected();
+            console.log(orderMedia);
+        });
+
+        /*Send templates to image*/
+        var values;
+        jQuery('#btnSendTemplatesToImageB').click(function(){
+            jQuery('#insert-media').sendTemplatesToImage({
+                id:32,
+                templateIds:[6,13],
+                callback: function(){
+                    values = JSON.parse(jQuery('#insert-media').attr('data-templatesToImage'));
+                    console.log('File id: '+values[0].id+'\n');
+                    console.log('Template id: '+values[0].template_id+'\n');
+                    console.log('Url: '+values[0].url+'\n');
+                }
+            });
+        });
+
+        /**/
+        jQuery('#btnDownloadFilesB').click(function(){
+            jQuery('#insert-media').getDownloader({
+                media_ids: [1,2]
+            });
+        });
+        /********************************/
+        /*          CODE Mirror         */
+        /********************************/
+
+        var opts = {
+            mode: 'text/javascript',
+            lineNumbers: true,
+            theme: 'lesser-dark',
+            styleActiveLine: true,
+            matchBrackets: true
+        };
+        var textArea = document.getElementById('areaCode');
+        var textArea2 = document.getElementById('areaCode2');
+        var textArea3 = document.getElementById('areaCode3');
+        var textArea4 = document.getElementById('areaCode4');
+        var textArea5 = document.getElementById('areaCode5');
+        var textArea6 = document.getElementById('areaCode6');
+        var textArea8 = document.getElementById('areaCode8');
+        var textArea9 = document.getElementById('areaCode9');
+        var textArea10 = document.getElementById('areaCode10');
+        var textArea11 = document.getElementById('areaCode11');
+        var textArea12 = document.getElementById('areaCode12');
+        var textArea13 = document.getElementById('areaCode13');
+        var textArea14 = document.getElementById('areaCode14');
+        /*var textArea11= document.getElementById('areaCode11');*/
+        CodeMirror.fromTextArea(textArea,opts);
+        CodeMirror.fromTextArea(textArea2,opts);
+        CodeMirror.fromTextArea(textArea3,opts);
+        CodeMirror.fromTextArea(textArea4,opts);
+        CodeMirror.fromTextArea(textArea5,opts);
+        CodeMirror.fromTextArea(textArea6,opts);
+        CodeMirror.fromTextArea(textArea8,opts);
+        CodeMirror.fromTextArea(textArea9,opts);
+        CodeMirror.fromTextArea(textArea10,opts);
+        CodeMirror.fromTextArea(textArea11,opts);
+        CodeMirror.fromTextArea(textArea12,opts);
+        CodeMirror.fromTextArea(textArea13,opts);
+        CodeMirror.fromTextArea(textArea14,opts);
+        /*CodeMirror.fromTextArea(textArea11,opts); */
+
+        var optsHTML = {
+            mode: 'text/html',
+            lineNumbers: true,
+            theme: 'railscasts',
+            styleActiveLine: true,
+            matchBrackets: true
+        };
+        var textAreaHTML = document.getElementById('areaCodeHTML');
+        var textAreaHTML2 = document.getElementById('areaCodeHTML2');
+        var textAreaHTML3 = document.getElementById('areaCodeHTML3');
+        var textAreaHTML4 = document.getElementById('areaCodeHTML4');
+        var textAreaHTML5 = document.getElementById('areaCodeHTML5');
+        var textAreaHTML6 = document.getElementById('areaCodeHTML6');
+        var textAreaHTML7 = document.getElementById('areaCodeHTML7');
+        CodeMirror.fromTextArea(textAreaHTML,optsHTML);
+        CodeMirror.fromTextArea(textAreaHTML2,optsHTML);
+        CodeMirror.fromTextArea(textAreaHTML3,optsHTML);
+        CodeMirror.fromTextArea(textAreaHTML4,optsHTML);
+        CodeMirror.fromTextArea(textAreaHTML5,optsHTML);
+        CodeMirror.fromTextArea(textAreaHTML6,optsHTML);
+        CodeMirror.fromTextArea(textAreaHTML7,optsHTML);
+
+    });
+</script>
+</body>
+</html>

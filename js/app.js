@@ -1,2 +1,2 @@
 
-var appRouter = angular.module("aritab2c", ["ngRoute"]);
+var appRouter = angular.module("aritab2c", ["ngRoute","ui.utils"]);

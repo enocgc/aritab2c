@@ -9,8 +9,13 @@
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Products</h3>
+            <script type="text/javascript">
+                        $("#addproduct2").click(function(){
+                          location.reload();
+                       });
+                        </script>
             <div class="uk-margin-small">
-                 <a href="#addproduct" class="uk-button uk-button-primary uk-button-small" > <i class="fas fa-plus fa-lg"></i> Add a Product</a>
+                 <a href="#addproduct" id="addproduct2" class="uk-button uk-button-primary uk-button-small" > <i class="fas fa-plus fa-lg"></i> Add a Product</a>
             </div>
             <!--tabla datatables-->
             <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">

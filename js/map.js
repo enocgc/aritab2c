@@ -4,7 +4,8 @@
 // *
 
 // Required variables.
-var map;
+console.log("entro");
+var map="";
 var marker;
 
 function initialize() {
@@ -14,7 +15,12 @@ function initialize() {
       mapTypeId: 'roadmap'
    };
    
-   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+   mapaI();
+   function mapaI(){
+      console.log("load map");
+         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+   }
+
 
    // This event detects a click on the map.
    google.maps.event.addListener(map, "click", function(event) {

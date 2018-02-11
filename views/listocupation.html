@@ -2,12 +2,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#ocupation').DataTable();
 } );
 
 </script>
 
-<div class="uk-section uk-padding" id="contenedor-1">
+<div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlOcupation">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Ocupation</h3>
@@ -16,7 +16,7 @@ $(document).ready(function() {
 
             </div>
             <!--tabla datatables-->
-            <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%">
+            <table datatable="ng" ng-if="ocupations.length" id="ocupation" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
                 <thead>
                     <tr>
                         <th>Actions</th>
@@ -35,100 +35,127 @@ $(document).ready(function() {
                 </tfoot>
                 <tbody>
 
-                    <tr>
-                        <td> <a class="toggle-eye0" uk-toggle="target: .toggle-eye0"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye0" uk-toggle="target: .toggle-eye0" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>ss</td>
-                        <td>1</td>
-                        <td>Simple bed</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye1" uk-toggle="target: .toggle-eye1"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye1" uk-toggle="target: .toggle-eye1" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>db</td>
-                        <td>2</td>
-                        <td>Double bed</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye2" uk-toggle="target: .toggle-eye2" hidden><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye2" uk-toggle="target: .toggle-eye2" ><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>tb</td>
-                        <td>3</td>
-                        <td>triple bed</td>
-                    </tr>
+                  <tr ng-repeat="ocupation in ocupations " role="row" class="odd">
+
+                      <td > <a ng-click="getOcupationtoModal(languages,ocupation.id,ocupation.persons)" href="#edit-occupation" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a  ng-click="deleteOcupation(ocupation.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
+                      <td>{{ocupation.id}} </td>
+                        <td>{{ocupation.persons}} </td>
+                          <td>{{ocupation.description}} </td>
+                  </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
-
-
-
-
-
-<!--MODAL DELETE COUNTRY-->
-<div id="modal-delete" uk-modal>
-    <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-body">
-            <p>Are you sure you want to delete this item?</p>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-            <a href="#modal-group-2" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg" ></i> Delete</a>
-            <a class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</a>
+    <!--MODAL DELETE -->
+    <div id="modal-delete" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <a  id="confirmdelete" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</button>
+            </div>
         </div>
     </div>
-</div>
 
 
+    <!--MODAL ADD OCUPATION-->
+
+    <div class="" id="add-occupation" uk-modal>
+        <div class="uk-background-muted uk-padding uk-modal-dialog">
+             <button class="uk-modal-close-default" type="button" uk-close></button>
+        	<div class="">
+    			<h3>Add Occupation</h3>
+    			<form method="post" class="uk-form-horizontal ">
+    				<div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+    					<div>
+                            <div class="uk-margin">
+    							 <label class="uk-form-label" for="form-stacked-text">ID</label>
+    							<div class="uk-form-controls">
+    								<input class="uk-input" type="text" ng-model="id" placeholder="Ex. ss or sb">
+    							</div>
+    						</div>
+                            <div class="uk-margin">
+    							 <label class="uk-form-label" for="form-stacked-text">Max Persons</label>
+    							<div class="uk-form-controls">
+    								<input class="uk-input" type="number" ng-value="'0'" ng-model="persons">
+    							</div>
+    						</div>
+    						<div class="uk-margin ">
+                                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                               <div class="uk-form-controls">
+                                   <ul uk-tab>
+                                         <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                                   </ul>
+
+                                   <ul class="uk-switcher uk-margin">
+                                     <li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description{{language.short}}"></textarea></li>
+                                   </ul>
+    							</div>
+    						</div>
+
+    					</div>
 
 
-<!--MODAL ADD OCUPATION-->
-
-<div class="" id="add-occupation" uk-modal>
-    <div class="uk-background-muted uk-padding uk-modal-dialog">
-         <button class="uk-modal-close-default" type="button" uk-close></button>
-    	<div class="">
-			<h3>Add Occupation</h3>
-			<form method="post" class="uk-form-horizontal ">
-				<div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
-					<div>
-                        <div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">ID</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="text" placeholder="Ex. ss or sb">
-							</div>
-						</div>
-                        <div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Max Persons</label>
-							<div class="uk-form-controls">
-								<input class="uk-input" type="number" value="0">
-							</div>
-						</div>
-						<div class="uk-margin ">
-                            <label class="uk-form-label" for="form-stacked-text">Description</label>
-                           <div class="uk-form-controls">
-                               <ul uk-tab>
-                                   <li><a href="#">English</a></li>
-                                   <li><a href="#">German</a></li>
-                                   <li><a href="#">Spanish</a></li>
-                               </ul>
-
-                               <ul class="uk-switcher uk-margin">
-                                   <li><textarea class="uk-textarea" rows="4" placeholder="English Description" name="description-en"></textarea></li>
-                                   <li><textarea class="uk-textarea" rows="4" placeholder="German Description" name="description-de"></textarea></li>
-                                   <li><textarea class="uk-textarea" rows="4" placeholder="Spanish Description" name="description-es"></textarea></li>
-                               </ul>
-							</div>
-						</div>
-
-					</div>
+    					<div class="uk-width-1-1 uk-text-center">
+    						<button class="uk-button uk-button-primary" ng-click="addOcupation(languages);"type="button">Save</button>
+    						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
+    					</div>
+    				</div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
 
 
-					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit">Save</button>
-						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+    <!--MODAL Edit OCUPATION-->
+
+    <div class="" id="edit-occupation" uk-modal>
+        <div class="uk-background-muted uk-padding uk-modal-dialog">
+             <button class="uk-modal-close-default" type="button" uk-close></button>
+        	<div class="">
+    			<h3>Edit Occupation</h3>
+    			<form method="post" class="uk-form-horizontal ">
+    				<div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+    					<div>
+                            <div class="uk-margin">
+    							 <label class="uk-form-label" for="form-stacked-text">ID</label>
+    							<div class="uk-form-controls">
+    								<input class="uk-input" type="text" ng-model="idE" placeholder="Ex. ss or sb">
+    							</div>
+    						</div>
+                            <div class="uk-margin">
+    							 <label class="uk-form-label" for="form-stacked-text">Max Persons</label>
+    							<div class="uk-form-controls">
+    								<input class="uk-input" type="number" id="personsE" ng-model="personsE" >
+    							</div>
+    						</div>
+    						<div class="uk-margin ">
+                                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                               <div class="uk-form-controls">
+                                   <ul uk-tab>
+                                      <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                                   </ul>
+
+                                   <ul class="uk-switcher uk-margin">
+                                     <li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="descriptionE-{{language.short}}"></textarea></li>
+                                   </ul>
+    							</div>
+    						</div>
+
+    					</div>
+
+
+    					<div class="uk-width-1-1 uk-text-center">
+    						<button class="uk-button uk-button-primary" ng-click="editOcupation(languages)"type="button">Save</button>
+    						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
+    					</div>
+    				</div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
+
 </div>

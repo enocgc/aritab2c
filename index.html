@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="loginApp" ng-controller="loginController">
 <head>
 <meta charset="utf-8">
 <!--login arita b2c-->
@@ -9,12 +9,15 @@
         <link rel="stylesheet" href="libs/uikit/css/uikit.min.css" />
         <script src="libs/uikit/js/uikit.min.js"></script>
         <script src="libs/uikit/js/uikit-icons.min.js"></script>
+          <script  src="libs/angular/angular.min.js"></script>
+				<script src="js/logincontroller.js">
+				</script>
 </head>
 
 <body>
 	<div class="uk-section">
     	<div class="uk-container uk-container-expand uk-text-center">
-			<img src="media/logo.png" alt="Arita B2C" />
+			<img src="images/logo.png" alt="Arita B2C" />
 			<br><hr><br>
 			<div class="uk-grid-small uk-child-width-1-3@s uk-flex-center uk-text-center" uk-grid>
 				<div>
@@ -25,17 +28,17 @@
 							<div class="uk-margin">
 								<div class="uk-inline">
             						<span class="uk-form-icon" style="color: white;" uk-icon="icon: user"></span>
-									<input class="uk-input" type="text" placeholder="User">
+									<input class="uk-input" type="text" placeholder="User" ng-model="usuario">
 								</div>
 							</div>
 							<div class="uk-margin">
 								<div class="uk-inline">
             						<span class="uk-form-icon" style="color: white;" uk-icon="icon: lock"></span>
-									<input class="uk-input" type="password" placeholder="Password">
+									<input class="uk-input" type="password" placeholder="Password" ng-model="contrasena">
 								</div>
 							</div>
 							<div class="uk-margin">
-									<a href="views/desktop.html"class="uk-button uk-button-primary">Login</a>
+									<a  ng-click="login();" class="uk-button uk-button-primary">Login</a>
 							</div>
 
 						</form>
