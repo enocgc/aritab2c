@@ -107,6 +107,8 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
 
     }
 }
+
+//funcion para editar
 $scope.editOcupation =function($lang){
 var action=6;
 $http.post('../php/ocupation.php', {'action':action,'idE':$scope.idE,'persons':$scope.personsE})//creo el ocupation
