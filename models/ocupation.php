@@ -10,31 +10,43 @@ require_once ("../includes/constantes.php");
 	}//fin del constructor
 
 
-  function deleteService($id){
-      $stmt=$this->cone->prepare("DELETE FROM services WHERE id=?");
+  function deleteOcupation($id){
+      $stmt=$this->cone->prepare("DELETE FROM occupations WHERE id=?");
       if($stmt === FALSE){
         die("prepare() fail eliminar: ". $this->cone->error);
         return 0;
       }
-      $stmt->bind_param('i',$id);
+      $stmt->bind_param('s',$id);
       $stmt->execute();
       $stmt->close();
       return 1;
     }# fin del metodo eliminar.
 
-    function editService($id,$language_id,$name){
-      $stmt=$this->cone->prepare("UPDATE servicedetails SET name=? WHERE service_id=? AND language_id=?");
+    function editOcupation($id,$persons){
+      $stmt=$this->cone->prepare("UPDATE occupations SET persons=? WHERE id=?");
       if($stmt === FALSE){
         die("prepare() fail modificar: ". $this->cone->error);
         echo 0;
       }
-      $stmt->bind_param('sss',$name,$id,$language_id);
+      $stmt->bind_param('ss',$persons,$id);
       //echo "id ".$id."idl ".$language_id."$name ".$name."$description ".$description;
       $stmt->execute();
       $stmt->close();
       echo 1;
     }# fin del metodo modificar.
 
+    function editOcupationDetails($id,$language_id,$description){
+      $stmt=$this->cone->prepare("UPDATE occupationdetails SET description=? WHERE occupation_id=? AND language_id=?");
+      if($stmt === FALSE){
+        die("prepare() fail modificar: ". $this->cone->error);
+        echo 0;
+      }
+      $stmt->bind_param('sss',$description,$id,$language_id);
+      //echo "id ".$id."idl ".$language_id."$name ".$name."$description ".$description;
+      $stmt->execute();
+      $stmt->close();
+      echo 1;
+    }# fin del metodo modificar.
 
 //funcion para insertar y obtener id
 function addOcupation($id,$persons){

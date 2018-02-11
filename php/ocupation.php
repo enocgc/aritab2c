@@ -36,18 +36,27 @@ switch ($action) {
   echo $bd->getOcupationtoModal($id,$idlan,$short);
   break;
   case 6:
-  $id = $data->id;
-  $language_id = $data->language_id;
-  $name= $data->name;
-//  echo "id ".$id." lang ".$language_id." name ".$name;
+  $id = $data->idE;
+  $persons=$data->persons;
+
+  //echo "id ".$id." persons ".$persons;
   $bd = new Ocupations();
-  $bd->editService($id,$language_id,$name);
+   $bd->editOcupation($id,$persons);
+  break;
+  case 7:
+  $id= $data->idE;
+  $language_id = $data->language_id;
+  $description= $data->description;
+  //echo "id ".$id." language_id ".$language_id." description".$description;
+  $bd = new Ocupations();
+  $bd->editOcupationDetails($id,$language_id,$description);
+
   break;
   case 8:
   $id = $data->id;
   $bd = new Ocupations();
   //echo "id".$id;
-  echo $bd->deleteService($id);
+  echo $bd->deleteOcupation($id);
   break;
   default:
 }

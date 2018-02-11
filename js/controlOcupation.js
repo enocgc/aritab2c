@@ -88,18 +88,18 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
       $http.post('../php/ocupation.php', {'action':action,'id':id,'idlan':langid,'short':short})
       .success(function(data){
         //$scope.ocupationE = data;
-        console.log("Datos");
-        console.log(data);
+      //  console.log("Datos");
+      //  console.log(data);
         var cont=$scope.contador;
         setTimeout(function () {//para que actualice los campos de forma eficiente
             $scope.$apply(function () {
-                 console.log(data[0].description);
+                // console.log(data[0].description);
                  $("#descriptionE-"+data[0].short).val(data[0].description);
                 //  $("#descriptionE-"+data[0].short).val(data[0].description);
               });
             }, 200);
         //usamos el contador para saber si todas las peticiones se hiceron
-        console.log("vector"+$scope.contador+" lang "+lang.length);
+        //console.log("vector"+$scope.contador+" lang "+lang.length);
         $scope.contador=$scope.contador+1;
       }).error(function(response){
         alert("No se get el tags");
@@ -109,48 +109,49 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
 }
 $scope.editOcupation =function($lang){
 var action=6;
-
-//console.log('edit'+langid);
-$scope.contador=0;
-for (var i = 0; i <  $lang.length; i++) {
-//  console.log("entro "+i+$scope.languages[i].short);
-var name= document.getElementById('nameE-'+$scope.languages[i].short).value;
-var langid = $scope.languages[i].id;
-$http.post('../php/service.php', {'action':action,'id':$scope.idServiceE,'language_id':langid,'name':name})
+$http.post('../php/ocupation.php', {'action':action,'idE':$scope.idE,'persons':$scope.personsE})//creo el ocupation
 .success(function(data){
-  console.log("editado");
-  //console.log(data);
+  //crear funcion para anadir detalle por idioma el siclo me jala los datos y podemos mandar el id del idioma como parametro
+  for (var i = 0; i <  $lang.length; i++) {
+  //  console.log("entro "+i+$scope.languages[i].short);
+  var description = document.getElementById('descriptionE-'+$scope.languages[i].short).value;
+  console.log($scope.languages[i].short);
+    var langid = $scope.languages[i].id;
+    $http.post('../php/ocupation.php', {'action':7,'idE': $scope.idE,'language_id':langid,'description':description})
+    .success(function(data){
+      console.log(data);
+      console.log("se actualizo ocupation detail correctamente");
+    }).error(function(response){
+      alert("No iserto ocupation detail");
+    });
+  }//fin del for
+  setTimeout(function () {//para que actualice los campos de forma eficiente
+    $scope.$apply(function () {
+      getOcupation();
+      console.log("se actualizo Ocupation");
+    });
+  }, 200);
 
-  if($lang.length==$scope.contador+1){
-    setTimeout(function () {//para que actualice los campos de forma eficiente
-        $scope.$apply(function () {
-          getService();
-         //  $("#descriptionE-"+data[0].short).val(data[0].description);
-        });
-    }, 300);
-    getLanguage()
-      console.log("guardado exitosamente");
-  }
-  $scope.contador++;
+  // alert("get exitoso");
 }).error(function(response){
-  console.log("No se actualizo ");
+  alert("No iserto ocupation");
 });
-}
 }//fin funcon edit
 
 //funcion para eliminar por id
 $scope.deleteOcupation = function(id){
-//console.log("id  "+id);
+console.log("id entrada "+id);
 var action=8;
 console.log(action);
 $("#confirmdelete").click(function(){
-$http.post("../php/service.php",{'action':action,'id':id})
+$http.post("../php/ocupation.php",{'action':action,'id':id})
 .success(function(data){
+  console.log(data);
 setTimeout(function () {//para que actualice los campos de forma eficiente
 $scope.$apply(function () {
 
 if(data=1){
-getService();
+getOcupation();
 console.log("se elimino exitosamente ");
 }else{
 console.log("Presento un error al eliminar ");
