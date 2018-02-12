@@ -31,7 +31,7 @@ function initialize() {
       var lng = event.latLng.lng().toFixed(6);
       var zoom=map.getZoom();
       // Call createMarker() function to create a marker on the map.
-      createMarker(lat, lng);
+      createMarker(lat, lng,zoom);
 
       // getCoords() function inserts lat and lng values into text boxes.
       getCoords(lat, lng, zoom);
@@ -43,13 +43,11 @@ function initialize() {
 // google.maps.event.addDomListener(window, 'load', initialize);
 
 // Function that creates the marker.
-function createMarker(lat, lng) {
-
+function createMarker(lat, lng,zoom) {
    // The purpose is to create a single marker, so
    // check if there is already a marker on the map.
    // With a new click on the map the previous
    // marker is removed and a new one is created.
-
    // If the marker variable contains a value
    if (marker) {
       // remove that marker from the map
@@ -62,9 +60,15 @@ function createMarker(lat, lng) {
    marker = new google.maps.Marker({
       position: new google.maps.LatLng(lat, lng),
       draggable: true, // Set draggable option as true
-      map: map
+      map: map,
+      zoom:zoom
    });
+   google.maps.event.trigger(map, 'resize');
+   // centar mapa
+   var latLng = marker.getPosition(); // returns LatLng object
+   map.setCenter(latLng); // setCenter takes a LatLng object
 
+//Get the boundaries of the Map.
 
    // This event detects the drag movement of the marker.
    // The event is fired when left button is released.
@@ -86,18 +90,8 @@ function createMarker(lat, lng) {
 // This function updates text boxes values.
 function getCoords(lat, lng, zoom) {
 
-   // Reference input html element with id="lat".
-   // var coords_lat = document.getElementById('lat');
-   // var coords_lat = $('#lat');
    $('#lat').val(lat).trigger('input').trigger('change');
    $('#zoom').val(zoom).trigger('input').trigger('change');
    $('#lng').val(lng).trigger('input').trigger('change');
-   // var czoomd = document.getElementById('zoom');
-   // czoomd.value=zoom;
-   // // Update latitude text box.
-   // // coords_lat.value = lat;
-   // // Reference input html element with id="lng".
-   // var coords_lng = document.getElementById('lng');
-   // // Update longitude text box.
-   // coords_lng.value = lng;
+  
 }

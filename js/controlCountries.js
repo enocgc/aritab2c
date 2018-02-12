@@ -13,11 +13,6 @@ $scope.units = [
 $scope.data= $scope.units[0]; // Set by default the value "test1"
 //funcion para agregar detalles
   $scope.addCountry = function($lang){
-    alert($scope.data.label);
-    alert($scope.position);
-    alert($scope.latitude);
-    alert($scope.longitude);
-    alert($scope.zoom);
     var action=4;
     var data={
         'action':action,
@@ -96,8 +91,6 @@ function getLanguage(){
   $http.post('../php/tags.php', {'action':action})
   .success(function(data){
     $scope.languages = data;
-  //  console.log($scope.languages);
-    // alert("get exitoso");
   }).error(function(response){
     alert("No se get el Language");
   });
@@ -134,4 +127,103 @@ $scope.confirmdelete=function(){
     alert("No se obtuvieron los countries");
   });
 }
+$scope.idEdit;
+$scope.getEditCountry=function(id){
+  $scope.idEdit=id;
+  var datos={
+    'action':7,
+    'id':id
+  };
+  $http.post('../php/countries.php',datos)
+  .success(function(data){
+    $scope.countrymap = data;
+    createMarker(data[0].gpslat,data[0].gpslong,data[0].gpszoom);
+    $scope.latitude=data[0].gpslat;
+    $scope.longitude=data[0].gpslong;
+    $scope.zoom=data[0].gpszoom;
+  }).error(function(response){
+    alert("No se obtuvieron los countries");
+  });
+  // language
+  datos={
+    'action':8,
+    'id':id
+  };
+  $http.post('../php/countries.php',datos)
+  .success(function(data){
+    for(var i=0;i<data.length;i++){
+      $("#nameE-"+data[i].language_id).val(data[i].name);
+      $("#descriptionE-"+data[i].language_id).val(data[i].description);
+    }
+  }).error(function(response){
+    alert("No se obtuvieron los countries");
+  });
+
+  datos={
+    'action':9,
+    'id':id
+  };
+  $http.post('../php/countries.php',datos)
+  .success(function(data){
+    console.log(data);
+    $scope.position=data[0].position;
+  }).error(function(response){
+    alert("No se obtuvieron los countries");
+  });
+
+}//end to getEditCoutnry
+
+function markMap(lat,lng,zoom) {
+  var myLatLng = {lat:parseFloat(lat), lng:parseFloat(lng)};
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    zoom: parseInt(zoom),
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: ''
+  });
+}
+// $id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position
+$scope.updateCountry=function(){
+   var datos={
+    'action':10,
+    'id':$scope.idEdit,
+    'gpslat':$scope.latitude,
+    'gpslong':$scope.longitude,
+    'gpszoom':$scope.zoom,
+    'media_id':30,
+    'template_id':19,
+    'position':$scope.position
+  };
+  $http.post('../php/countries.php',datos)
+  .success(function(data){
+    getCountries();
+    console.log(data);
+  }).error(function(response){
+    alert("No se obtuvieron los countries");
+  });
+// $country_id,$language_id,$name,$description
+for (var i = 0; i <  $scope.languages.length; i++) {
+   var datos={
+    'action':11,
+    'country_id':$scope.idEdit,
+    'language_id':$scope.languages[i].id,
+    'name':$("#nameE-"+$scope.languages[i].id).val(),
+    'description':$("#descriptionE-"+$scope.languages[i].id).val()
+  };
+  $http.post('../php/countries.php',datos)
+  .success(function(data){
+    getCountries();
+    console.log(data);
+  }).error(function(response){
+    alert("No se obtuvieron los countries");
+  });
+}//end to for
+    
+}// end to update country
+
 });// FIN  del controlador
