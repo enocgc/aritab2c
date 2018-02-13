@@ -14,7 +14,7 @@
 				</script>
 </head>
 
-<body>
+<body ng-keypress="checkIfEnterKeyWasPressed($event)" >
 	<div class="uk-section">
     	<div class="uk-container uk-container-expand uk-text-center">
 			<img src="images/logo.png" alt="Arita B2C" />
@@ -40,7 +40,7 @@
 							<div class="uk-margin">
 									<a  ng-click="login();" class="uk-button uk-button-primary">Login</a>
 							</div>
-
+              <div class="uk-margin">
 						</form>
 
 					</div>
