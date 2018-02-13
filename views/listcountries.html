@@ -42,10 +42,10 @@ $(document).ready(function() {
                 <tbody>
                   <tr ng-repeat="country in countries" role="row" class="odd">
                     <td >
-                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i></a>
-                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
+                      <a ng-click="changeenabled(country.id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i></a>
+                      <a ng-click="changeenabled(country.id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
                       <a ng-click="getEditCountry(country.id)" href="#edit-country" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a>
-                      <a ng-click="deleteCountryDetails(country.language_id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
+                      <a ng-click="deleteCountry(country.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
                     </td>
                     <td>
                       {{country.name}}

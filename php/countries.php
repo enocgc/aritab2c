@@ -10,15 +10,16 @@ switch ($action) {
   echo $bd->getCountries();
   break;
   case 2:
-  $language_id = $data->language_id;
+  $id = $data->id;
   $enabled = $data->enabled;
   $bd = new Countries();
-  echo $bd->changeEnabled($language_id,$enabled);
+  //echo "id".$id."estado".$enabled;
+  echo $bd->changeEnabled($id,$enabled);
   break;
   case 3:
-  $language_id = $data->language_id;
+  $id = $data->id;
   $bd = new Countries();
-  echo $bd->deleteCountryDetails($language_id);
+  echo $bd->deleteCountry($id);
   break;
   case 4:
   $gpslat= $data->gpslat;

@@ -32,20 +32,20 @@ require_once ("../includes/constantes.php");
    return false;
   }# fin del metodo consulta
 
-  function changeEnabled($language_id,$enabled){
-    $stmt=$this->cone->prepare("UPDATE countrydetails SET enabled=? WHERE language_id=?");
+  function changeEnabled($id,$enabled){
+    $stmt=$this->cone->prepare("UPDATE countries SET enabled=? WHERE id=?");
     if($stmt === FALSE){
       die("prepare() fail modificar: ". $this->cone->error);
       return false;
     }
-    $stmt->bind_param('ss',$enabled,$language_id);
+    $stmt->bind_param('ss',$enabled,$id);
     $stmt->execute();
     $stmt->close();
     return true;
   }# fin del metodo modificar.
 
-  function deleteCountryDetails($language_id){
-    $stmt=$this->cone->prepare("DELETE FROM countrydetails WHERE language_id=?");
+  function deleteCountry($id){
+    $stmt=$this->cone->prepare("DELETE FROM countries WHERE id=?");
     if($stmt === FALSE){
       die("prepare() fail eliminar: ". $this->cone->error);
       return 0;

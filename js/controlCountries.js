@@ -96,16 +96,17 @@ function getLanguage(){
   });
 }
 
-$scope.changeenabled=function(language_id,enabled){
+$scope.changeenabled=function(id,enabled){
   console.log("estado actual "+enabled);
   var estado;
   if(enabled==0){
-     estado=1;
+  var   estado=1;
   }else{
-     estado=0;
+  var   estado=0;
   }
   var action=2;
-  $http.post('../php/countries.php', {'action':action,'language_id':language_id,'enabled':estado})
+  //console.log("estado"+estado+"id "+id);
+  $http.post('../php/countries.php', {'action':action,'id':id,'enabled':estado})
   .success(function(data){
     console.log(data);
     getCountries();
@@ -116,10 +117,10 @@ $scope.changeenabled=function(language_id,enabled){
 
 //process to delete
 $scope.itemToDelete;
-$scope.deleteCountryDetails=function(id){ $scope.itemToDelete=id;}// end to delte country details
+$scope.deleteCountry=function(id){ $scope.itemToDelete=id;}// end to delte country details
 $scope.confirmdelete=function(){
   var action=3;
-  $http.post('../php/countries.php', {'action':action,'language_id':$scope.itemToDelete})
+  $http.post('../php/countries.php', {'action':action,'id':$scope.itemToDelete})
   .success(function(data){
     $scope.countries = data;
     getCountries();
