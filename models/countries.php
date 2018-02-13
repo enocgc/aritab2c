@@ -50,7 +50,7 @@ require_once ("../includes/constantes.php");
       die("prepare() fail eliminar: ". $this->cone->error);
       return 0;
     }
-    $stmt->bind_param('s',$language_id);
+    $stmt->bind_param('s',$id);
     $stmt->execute();
     $stmt->close();
     return 1;
