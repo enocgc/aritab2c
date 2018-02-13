@@ -20,27 +20,31 @@ switch ($action) {
   echo $bd->addService($bylocation,$byitinerary);
   break;
   case 4:
-  $id= $data->id;
-  $language_id = $data->language_id;
-  $name= $data->name;
-  //echo "idlangu: ".$language_id;
+  $service_id= $data->service_id;
+  $country_id= $data->country_id;
+  $location_id= $data->location_id;
+  $gpslat= $data->gpslat;
+  $gpslong = $data->gpslong;
+  $gpszoom= $data->gpszoom;
+  $enabled= 1;
   $bd = new Products();
-  echo $bd->addServiceDetails($id,$language_id,$name);
+  echo $bd->addProduct($service_id,$country_id,$location_id,$gpslat,$gpslong,$gpszoom,$enabled);
   break;
   case 5:
-  $id = $data->id;
-  $idlan = $data->idlan;
-  $short = $data->short;
-  $bd = new Products();
-  echo $bd->getServicetoModal($id,$idlan,$short);
-  break;
-  case 6:
-  $id = $data->id;
+  $product_id= $data->product_id;
   $language_id = $data->language_id;
   $name= $data->name;
-//  echo "id ".$id." lang ".$language_id." name ".$name;
+  $description= $data->description;
   $bd = new Products();
-  $bd->editService($id,$language_id,$name);
+  echo $bd->addProductDetails($product_id,$language_id,$name,$description);
+  break;
+  case 6:
+  $product_id= $data->product_id;
+  $media_id = $data->media_id;
+  $template_id= $data->template_id;
+  $position= $data->position;
+  $bd = new Products();
+  echo $bd->addProductMedia($product_id,$media_id,$template_id,$position);
   break;
   case 8:
   $id = $data->id;

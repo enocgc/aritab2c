@@ -46,48 +46,6 @@ require_once ("../includes/constantes.php");
       echo 1;
     }# fin del metodo modificar.
 
-
-//funcion para insertar y obtener id
-function addService($bylocation,$byitinerary){
-  $stmt= $this->cone->prepare("INSERT INTO services(bylocation,byitinerary) VALUES(?,?)");
-
-  if($stmt === FALSE){
-    die("prepare() fail: ". $this->cone->error);
-    return false;
-  }
-  $stmt->bind_param('ss',$bylocation,$byitinerary);
-  $stmt->execute();
-  $stmt->close();
-  //return true;
-  $sql="SELECT (MAX(id)) AS id  FROM services";
-  $result = $this->cone->query($sql);
-  $array=array();
-  while($row = $result->fetch_assoc()){
-    $array[]=array(
-      'id'=>$row['id']
-    );
-  }//fin del while
-   if($result->num_rows > 0){
-  return json_encode($array);
-   }
-  $this->close();
-  //return $variable;
- return false;
-}
-//funcion para agregar idiomas al detale del tag
-function addServiceDetails($id,$language_id,$name){
-  $stmt= $this->cone->prepare("INSERT INTO servicedetails(service_id,language_id,name) VALUES(?,?,?)");
-  if($stmt === FALSE){
-    die("prepare() fail: ". $this->cone->error);
-    return false;
-  }
-  $stmt->bind_param('iis',$id,$language_id,$name);
-  $stmt->execute();
-  //echo "aqui estamos"." id ".$id." lang ".$language_id." name ".$name." desc ".$description." stm ".  $stmt->bind_param('iiss',$id,$language_id,$name,$description);
-  $stmt->close();
-
-  return true;
-}
     function getProduct(){
       //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
       $sql="SELECT a.id, b.product_id,b.name,b.description,b.language_id,a.service_id,a.country_id,a.location_id,a.gpslat,a.gpslong,a.gpszoom,a.enabled FROM products AS a, productdetails AS b   WHERE a.id=b.product_id AND b.language_id=1  ORDER BY a.id";
@@ -270,7 +228,55 @@ function addServiceDetails($id,$language_id,$name){
      //return $variable;
     return false;
    }# fin del metodo consulta
+   //funcion para insertar y obtener id
+   function addProduct($service_id,$country_id,$location_id,$gpslat,$gpslong,$gpszoom,$enabled){
+     $stmt= $this->cone->prepare("INSERT INTO products(service_id,country_id,location_id,gpslat,gpslong,gpszoom,enabled) VALUES(?,?,?,?,?,?,?)");
+     if($stmt === FALSE){
+       die("prepare() fail: ". $this->cone->error);
+       return false;
+     }
+     $stmt->bind_param('iiiiiii',$service_id,$country_id,$location_id,$gpslat,$gpslong,$gpszoom,$enabled);
+     $stmt->execute();
+     $stmt->close();
+     //return true;
+     $sql="SELECT (MAX(id)) AS id ,enabled  FROM products";
+     $result = $this->cone->query($sql);
+     $array=array();
+     while($row = $result->fetch_assoc()){
+       $array[]=array(
+         'id'=>$row['id'],
+         'enabled'=>$row['enabled']
+       );
+     }//fin del while
+      if($result->num_rows > 0){
+     return json_encode($array);
+      }
+     $this->close();
+     return false;
+   }// end to addProduct*/
+  function addProductDetails($product_id,$language_id,$name,$description){
+     $stmt= $this->cone->prepare("INSERT INTO productdetails(product_id,language_id,name,description) VALUES(?,?,?,?)");
+     if($stmt === FALSE){
+       die("prepare() fail: ". $this->cone->error);
+       return false;
+     }
+     $stmt->bind_param('iiss',$product_id,$language_id,$name,$description);
+     $stmt->execute();
+     $stmt->close();
+     return 1;
+   }//end to addCountryDetails
 
+   function addProductMedia($product_id,$media_id,$template_id,$position){
+     $stmt= $this->cone->prepare("INSERT INTO product_media(product_id,media_id,template_id,position) VALUES(?,?,?,?)");
+     if($stmt === FALSE){
+       die("prepare() fail: ". $this->cone->error);
+       return false;
+     }
+     $stmt->bind_param('iiii',$product_id,$media_id,$template_id,$position);
+     $stmt->execute();
+     $stmt->close();
+     return 1;
+   }// end to addCountryMedia
 
 }
 

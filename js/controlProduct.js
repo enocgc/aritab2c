@@ -108,51 +108,69 @@ getLocation();
       alert("No se obtuvieron los countries");
     });
   }
-  //funcion para agregar detalles
-  $scope.addService = function($lang){
-    var action=3;
-    if($scope.typeS=="Bylocation"){
-      var bylocation=1;
-      var byitinerary=0;
-    }else if($scope.typeS=="ByItinerary"){
-      var bylocation=0;
-      var byitinerary=1;
-    }else{
-      var bylocation=0;
-      var byitinerary=0;
-    }
-
-    console.log("bylocation "+bylocation+" byitinerary "+byitinerary);
-    $http.post('../php/service.php', {'action':action,'bylocation':bylocation,'byitinerary':byitinerary})//creo el tag
+  //funcion para agregar
+  $scope.addProduct = function($lang){
+    var action=4;
+    var data={
+        'action':action,
+        'service_id':$scope.selectedService.id,
+        'country_id':$scope.selectedCountry.id,
+        'location_id':$scope.selectedLocation.id,
+        'gpslat':$scope.latitude,
+        'gpslong':$scope.longitude,
+        'gpszoom':$scope.zoom
+      };
+    $http.post('../php/product.php',data)//creo el tag
     .success(function(data){
-      $scope.newService = data;
-      console.log(data);
-      //crear funcion para anadir detalle por idioma el siclo me jala los datos y podemos mandar el id del idioma como parametro
+      $scope.newProduct = data;
       for (var i = 0; i <  $lang.length; i++) {
-      //  console.log("entro "+i+$scope.languages[i].short);
+        console.log("entro "+i+$scope.languages[i].short);
         var name= document.getElementById('name-'+$scope.languages[i].short).value;
+        var description= document.getElementById('description-'+$scope.languages[i].short).value;
         var langid = $scope.languages[i].id;
-
-        $http.post('../php/service.php', {'action':4,'id': $scope.newService[0].id,'language_id':langid,'name':name})//creo el tag
+        var datos={
+          'action':5,
+          'product_id':$scope.newProduct[0].id,
+          'language_id':langid,
+          'name':name,
+          'description':description
+        };
+        console.log("agregando en id "+$scope.newProduct[0].id);
+        $http.post('../php/product.php',datos)//creo el tag
         .success(function(data){
-          //console.log(data);
-          console.log("se agrego service detail correctamente");
+          console.log("se agrego el country details correctamente"+data);
         }).error(function(response){
-          alert("No iserto service detail");
+          alert("No agrego el product details");
         });
       }//fin del for
-      setTimeout(function () {//para que actualice los campos de forma eficiente
-        $scope.$apply(function () {
-          getService();
-          console.log("se agrego nuevo service");
+
+      // $country_id,$media_id,$template_id,$position
+      var datos={
+          'action':6,
+          'product_id':$scope.newProduct[0].id,
+          'media_id':777,
+          'template_id':$scope.data.id,
+          'position':$scope.position
+        };
+        $http.post('../php/product.php',datos)//creo el tag
+        .success(function(data){
+          console.log("se agrego el country media correctamente"+data);
+        }).error(function(response){
+          alert("No agrego el product media");
         });
-      }, 200);
+
+      setTimeout(function () {//para que actualice los campos de forma eficiente
+          $scope.$apply(function () {
+            // getTags();
+            console.log("final");
+          });
+      }, 100);
 
       // alert("get exitoso");
     }).error(function(response){
-      alert("No iserto service");
+      alert("No iserto product");
     });
-  }
+  }//fin del add product
 
   //funcion para mostrar datos en getLanguagetoModal
   $scope.getServicetoModal=function(lang,id){
@@ -263,6 +281,7 @@ console.log("Presento un error al eliminar ");
 });
 });
 }//fin delete
+
 
 
 });
