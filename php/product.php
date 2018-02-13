@@ -45,13 +45,37 @@ switch ($action) {
   case 8:
   $id = $data->id;
   $bd = new Products();
-  //echo "id".$id;
-  echo $bd->deleteService($id);
+  //echo "id entra al php".$id;
+  echo $bd->deleteProduct($id);
   break;
   case 9:
   $id = $data->id;
   $bd = new Products();
-  echo $bd->getName($id);
+  echo $bd->getNameCountry($id);
+  break;
+  case 10:
+  $id = $data->id;
+  $bd = new Products();
+  echo $bd->getNameLocation($id);
+  break;
+  case 11:
+  $id = $data->id;
+  $enabled = $data->enabled;
+  $bd = new Products();
+  //echo "estring";
+  echo $bd->changeEnabled($id,$enabled);
+  break;
+  case 12:
+  $bd = new Products();
+  echo $bd->getService();
+  break;
+  case 13:
+  $bd = new Products();
+  echo $bd->getCountries();
+  break;
+  case 14:
+  $bd = new Products();
+  echo $bd->getLocation();
   break;
   default:
 }

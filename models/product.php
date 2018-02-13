@@ -9,9 +9,20 @@ require_once ("../includes/constantes.php");
      parent::__construct(__HOST__, __USER__, __PASSWD__, __DB_NAME__);
 	}//fin del constructor
 
+  function changeEnabled($id,$enabled){
+    $stmt=$this->cone->prepare("UPDATE products SET enabled=? WHERE id=?");
+    if($stmt === FALSE){
+      die("prepare() fail modificar: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('ss',$enabled,$id);
+    $stmt->execute();
+    $stmt->close();
+    return true;
+  }# fin del metodo modificar.
 
-  function deleteService($id){
-      $stmt=$this->cone->prepare("DELETE FROM services WHERE id=?");
+  function deleteProduct($id){
+      $stmt=$this->cone->prepare("DELETE FROM products WHERE id=?");
       if($stmt === FALSE){
         die("prepare() fail eliminar: ". $this->cone->error);
         return 0;
@@ -96,7 +107,8 @@ function addServiceDetails($id,$language_id,$name){
           'gpslong'=>$row['gpslong'],
           'gpszoom'=>$row['gpszoom'],
           'enabled'=>$row['enabled'],
-          'namecountry'=>''
+          'namecountry'=>'',
+          'namelocation'=>''
         );
       }//fin del while
       //return "texto";
@@ -157,8 +169,8 @@ function addServiceDetails($id,$language_id,$name){
       return false;
    }# fin del metodo consulta byid
 
-   function getName($id){
-      $sql="SELECT name FROM countrydetails WHERE country_id=$id";
+   function getNameCountry($id){
+      $sql="SELECT name FROM countrydetails WHERE country_id=$id AND language_id=1";
       $result = $this->cone->query($sql);
       $array=array();
       while($row = $result->fetch_assoc()){
@@ -173,6 +185,92 @@ function addServiceDetails($id,$language_id,$name){
        $result->close();
         return false;
    }//end to ggetName
+
+   function getNameLocation($id){
+      $sql="SELECT name FROM locationdetails WHERE location_id=$id AND language_id=1";
+      $result = $this->cone->query($sql);
+      $array=array();
+      while($row = $result->fetch_assoc()){
+        $array[]=array(
+          'name'=>$row['name']
+        );
+      }//fin del while
+       if($result->num_rows > 0){
+        return json_encode($array);
+       }
+       $result->close();
+        return false;
+   }//end to ggetName
+
+   function getService(){
+     //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
+     $sql="SELECT a.id, b.service_id,b.name,b.language_id,a.bylocation,a.byitinerary FROM services AS a, servicedetails AS b WHERE a.id=b.service_id and b.language_id=1  ORDER BY a.id";
+     $result = $this->cone->query($sql);
+     $array=array();
+     while($row = $result->fetch_assoc()){
+       $array[]=array(
+         'id'=>$row['id'],
+         'service_id'=>$row['service_id'],
+         'language_id'=>$row['language_id'],
+         'name'=> $row['name'],
+         'bylocation'=>$row['bylocation'],
+         'byitinerary'=>$row['byitinerary']
+       );
+     }//fin del while
+     //return "texto";
+      if($result->num_rows > 0){
+     return json_encode($array);
+      }
+     $this->close();
+     //return $variable;
+    return false;
+   }# fin del metodo consulta
+
+   function getCountries(){
+     $sql="SELECT a.id, b.language_id,b.name,b.description,a.gpslat,a.gpszoom,a.enabled,a.gpslong FROM countries AS a,countrydetails AS b WHERE b.language_id=1 AND b.country_id=a.id AND a.enabled=1 ORDER BY a.id";
+     $result = $this->cone->query($sql);
+     $array=array();
+     while($row = $result->fetch_assoc()){
+       $array[]=array(
+         'language_id'=>$row['language_id'],
+         'name'=>$row['name'],
+         'gpslat'=>$row['gpslat'],
+         'gpslong'=> $row['gpslong'],
+         'enabled'=> $row['enabled'],
+         'id'=> $row['id']
+       );
+     }//fin del while
+     //return "texto";
+      if($result->num_rows > 0){
+     return json_encode($array);
+      }
+     $result->close();
+     //return $variable;
+    return false;
+   }# fin del metodo consulta
+
+   function getLocation(){
+     $sql="SELECT a.id, b.language_id,b.name,b.description,a.enabled FROM locations AS a,locationdetails AS b WHERE b.language_id=1 AND b.location_id=a.id AND a.enabled=1 ORDER BY a.id";
+     $result = $this->cone->query($sql);
+     $array=array();
+     while($row = $result->fetch_assoc()){
+       $array[]=array(
+         'language_id'=>$row['language_id'],
+         'name'=>$row['name'],
+         'description'=>$row['description'],
+         'enabled'=> $row['enabled'],
+         'id'=> $row['id']
+       );
+     }//fin del while
+     //return "texto";
+      if($result->num_rows > 0){
+     return json_encode($array);
+      }
+     $result->close();
+     //return $variable;
+    return false;
+   }# fin del metodo consulta
+
 
 }
 

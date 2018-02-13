@@ -72,7 +72,7 @@ $scope.data= $scope.units[0]; // Set by default the value "test1"
     });
 }
 
-
+getCountries();
 function getCountries(){
   var action=1;
   $http.post('../php/countries.php', {'action':action})

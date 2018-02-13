@@ -1,6 +1,6 @@
 <!-- VISTA DE ADDPRODUCT-->
 <div class="uk-section uk-padding">
-	<div class="uk-background-muted uk-padding uk-panel" data-ng-controller="controlProduct">
+	<div class="uk-background-muted uk-padding uk-panel" ng-controller="controlProduct">
     	<div class="uk-container uk-container-expand">
 			<h3>Add Product (Activity)</h3>
 			<form method="post" class="uk-form-horizontal ">
@@ -9,110 +9,100 @@
 						<div class="uk-margin ">
 							 <label class="uk-form-label" >Name</label>
 							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
-								</ul>
-								<ul class="uk-switcher uk-margin">
-									<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
+										<ul uk-tab>
+											<li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+										</ul>
+										<ul class="uk-switcher uk-margin">
+											<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
 
-								</ul>
-							</div>
+										</ul>
+									</div>
 						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Description</label>
-							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
-								</ul>
-								<ul class="uk-switcher uk-margin">
-									<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description-{{language.short}}"></textarea></li>
-								</ul>
+					<div class="uk-margin">
+									 <label class="uk-form-label" for="form-stacked-text">Description</label>
+									<div class="uk-form-controls">
+										<ul uk-tab>
+											<li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+										</ul>
+										<ul class="uk-switcher uk-margin">
+											<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description-{{language.short}}"></textarea></li>
+										</ul>
 
-							</div>
+									</div>
+					</div>
+					<div class="uk-margin">
+						 <label class="uk-form-label" for="form-stacked-text">Service</label>
+						<div class="uk-form-controls">
+							<select  class="uk-select" id="form-horizontal-select"  ng-model="selectedService" ng-options="service as service.name for service in services" >
+				</select>
 						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Service</label>
-							<div class="uk-form-controls">
-									<select class="uk-select">
-									<option class="uk-selected">Select a Service</option>
-													<option>Tours</option>
-													 <option>Acomodation</option>
-													 <option>Rent a car</option>
-											 </select>
-							</div>
-						</div>
+					</div>
 					</div>
 					<div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Media</label>
 							<div class="uk-form-controls">
-								<img src="http://fakeimg.pl/120x120/" alt="">
+								<img src="http://fakeimg.pl/120x120/" alt="" id="img">
 								&nbsp;&nbsp;
-								<button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button>
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Country</label>
-							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Country</option>
-                					<option>Costa Rica</option>
-               						 <option>Guatemala</option>
-               						 <option>Nicaragua</option>
-           						 </select>
+								<!-- <button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button> -->
+								<button class="uk-button" type="button" onclick="alert('Boton media')"><span uk-icon="icon: image"></span> Select Media</button>
 							</div>
 						</div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Template</label>
 							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Template</option>
-                					<option>200x200</option>
-               						 <option>560x400</option>
-               						 <option>1920x760</option>
-           						 </select>
+													 <select class="uk-select" ng-model="data" ng-options="opt as opt.label for opt in units ">
+													</select>
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Country</label>
+							<div class="uk-form-controls">
+								<select  class="uk-select" id="form-horizontal-select"  ng-model="selectedCountry" ng-options="country as country.name for country in countries" >
+					</select>
 							</div>
 						</div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Location</label>
 							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Location</option>
-                					<option>Location01</option>
-               						 <option>Location02</option>
-           						 </select>
+								<select  class="uk-select" id="form-horizontal-select"  ng-model="selectedLocation" ng-options="location as location.name for location in locations" >
+					</select>
+							</div>
+						</div>
+						<div class="uk-margin">
+							 <label class="uk-form-label" for="form-stacked-text">Position</label>
+							<div class="uk-form-controls">
+							<input class="uk-input" type="text" ng-model="position" value="0"/>
 							</div>
 						</div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Latitude</label>
 					<div class="uk-form-controls">
-						<input class="uk-input" type="text" name="lat" id="lat" value="0">
+						<input id="lat" class="uk-input" type="text" ng-model="latitude" value="0"/>
 					</div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Longitude</label>
 					 <div class="uk-form-controls">
-						 <input class="uk-input" type="text" name="lng" id="lng" value="0">
+						 <input id="lng" class="uk-input" type="text" ng-model="longitude" value="0"/>
 					 </div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Zoom</label>
 					 <div class="uk-form-controls">
-						 <input class="uk-input" name="zoom" type="text" id="zoom" value="0">
+						 <input id="zoom" class="uk-input" type="text" ng-model="zoom" value="0"/>
 					 </div>
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
 						<div class="contenedormapa">
-
 								<div id="map-canvas"/>
 							</div>
 					</div>
 
-
 					<div class="uk-width-1-1 uk-text-center">
-						<button class="uklistproduct-button uk-button uk-button-primary" type="submit">Save</button>
-						<a href="#listproduct"class="uk-button uk-button-danger" >Cancel</a>
+						<button class="uk-button uk-button-primary uk-modal-close" type="submit" ng-click="addCountry(languages);">Save</button>
+						<a  href="#contrieslist" class="uk-button uk-button-danger " type="button">Cancel</a>
 					</div>
 				</div>
 			</form>

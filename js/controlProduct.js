@@ -5,37 +5,53 @@ appRouter.controller('controlProduct',function($scope,$http,$timeout){
   getLanguage();
   $scope.products;
   $scope.name;
+  $scope.units = [
+           {'id': 19, 'label': '200x100'},
+           {'id': 21, 'label': '800x600'},
+        ];
 
+  $scope.data= $scope.units[0];
   function setName(name,index,length){
     $scope.products[index].namecountry=name;
-    console.log($scope.products[index].namecountry+" i "+ length);
+  //  console.log($scope.products[index].namecountry+" i "+ length);
   }
-
+  function setNameL(name,index,length){
+      $scope.products[index].namelocation=name;
+      //console.log($scope.products[index].namelocation+" i "+ length);
+    }
   function getProduct(){
     var action=1;
     //  console.log(action);
     $http.post('../php/product.php', {'action':action})
     .success(function(data){
       $scope.contador=0;
+      $scope.contador2=0;
       for(var i=0;i<data.length;i++){
         $http.post('../php/product.php', {'action':9,'id':data[i].country_id})
         .success(function(dataname){
           setName(dataname[0].name,$scope.contador,data.length);
           $scope.contador++;
         }).error(function(response){
-          alert("No se get  tags");
+            console.log("No se get  product");
         });
+
+        $http.post('../php/product.php', {'action':10,'id':data[i].location_id})
+        .success(function(data){
+          //console.log(data);
+          setNameL(data[0].name,$scope.contador2,data.length);
+          $scope.contador2++;
+        }).error(function(response){
+          console.log("No se get  product");
+        });
+
       }//fin del ciclo
       // $scope.products = $scope.datos;
       $scope.products=data;
-      console.log(data);
+      //console.log(data);
       console.log("get Product");
 
-
-      //  console.log($scope.seasons);
-      // alert("get exitoso");
     }).error(function(response){
-      alert("No se get  tags");
+      console.log("No se get  product");
     });
   }
   //languages
@@ -43,7 +59,7 @@ appRouter.controller('controlProduct',function($scope,$http,$timeout){
   function getLanguage(){
     var action=2;
     //console.log(action);
-    $http.post('../php/tags.php', {'action':action})
+    $http.post('../php/product.php', {'action':action})
     .success(function(data){
       $scope.languages = data;
       console.log("get language");
@@ -51,6 +67,45 @@ appRouter.controller('controlProduct',function($scope,$http,$timeout){
       // alert("get exitoso");
     }).error(function(response){
       alert("No se get el Language");
+    });
+  }
+  getService();
+  function getService(){
+    var action=12;
+    //  console.log(action);
+    $http.post('../php/product.php', {'action':action})
+    .success(function(data){
+    //  console.log(data);
+      $scope.services = data;
+      //console.log(data);
+      console.log("get service");
+    }).error(function(response){
+      alert("No se get  tags");
+    });
+  }
+getCountries();
+  function getCountries(){
+    var action=13;
+    $http.post('../php/product.php', {'action':action})
+    .success(function(data){
+      //console.log(data);
+      $scope.countries = data;
+      console.log("peticion finalizada datos arriba para renderizar");
+    }).error(function(response){
+      alert("No se obtuvieron los countries");
+    });
+  }
+getLocation();
+  function getLocation(){
+    var action=14;
+    $http.post('../php/product.php', {'action':action})
+    .success(function(data){
+      //console.log("location");
+      //console.log(data);
+      $scope.locations = data;
+      console.log("peticion finalizada datos arriba para renderizar");
+    }).error(function(response){
+      alert("No se obtuvieron los countries");
     });
   }
   //funcion para agregar detalles
@@ -133,7 +188,7 @@ appRouter.controller('controlProduct',function($scope,$http,$timeout){
         console.log("vector"+$scope.contador+" lang "+lang.length);
         $scope.contador=$scope.contador+1;
       }).error(function(response){
-        alert("No se get el tags");
+        alert("No se get el product");
       });
 
     }
@@ -169,26 +224,42 @@ $http.post('../php/service.php', {'action':action,'id':$scope.idServiceE,'langua
 }
 }//fin funcon edit
 
+$scope.changeenabled = function(id,enabled){
+  console.log(id+"estado actual "+enabled);
+  var estado;
+  if(enabled==0){
+  var   estado=1;
+  }else{
+  var   estado=0;
+  }
+  console.log("nuevo estado "+estado);
+  $http.post('../php/product.php', {'action':11,'id':id,'enabled':estado})
+  .success(function(data){
+    getProduct();
+    console.log("actulizado exitosamente el estado");
+  }).error(function(response){
+    console.log("No se actualizo el el estado");
+  });
+}//fin funcioncambiar estado
 //funcion para eliminar por id
-$scope.deleteService = function(id){
-//console.log("id  "+id);
-var action=8;
-console.log(action);
+$scope.deleteProduct = function(id){
+console.log(id);
 $("#confirmdelete").click(function(){
-$http.post("../php/service.php",{'action':action,'id':id})
+$http.post("../php/product.php",{'action':8,'id':id})
 .success(function(data){
+  console.log(data);
 setTimeout(function () {//para que actualice los campos de forma eficiente
 $scope.$apply(function () {
 
 if(data=1){
-getService();
+getProduct();
 console.log("se elimino exitosamente ");
 }else{
 console.log("Presento un error al eliminar ");
 }
 
 });
-}, 100);
+}, 300);
 });
 });
 }//fin delete
