@@ -1,6 +1,6 @@
 <!-- VISTA DE ADDPRODUCT-->
 <div class="uk-section uk-padding">
-	<div class="uk-background-muted uk-padding uk-panel" ng-controller="controlProduct">
+	<div class="uk-background-muted uk-padding uk-panel" data-ng-controller="controlProduct">
     	<div class="uk-container uk-container-expand">
 			<h3>Add Product (Activity)</h3>
 			<form method="post" class="uk-form-horizontal ">
@@ -10,32 +10,22 @@
 							 <label class="uk-form-label" >Name</label>
 							<div class="uk-form-controls">
 								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
+									<li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
 								</ul>
-
 								<ul class="uk-switcher uk-margin">
-									<li><input class="uk-input" type="text" placeholder="English Name" name="name-en"></li>
-									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
-									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
+									<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
+
 								</ul>
 							</div>
 						</div>
-
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Description</label>
 							<div class="uk-form-controls">
 								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
+									<li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
 								</ul>
-
 								<ul class="uk-switcher uk-margin">
-									<li><textarea class="uk-textarea" rows="4" placeholder="English Description" name="description-en"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="German Description" name="description-de"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="Spanish Description" name="description-es"></textarea></li>
+									<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description-{{language.short}}"></textarea></li>
 								</ul>
 
 							</div>
@@ -128,6 +118,9 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+		initialize();
+	</script>
 </div>
 
 
