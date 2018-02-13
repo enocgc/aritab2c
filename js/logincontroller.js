@@ -16,6 +16,7 @@ loginApp.controller("loginController", function($scope, $http) {
             alert('error');
         });
     }
+
     function login(){
       console.log("entro login");
          $http.post('php/login.php', {'usuario': $scope.usuario,'password': $scope.contrasena})
@@ -31,6 +32,7 @@ loginApp.controller("loginController", function($scope, $http) {
              alert('error');
          });
     }
+    
     $scope.checkIfEnterKeyWasPressed = function($event){
         var keyCode = $event.which || $event.keyCode;
         if (keyCode === 13) {
