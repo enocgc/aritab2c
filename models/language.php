@@ -61,7 +61,7 @@ require_once ("../includes/constantes.php");
 
 
     function getLanguage(){
-      $sql="SELECT * FROM languages";
+      $sql = "SELECT * FROM `languages`";
       $result = $this->cone->query($sql);
       $array=array();
       while($row = $result->fetch_assoc()){

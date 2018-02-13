@@ -9,19 +9,25 @@ require_once ("../includes/constantes.php");
 	}//fin del constructor
 
   function getLocations(){
-    //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
-    // $sql="SELECT a.id, b.tag_id,b.name,b.description,a.enabled FROM tags AS a, tagdetails AS b WHERE a.id=b.tag_id and b.language_id=1  ORDER BY a.id";
-    $sql="SELECT a.name,a.language_id,b.gpslat,b.gpslong,a.enabled,b.id  FROM countrydetails AS a,countries AS b WHERE a.language_id=1 AND a.country_id=b.id AND b.enabled=1";
+    $sql="SELECT a.name,a.description,b.id,b.country_id,a.location_id,a.language_id,b.enabled FROM locationdetails AS a,locations AS b WHERE b.id=a.location_id AND language_id=1 ORDER BY b.id";
     $result = $this->cone->query($sql);
     $array=array();
+    $columnCountry="aa";
     while($row = $result->fetch_assoc()){
+        $uno=$row['country_id'];
+        $dos=$row['language_id'];
+        $sql2="SELECT name FROM countrydetails WHERE country_id=$uno AND language_id=1 AND language_id=1";
+        $result2 = $this->cone->query($sql2);
+        while($row2 = $result2->fetch_assoc()){
+            $columnCountry=$row2['name'];
+        }
       $array[]=array(
-        'language_id'=>$row['language_id'],
+        'id'=>$row['id'],
         'name'=>$row['name'],
-        'gpslat'=>$row['gpslat'],
-        'gpslong'=> $row['gpslong'],
-        'enabled'=> $row['enabled'],
-        'id'=> $row['id']
+        'description'=>$row['description'],
+        'country'=>$columnCountry,
+        'enabled'=>$row['enabled'],
+        'language_id'=>$row['language_id']
       );
     }//fin del while
     //return "texto";
@@ -33,13 +39,13 @@ require_once ("../includes/constantes.php");
    return false;
   }# fin del metodo consulta
 
-  function changeEnabled($language_id,$enabled){
-    $stmt=$this->cone->prepare("UPDATE countrydetails SET enabled=? WHERE language_id=?");
+  function changeEnabled($id,$enabled){
+    $stmt=$this->cone->prepare("UPDATE locations SET enabled=? WHERE id=?");
     if($stmt === FALSE){
       die("prepare() fail modificar: ". $this->cone->error);
       return false;
     }
-    $stmt->bind_param('ss',$enabled,$language_id);
+    $stmt->bind_param('si',$enabled,$id);
     $stmt->execute();
     $stmt->close();
     return true;

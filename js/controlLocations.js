@@ -6,9 +6,11 @@ getLocations();
 getLanguage();
 
 function getLocations(){
+  console.log("locations");
   var action=1;
   $http.post('../php/locations.php', {'action':action})
   .success(function(data){
+    console.log(data);
     $scope.locations = data;
   }).error(function(response){
     alert("No se obtuvieron los countries");
@@ -25,8 +27,8 @@ function getLanguage(){
   });
 }
 
-$scope.changeenabled=function(language_id,enabled){
-  console.log("estado actual "+enabled);
+$scope.changeenabled=function(id,enabled){
+  console.log(id+"estado actual "+enabled);
   var estado;
   if(enabled==0){
      estado=1;
@@ -34,9 +36,10 @@ $scope.changeenabled=function(language_id,enabled){
      estado=0;
   }
   var action=2;
-  $http.post('../php/locations.php', {'action':action,'language_id':language_id,'enabled':estado})
+  $http.post('../php/locations.php', {'action':action,'id':id,'enabled':estado})
   .success(function(data){
-    getCountries();
+    console.log(data);
+    getLocations();
   }).error(function(response){
     console.log("No se actualizo el el estado");
   });
