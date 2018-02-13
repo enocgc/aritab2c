@@ -18,13 +18,13 @@ $(document).ready(function() {
 				<a href="#addlocation" id="addlocation2" class="uk-button uk-button-primary uk-button-small"> <i class="fas fa-plus fa-lg"></i> Add a Location</a>
             </div>
             <!--tabla datatables-->
-            <table  datatable="ng" ng-if="countries.length" id="locations" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
+
+            <table  datatable="ng" ng-if="locations.length" id="locations" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
                 <thead>
                     <tr>
                         <th>Actions</th>
                         <th>Name</th>
                         <th>Country</th>
-                        <th>Min. Nights</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -32,47 +32,24 @@ $(document).ready(function() {
                         <th>Actions</th>
                         <th>Name</th>
                         <th>Country</th>
-                        <th>Min. Nights</th>
                     </tr>
                 </tfoot>
                 <tbody>
 
-                  <!-- <tr ng-repeat="location in locations" role="row" class="odd">
+                  <tr ng-repeat="location in locations" role="row" class="odd">
                     <td >
-                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i></a>
-                      <a ng-click="changeenabled(country.language_id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
+                      <a ng-click="changeenabled(location.id,location.enabled)" class="toggle-eye0" ng-if="location.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i></a>
+                      <a ng-click="changeenabled(location.id,location.enabled)" class="toggle-eye0" ng-if="location.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
                       <a ng-click="getTagtoModal(languages,country.id)" href="#edit-country-details" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a>
                       <a ng-click="deleteCountryDetails(country.language_id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
                     </td>
                     <td>
-                      {{country.name}}
+                      {{location.name}}
                     </td>
                     <td>
-                        {{country.gpslat}}
+                        {{location.country}}
                     </td>
-                    <td>
-                      {{country.gpslong}}
-                    </td>
-                  </tr> -->
-
-                    <tr>
-                        <td> <a class="toggle-eye0" uk-toggle="target: .toggle-eye0"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye0" uk-toggle="target: .toggle-eye0" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>San Jose</td>
-                        <td>Costa Rica</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye1" uk-toggle="target: .toggle-eye1"><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye1" uk-toggle="target: .toggle-eye1" hidden><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Monteverde</td>
-                        <td>Costa Rica</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td> <a class="toggle-eye2" uk-toggle="target: .toggle-eye2" hidden><i class="fas fa-eye fa-lg"></i></a><a class="toggle-eye2" uk-toggle="target: .toggle-eye2" ><i class="fas fa-eye-slash fa-lg"></i></a> <a href="#add-season" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
-                        <td>Tortuguero </td>
-                        <td>Costa Rica</td>
-                        <td>5</td>
-                    </tr>
+                  </tr>
                 </tbody>
             </table>
         </div>
