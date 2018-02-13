@@ -9,29 +9,8 @@ require_once ("../includes/constantes.php");
   }//fin del constructor
 
   function getCountries(){
-  /*  $sql="SELECT a.name, b.name,b.description,b.language_id,a.gpslat,a.gpslong,a.gpszoom,a.enabled,a.id FROM countries AS a, countrydetails AS b WHERE a.id=b.country_id and b.language_id=1 ORDER BY a.id";
-    $result = $this->cone->query($sql);
-    $array=array();
-    while($row = $result->fetch_assoc()){
-      $array[]=array(
-        'id'=>$row['id'],
-        'name'=>$row['name'],
-        'gpslat'=>$row['gpslat'],
-        'gpslong'=>  $row['gpslong'],
-        'gpszoom'=> $row['gpszoom'],
-        'enabled'=>$row['enabled'],
-        'description'=>  $row['description'],
-        'language_id'=> $row['language_id']
-      );
-    }//fin del while
-    //return "texto";
-     if($result->num_rows > 0){
-    return json_encode($array);
-     }
-    $this->close();
-    //return $variable;
-   return false;*/
-    $sql="SELECT a.name,a.language_id,b.gpslat,b.gpslong,a.enabled,b.id  FROM countrydetails AS a,countries AS b WHERE a.language_id=1 AND a.country_id=b.id ";
+
+    $sql="SELECT a.id, b.language_id,b.name,b.description,a.gpslat,a.gpszoom,a.enabled,a.gpslong FROM countries AS a,countrydetails AS b WHERE b.language_id=1 AND b.country_id=a.id ORDER BY a.id";
     $result = $this->cone->query($sql);
     $array=array();
     while($row = $result->fetch_assoc()){
@@ -48,7 +27,7 @@ require_once ("../includes/constantes.php");
      if($result->num_rows > 0){
     return json_encode($array);
      }
-    $this->close();
+    $result->close();
     //return $variable;
    return false;
   }# fin del metodo consulta
