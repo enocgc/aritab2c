@@ -95,7 +95,8 @@ function addServiceDetails($id,$language_id,$name){
           'gpslat'=>$row['gpslat'],
           'gpslong'=>$row['gpslong'],
           'gpszoom'=>$row['gpszoom'],
-          'enabled'=>$row['enabled']
+          'enabled'=>$row['enabled'],
+          'namecountry'=>''
         );
       }//fin del while
       //return "texto";
@@ -155,6 +156,23 @@ function addServiceDetails($id,$language_id,$name){
        //return $variable;
       return false;
    }# fin del metodo consulta byid
+
+   function getName($id){
+      $sql="SELECT name FROM countrydetails WHERE country_id=$id";
+      $result = $this->cone->query($sql);
+      $array=array();
+      while($row = $result->fetch_assoc()){
+        $array[]=array(
+          'name'=>$row['name'],
+          'id'=>$id
+        );
+      }//fin del while
+       if($result->num_rows > 0){
+        return json_encode($array);
+       }
+       $result->close();
+        return false;
+   }//end to ggetName
 
 }
 

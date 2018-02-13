@@ -4,12 +4,30 @@ appRouter.controller('controlProduct',function($scope,$http,$timeout){
   getProduct();
   getLanguage();
   $scope.products;
+  $scope.name;
+
+  function setName(name,index,length){
+    $scope.products[index].namecountry=name;
+    console.log($scope.products[index].namecountry+" i "+ length);
+  }
+
   function getProduct(){
     var action=1;
     //  console.log(action);
     $http.post('../php/product.php', {'action':action})
     .success(function(data){
-      $scope.products = data;
+      $scope.contador=0;
+      for(var i=0;i<data.length;i++){
+        $http.post('../php/product.php', {'action':9,'id':data[i].country_id})
+        .success(function(dataname){
+          setName(dataname[0].name,$scope.contador,data.length);
+          $scope.contador++;
+        }).error(function(response){
+          alert("No se get  tags");
+        });
+      }//fin del ciclo
+      // $scope.products = $scope.datos;
+      $scope.products=data;
       console.log(data);
       console.log("get Product");
 

@@ -48,6 +48,11 @@ switch ($action) {
   //echo "id".$id;
   echo $bd->deleteService($id);
   break;
+  case 9:
+  $id = $data->id;
+  $bd = new Products();
+  echo $bd->getName($id);
+  break;
   default:
 }
 
