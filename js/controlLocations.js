@@ -1,10 +1,11 @@
 appRouter.controller('controlLocations',function($scope,$http,$timeout){
 $scope.locations;
 $scope.languages;
-
+$scope.countries;
 
 getLocations();
 getLanguage();
+// Set by default the value "test1"
 $scope.units = [
          {'id': 19, 'label': '200x100'},
          {'id': 21, 'label': '800x600'},
@@ -29,7 +30,7 @@ function getLocations(){
     $http.post('../php/tags.php', {'action':action})
     .success(function(data){
       $scope.languages = data;
-    //  console.log($scope.languages);
+     console.log($scope.languages);
       // alert("get exitoso");
     }).error(function(response){
       alert("No se get el Language");
@@ -157,5 +158,56 @@ for (var i = 0; i <  $scope.languages.length; i++) {
 getLocations();
 }//end to updateLocation
 
+
+$scope.countrieslist=[];
+$scope.datascountri= $scope.countrieslist[0]; 
+getCountries();
+function getCountries (){
+  $http.post('../php/locations.php',{'action':9})
+  .success(function(data){
+    $scope.countrieslist=data;
+  }).error(function(response){
+    alert("No se obtuvieron los countries");
+  });
+}//end to getCountries
+
+$scope.addLocation=function(){
+  var datos={
+    'action':10,
+    'country_id':$scope.dataCountrySelect.country_id,
+    'gpslat':$scope.latitude,
+    'gpslong':$scope.longitude,
+    'gpszoom':$scope.zoom,
+    'media_id':1,
+    'template_id':1,
+    'position':$scope.position
+  };
+  $http.post('../php/locations.php',datos)
+  .success(function(data){
+    console.log(data);
+    // location_id,language_id,name,description,enabled
+      for (var i = 0; i <  $scope.languages.length; i++) {
+           var datos={
+            'action':11,
+            'location_id':data[0].location_id,
+            'language_id':$scope.languages[i].id,
+            'name':$("#nameE-"+$scope.languages[i].id).val(),
+            'description':$("#descriptionE-"+$scope.languages[i].id).val()
+          };
+          $http.post('../php/locations.php',datos)
+          .success(function(data){
+            console.log(data);
+            if(data==1){
+              alert("agregado exitoso");
+            }
+          }).error(function(response){
+            alert("No se pudo agregar los details, error de servidor");
+          });
+      }//end to for
+    console.log(data);
+  }).error(function(response){
+    alert("No se obtuvieron los countries");
+  });
+}//end o addLocation
 
 });// FIN  del controlador

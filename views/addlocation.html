@@ -1,5 +1,5 @@
 
-<div class="uk-section uk-padding">
+<div class="uk-section uk-padding" data-ng-controller="controlLocations">
 	<div class="uk-background-muted uk-padding uk-panel">
     	<div class="uk-container uk-container-expand">
 			<h3>Add Location</h3>
@@ -7,38 +7,30 @@
 				<div uk-grid class="uk-child-width-1-2@m uk-grid-divider " uk-grid>
 					<div>
 						<div class="uk-margin ">
-							 <label class="uk-form-label" >Name</label>
-							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
-								</ul>
-
-								<ul class="uk-switcher uk-margin">
-									<li><input class="uk-input" type="text" placeholder="English Name" name="name-en"></li>
-									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
-									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
-								</ul>
-							</div>
-						</div>
+                               <label class="uk-form-label" >Name</label>
+                              <div class="uk-form-controls">
+                                <ul uk-tab>
+                                  <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                                </ul>
+                                <ul class="uk-switcher uk-margin">
+                                  <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="nameE-{{language.id}}">
+                                  </li>
+                                  <a href="">mi boton</a>
+                                </ul>
+                              </div>
+                            </div>
 						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Description</label>
-							<div class="uk-form-controls">
-								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
-								</ul>
+                                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                                <div class="uk-form-controls">
+                                  <ul uk-tab>
+                                    <li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                                  </ul>
+                                  <ul class="uk-switcher uk-margin">
+                                    <li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="descriptionE-{{language.id}}"></textarea></li>
+                                  </ul>
 
-								<ul class="uk-switcher uk-margin">
-									<li><textarea class="uk-textarea" rows="4" placeholder="English Description" name="description-en"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="German Description" name="description-de"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="Spanish Description" name="description-es"></textarea></li>
-								</ul>
-
-							</div>
-						</div>
+                                </div>
+                            </div>
 
 
 					</div>
@@ -52,61 +44,55 @@
 							</div>
 						</div>
 						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Country</label>
-							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Country</option>
-                					<option>Costa Rica</option>
-               						 <option>Guatemala</option>
-               						 <option>Nicaragua</option>
-           						 </select>
-							</div>
-						</div>
+                                 <label class="uk-form-label" for="form-stacked-text">Country</label>
+                                <div class="uk-form-controls">
+                                             <select class="uk-select" ng-model="dataCountrySelect" ng-options="opt as opt.name for opt in countrieslist ">
+                                            </select>
+                                </div>
+                              </div>
 
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Template</label>
 							<div class="uk-form-controls">
-								  <select class="uk-select">
-									<option class="uk-selected">Select a Template</option>
-                					<option>200x200</option>
-               						 <option>560x400</option>
-               						 <option>1920x760</option>
-           						 </select>
-							</div>
+                                             <select class="uk-select" ng-model="dataTemplateSelect" ng-options="opt as opt.label for opt in units ">
+                                            </select>
+                                </div>
 						</div>
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Position</label>
 							<div class="uk-form-controls">
-								<input class="uk-input" type="number" placeholder="position">
+								<input class="uk-input" type="number" ng-model="position" placeholder="position">
 							</div>
 						</div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Latitude</label>
  					<div class="uk-form-controls">
- 						<input class="uk-input" type="text" name="lat" id="lat" value="0">
+ 						<input id="lat" class="uk-input" type="text" name="lat" ng-model="latitude" value="0">
  					</div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Longitude</label>
 					 <div class="uk-form-controls">
-						 <input class="uk-input" type="text" name="lng" id="lng" value="0">
+						 <input id="lng" class="uk-input" type="text" name="lng" ng-model="longitude" value="0">
 					 </div>
 					</div>
 					<div class="uk-width-1-2@m uk-text-center">
 						<label class="uk-form-label" for="form-stacked-text">Zoom</label>
 					 <div class="uk-form-controls">
-						 <input class="uk-input" name="zoom" type="text" id="zoom" value="0">
+						 <input id="zoom" class="uk-input" name="zoom" type="text" ng-model="zoom" value="0">
 					 </div>
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
 						<div class="contenedormapa">
-
 								<div id="map-canvas"/>
-							</div>
+						</div>
+						<script type="text/javascript">
+							initialize();
+						</script>
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit">Save</button>
+						<button class="uk-button uk-button-primary" ng-click="addLocation();">Save</button>
 						<a href="#locationlist" class="uk-button uk-button-danger" type="submit">Cancel</a>
 					</div>
 				</div>
