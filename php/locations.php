@@ -51,6 +51,11 @@ switch ($action) {
   $bd = new Locations();
   echo $bd->updateLocationDetails($location_id,$language_id,$name,$description);
   break;
+  case 8:
+  $id = $data->id;
+  $bd = new Locations();
+  echo $bd->deleteLocation($id);
+  break;
 
 
 }

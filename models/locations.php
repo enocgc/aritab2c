@@ -160,5 +160,35 @@ require_once ("../includes/constantes.php");
       return true;
   }// end to updateCountryDetails
 
+   function deleteLocation($id){
+    $stmt=$this->cone->prepare("DELETE FROM location_media WHERE location_id=?");
+    if($stmt === FALSE){
+      die("prepare() fail eliminar: ". $this->cone->error);
+      return 0;
+    }
+    $stmt->bind_param('i',$id);
+    $stmt->execute();
+    $stmt->close();
+
+    $stmt=$this->cone->prepare("DELETE FROM locationdetails WHERE location_id=?");
+    if($stmt === FALSE){
+      die("prepare() fail eliminar: ". $this->cone->error);
+      return 0;
+    }
+    $stmt->bind_param('i',$id);
+    $stmt->execute();
+    $stmt->close();
+
+    $stmt=$this->cone->prepare("DELETE FROM locations WHERE id=?");
+    if($stmt === FALSE){
+      die("prepare() fail eliminar: ". $this->cone->error);
+      return 0;
+    }
+    $stmt->bind_param('i',$id);
+    $stmt->execute();
+    $stmt->close();
+    return "eliminar completo";
+  }// end to delete
+
 }// fin de la clase
  ?>

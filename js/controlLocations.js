@@ -56,13 +56,15 @@ $scope.changeenabled=function(id,enabled){
 
 //process to delete
 $scope.itemToDelete;
-$scope.deleteCountryDetails=function(id){ $scope.itemToDelete=id;}// end to delte country details
+$scope.deleteLocation=function(id){ $scope.itemToDelete=id;}// end to delte country details
 $scope.confirmdelete=function(){
-  var action=3;
-  $http.post('../php/locations.php', {'action':action,'language_id':$scope.itemToDelete})
+  alert($scope.itemToDelete);
+  var action=8;
+  $http.post('../php/locations.php', {'action':action,'id':$scope.itemToDelete})
   .success(function(data){
-    $scope.countries = data;
-    getCountries();
+    alert(data);
+    console.log(data);
+    getLocations();
   }).error(function(response){
     alert("No se obtuvieron los countries");
   });
