@@ -15,13 +15,42 @@ switch ($action) {
   $bd = new Locations();
   echo $bd->changeEnabled($id,$enabled);
   break;
-  // case 3:
-  // $language_id = $data->language_id;
-  // $bd = new Locations();
-  // echo $bd->deleteCountryDetails($language_id);
-  // break;
-  // case 4:
-  // break;
+  case 3:
+  $id= $data->id;
+  $bd = new Locations();
+  echo $bd->getLocation($id);
+  break;
+  case 4:
+  $id= $data->id;
+  $bd = new Locations();
+  echo $bd->getLaguage($id);
+  break;
+  case 5:
+  $id= $data->id;
+  $bd = new Locations();
+  echo $bd->getMedia($id);
+  break;
+   case 6:
+  // updateLocation
+  $id= $data->id;
+  $gpslat= $data->gpslat;
+  $gpslong= $data->gpslong;
+  $gpszoom= $data->gpszoom;
+  $media_id= $data->media_id;
+  $template_id= $data->template_id;
+  $position= $data->position;
+  $bd = new Locations();
+  echo $bd->updateLocation($id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position);
+  break;
+   case 7:
+  // update countrydetails
+  $location_id= $data->location_id;
+  $language_id= $data->language_id;
+  $name= $data->name;
+  $description= $data->description;
+  $bd = new Locations();
+  echo $bd->updateLocationDetails($location_id,$language_id,$name,$description);
+  break;
 
 
 }
