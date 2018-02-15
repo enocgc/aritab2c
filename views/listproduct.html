@@ -79,7 +79,7 @@ $(document).ready(function() {
     											<li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
     										</ul>
     										<ul class="uk-switcher uk-margin">
-    											<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
+    											<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="nameP-{{language.id}}"></li>
 
     										</ul>
     									</div>
@@ -91,7 +91,7 @@ $(document).ready(function() {
     											<li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
     										</ul>
     										<ul class="uk-switcher uk-margin">
-    											<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description-{{language.short}}"></textarea></li>
+    											<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="descriptionP-{{language.id}}"></textarea></li>
     										</ul>
 
     									</div>
@@ -100,6 +100,7 @@ $(document).ready(function() {
     						 <label class="uk-form-label" for="form-stacked-text">Service</label>
     						<div class="uk-form-controls">
     							<select  class="uk-select" id="form-horizontal-select"  ng-model="selectedService" ng-options="service as service.name for service in services" >
+                    <option id="serviceE"></option>
     				</select>
     						</div>
     					</div>
@@ -138,7 +139,7 @@ $(document).ready(function() {
     						<div class="uk-margin">
     							 <label class="uk-form-label" for="form-stacked-text">Position</label>
     							<div class="uk-form-controls">
-    							<input class="uk-input" type="text" ng-model="position" value="0"/>
+    							<input class="uk-input" type="text" ng-model="positionE" value="0"/>
     							</div>
     						</div>
     					</div>

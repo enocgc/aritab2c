@@ -24,7 +24,6 @@ appRouter.controller('controlProduct',function($scope,$http,$timeout){
       var action=1;
       $http.post('../php/product.php', {'action':action})
       .success(function(data){
-      //  console.log(data);
         $scope.products = data;
       }).error(function(response){
         console.log("No se obtuvieron los products");
@@ -36,7 +35,7 @@ appRouter.controller('controlProduct',function($scope,$http,$timeout){
   function getLanguage(){
     var action=2;
     //console.log(action);
-    $http.post('../php/product.php', {'action':action})
+    $http.post('../php/tags.php', {'action':action})
     .success(function(data){
       $scope.languages = data;
       console.log("get language");
@@ -63,7 +62,7 @@ getCountries();
     var action=13;
     $http.post('../php/product.php', {'action':action})
     .success(function(data){
-      console.log(data);
+    //  console.log(data);
       $scope.countries = data;
       console.log("peticion finalizada datos arriba para renderizar");
     }).error(function(response){
@@ -78,7 +77,7 @@ getLocation();
       //console.log("location");
       //console.log(data);
       $scope.locations = data;
-      console.log("peticion finalizada datos arriba para renderizar");
+      //console.log("peticion finalizada datos arriba para renderizar");
     }).error(function(response){
         console.log("No se obtuvieron los location");
     });
@@ -209,8 +208,14 @@ $scope.getEditProduct=function(id){
   };
   $http.post('../php/product.php',datos)
   .success(function(data){
+  //  console.log(data);
     $scope.countrymap = data;
     createMarker(data[0].gpslat,data[0].gpslong,data[0].gpszoom);
+    $scope.productsE=data;
+
+      //$("#serviceE").text(data[0].service_id);//Mae es un vector {id:'valor','label':titulo}
+    //$scope.selectedCountry=data[0].country_id;
+    //$scope.selectedLocation=data[0].location_id;
     $scope.latitude=data[0].gpslat;
     $scope.longitude=data[0].gpslong;
     $scope.zoom=data[0].gpszoom;
@@ -219,27 +224,28 @@ $scope.getEditProduct=function(id){
   });
   // language
   datos={
-    'action':8,
+    'action':2,
     'id':id
   };
   $http.post('../php/product.php',datos)
   .success(function(data){
+    //console.log(data);
     for(var i=0;i<data.length;i++){
-      $("#nameE-"+data[i].language_id).val(data[i].name);
-      $("#descriptionE-"+data[i].language_id).val(data[i].description);
+      $("#nameP-"+data[i].language_id).val(data[i].name);
+      $("#descriptionP-"+data[i].language_id).val(data[i].description);
     }
   }).error(function(response){
     alert("No se obtuvieron los Product");
   });
 
   datos={
-    'action':9,
+    'action':15,
     'id':id
   };
   $http.post('../php/product.php',datos)
   .success(function(data){
-    console.log(data);
-    $scope.position=data[0].position;
+    //console.log(data);
+    $scope.positionE=data[0].position;
   }).error(function(response){
     alert("No se obtuvieron los Product");
   });
@@ -263,14 +269,17 @@ function markMap(lat,lng,zoom) {
 // $id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position
 $scope.updateProduct=function(){
    var datos={
-    'action':10,
+    'action':16,
     'id':$scope.idEdit,
+    'service_id':$scope.selectedService.id,
+    'country_id':$scope.selectedCountry.id,
+    'location_id':$scope.selectedLocation.id,
     'gpslat':$scope.latitude,
     'gpslong':$scope.longitude,
     'gpszoom':$scope.zoom,
     'media_id':30,
     'template_id':19,
-    'position':$scope.position
+    'position':$scope.positionE
   };
   $http.post('../php/product.php',datos)
   .success(function(data){
@@ -282,15 +291,15 @@ $scope.updateProduct=function(){
 // $country_id,$language_id,$name,$description
 for (var i = 0; i <  $scope.languages.length; i++) {
    var datos={
-    'action':11,
-    'country_id':$scope.idEdit,
+    'action':17,
+    'product_id':$scope.idEdit,
     'language_id':$scope.languages[i].id,
-    'name':$("#nameE-"+$scope.languages[i].id).val(),
-    'description':$("#descriptionE-"+$scope.languages[i].id).val()
+    'name':$("#nameP-"+$scope.languages[i].id).val(),
+    'description':$("#descriptionP-"+$scope.languages[i].id).val()
   };
   $http.post('../php/product.php',datos)
   .success(function(data){
-    getCountries();
+    getProduct();
     console.log(data);
   }).error(function(response){
     alert("No se obtuvieron los Product");

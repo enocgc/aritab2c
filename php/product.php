@@ -7,11 +7,13 @@ require_once ("../models/product.php");
 switch ($action) {
   case 1:
   $bd = new Products();
-  echo $bd->getProduct();
+  echo $bd->getProducts();
   break;
   case 2:
+  //getlanguage
+  $id= $data->id;
   $bd = new Products();
-  echo $bd->getLanguage();
+  echo $bd->getLaguage($id);
   break;
   case 3:
   $bylocation = $data->bylocation;
@@ -45,6 +47,12 @@ switch ($action) {
   $position= $data->position;
   $bd = new Products();
   echo $bd->addProductMedia($product_id,$media_id,$template_id,$position);
+  break;
+  case 7:
+  $id= $data->id;
+  $bd = new Products();
+  echo $bd->getProduct($id);
+  break;
   break;
   case 8:
   $id = $data->id;
@@ -80,6 +88,35 @@ switch ($action) {
   case 14:
   $bd = new Products();
   echo $bd->getLocation();
+  break;
+  case 15:
+  // getdatamedia
+  $id= $data->id;
+  $bd = new Products();
+  echo $bd->getMedia($id);
+  break;
+  case 16:
+  $id= $data->id;
+  $service_id= $data->service_id;
+  $country_id= $data->country_id;
+  $location_id= $data->location_id;
+  $gpslat= $data->gpslat;
+  $gpslong= $data->gpslong;
+  $gpszoom= $data->gpszoom;
+  $media_id= $data->media_id;
+  $template_id= $data->template_id;
+  $position= $data->position;
+  $bd = new Products();
+  echo $bd->updateProduct($id,$service_id,$country_id,$location_id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position);
+  break;
+  case 17:
+  // update productdetails
+  $product_id= $data->product_id;
+  $language_id= $data->language_id;
+  $name= $data->name;
+  $description= $data->description;
+  $bd = new Products();
+  echo $bd->updateProductDetails($product_id,$language_id,$name,$description);
   break;
   default:
 }

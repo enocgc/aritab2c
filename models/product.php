@@ -34,7 +34,7 @@ require_once ("../includes/constantes.php");
     }# fin del metodo eliminar.
 
 
-    function getProduct(){
+    function getProducts(){
       //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
       $sql="SELECT a.id, b.product_id,b.name,b.language_id,a.service_id,a.country_id,a.location_id,a.enabled,c.name AS namecountrie,d.name As namelocation FROM products AS a, productdetails AS b,countrydetails As c,locationdetails AS d
       WHERE a.id=b.product_id AND b.language_id=1 AND c.language_id=1 AND d.language_id=1 AND c.country_id=a.country_id AND d.location_id=a.location_id ORDER BY a.id";
@@ -63,28 +63,66 @@ require_once ("../includes/constantes.php");
      return false;
     }# fin del metodo consulta
 
-    function getLanguage(){
-      $sql="SELECT * FROM languages WHERE enabled=1";
+    function getLaguage($id){
+      $sql="SELECT * FROM productdetails WHERE product_id=$id";
       $result = $this->cone->query($sql);
       $array=array();
       while($row = $result->fetch_assoc()){
         $array[]=array(
-          'id'=>$row['id'],
+          'product_id'=>$row['product_id'],
+          'language_id'=>$row['language_id'],
           'name'=>$row['name'],
-          'short'=>$row['short'],
-          'icon'=>  $row['icon'],
-          'enabled'=> $row['enabled']
+          'description'=> $row['description']
         );
       }//fin del while
-      //return "texto";
        if($result->num_rows > 0){
-      return json_encode($array);
+        return json_encode($array);
        }
       $this->close();
-      //return $variable;
-     return false;
-    }# fin del metodo consulta
+      return false;
+    }// fin de product
 
+    function getMedia($id){
+
+      $sql="SELECT * FROM product_media WHERE product_id=$id";
+      $result = $this->cone->query($sql);
+      $array=array();
+      while($row = $result->fetch_assoc()){
+        $array[]=array(
+          'product_id'=>$row['product_id'],
+          'media_id'=>$row['media_id'],
+          'template_id'=>$row['template_id'],
+          'position'=>$row['position']
+        );
+      }//fin del while
+       if($result->num_rows > 0){
+        return json_encode($array);
+       }
+      $result->close();
+      return true;
+    }// fin de getCountry
+
+    function getProduct($id){
+      $sql="SELECT * FROM products WHERE id=$id";
+      $result = $this->cone->query($sql);
+      $array=array();
+      while($row = $result->fetch_assoc()){
+        $array[]=array(
+          'service_id'=>$row['service_id'],
+          'country_id'=>$row['country_id'],
+          'location_id'=>$row['location_id'],
+          'gpslat'=>$row['gpslat'],
+          'gpslong'=>$row['gpslong'],
+          'gpszoom'=>$row['gpszoom'],
+          'id'=> $row['id']
+        );
+      }//fin del while
+       if($result->num_rows > 0){
+        return json_encode($array);
+       }
+      $this->close();
+      return false;
+    }// fin de getCountry
 
 
    function getNameCountry($id){
@@ -237,7 +275,39 @@ require_once ("../includes/constantes.php");
      $stmt->close();
      return 1;
    }// end to addCountryMedia
+   function updateProduct($id,$service_id,$country_id,$location_id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position){
+      $stmt=$this->cone->prepare("UPDATE products SET service_id=?,country_id=?,location_id=?,gpslat=?,gpslong=?,gpszoom=? WHERE id=?");
+       if($stmt === FALSE){
+         die("prepare() fail modificar: ". $this->cone->error);
+         echo 0;
+       }
+       $stmt->bind_param('sssssii',$service_id,$country_id,$location_id,$gpslat,$gpslong,$gpszoom,$id);
+       $stmt->execute();
+       $stmt->close();
 
+
+       $stmt=$this->cone->prepare("UPDATE product_media SET media_id=?,template_id=?,position=? WHERE product_id=?");
+       if($stmt === FALSE){
+         die("prepare() fail modificar: ". $this->cone->error);
+         echo 0;
+       }
+       $stmt->bind_param('iiii',$media_id,$template_id,$position,$id);
+       $stmt->execute();
+       $stmt->close();
+       return true;
+   }//end to updateCountry
+
+   function updateProductDetails($product_id,$language_id,$name,$description){
+       $stmt=$this->cone->prepare("UPDATE productdetails SET name=?,description=? WHERE product_id=? AND language_id=?");
+       if($stmt === FALSE){
+         die("prepare() fail modificar: ". $this->cone->error);
+         echo 0;
+       }
+       $stmt->bind_param('ssii',$name,$description,$country_id,$language_id);
+       $stmt->execute();
+       $stmt->close();
+       return true;
+   }// end to updateCountryDetails
 }
 
 ?>
