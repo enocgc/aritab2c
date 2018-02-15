@@ -1,4 +1,4 @@
 appRouter.controller('arita', function($scope, $http) {
-  console.log("angular run desktop");
+  //console.log("angular run desktop");
 
 });
