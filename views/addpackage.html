@@ -1,5 +1,5 @@
 
-<div class="uk-section uk-padding">
+<div class="uk-section uk-padding" data-ng-controller="controlPackage">
 	<div class="uk-background-muted uk-padding uk-panel">
     	<div class="uk-container uk-container-expand">
 			<h3>Add Package</h3>
@@ -13,15 +13,11 @@
 							 <label class="uk-form-label" >Name</label>
 							<div class="uk-form-controls">
 								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
+									  <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
 								</ul>
 
 								<ul class="uk-switcher uk-margin">
-									<li><input class="uk-input" type="text" placeholder="English Name" name="name-en"></li>
-									<li><input class="uk-input" type="text" placeholder="German Name" name="name-de"></li>
-									<li><input class="uk-input" type="text" placeholder="Spanish Name" name="name-es"></li>
+								  <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
 								</ul>
 							</div>
 						</div>
@@ -29,28 +25,12 @@
 							 <label class="uk-form-label" for="form-stacked-text">Description</label>
 							<div class="uk-form-controls">
 								<ul uk-tab>
-									<li><a href="#">English</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
+									  <li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
 								</ul>
 
 								<ul class="uk-switcher uk-margin">
-									<li><textarea class="uk-textarea" rows="4" placeholder="English Description" name="description-en"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="German Description" name="description-de"></textarea></li>
-									<li><textarea class="uk-textarea" rows="4" placeholder="Spanish Description" name="description-es"></textarea></li>
+									<li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="description-{{language.short}}"></textarea></li>
 								</ul>
-
-							</div>
-						</div>
-						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Accomadation</label>
-							<div class="uk-form-controls">
-									<select class="uk-select">
-									<option class="uk-selected">Select Accomodation Type</option>
-													<option> ★★★★</option>
-													 <option> ★★★★</option>
-													 <option> ★★★</option>
-											 </select>
 							</div>
 						</div>
 					</div>
@@ -136,10 +116,6 @@
 							</div>
 				<!--aqui se crean los location-->
 
-
-
-
-
 							<!-- DIA FINAL -->
 
 							<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
@@ -149,16 +125,14 @@
 							<div class="uk-width-1-1@m uk-text-left">
 								<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
 								<div class="uk-inline">
-									<label><input class="uk-checkbox" type="checkbox" checked> Shuttle </label>
-									<label><input class="uk-checkbox" type="checkbox"> Rent a car </label>
+									<label ng-repeat="transport in transports"><input class="uk-checkbox" type="checkbox" > {{transport.name}} </label>
 								</div>
 
 							</div><br>
 							<div class="uk-width-1-1@m uk-text-left">
 								<label class="uk-h4 uk-margin-small-right" for="">Tags:  </label>
 								<div class="uk-inline">
-									<label><input class="uk-checkbox" type="checkbox" checked> Adventure </label>
-									<label><input class="uk-checkbox" type="checkbox"> Familiar </label>
+									<label ng-repeat="tag in tags"><input class="uk-checkbox" type="checkbox" > {{tag.name}} </label>
 								</div>
 
 							</div><br>

@@ -111,7 +111,28 @@ function addTagDetails($id,$language_id,$name,$description){
       //return $variable;
      return false;
     }# fin del metodo consulta
-
+    function getTagsEnabled(){
+      //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
+      $sql="SELECT a.id, b.tag_id,b.name,b.description,a.enabled FROM tags AS a, tagdetails AS b WHERE a.id=b.tag_id and b.language_id=1 and a.enabled=1  ORDER BY a.id";
+      $result = $this->cone->query($sql);
+      $array=array();
+      while($row = $result->fetch_assoc()){
+        $array[]=array(
+          'id'=>$row['id'],
+          'tag_id'=>$row['tag_id'],
+          'enabled'=>$row['enabled'],
+          'name'=> $row['name'],
+          'description'=>$row['description']
+        );
+      }//fin del while
+      //return "texto";
+       if($result->num_rows > 0){
+      return json_encode($array);
+       }
+      $this->close();
+      //return $variable;
+     return false;
+    }# fin del metodo consulta
     function getLanguage(){
       $sql="SELECT * FROM languages WHERE enabled=1";
       $result = $this->cone->query($sql);

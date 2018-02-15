@@ -55,6 +55,10 @@ switch ($action) {
   $bd = new Tags();
   $bd->deleteTag($id);
   break;
+  case 9:
+  $bd = new Tags();
+  echo $bd->getTagsEnabled();
+  break;
   default:
 }
 
