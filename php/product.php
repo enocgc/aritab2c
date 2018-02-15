@@ -118,6 +118,10 @@ switch ($action) {
   $bd = new Products();
   echo $bd->updateProductDetails($product_id,$language_id,$name,$description);
   break;
+  case 18:
+  $bd = new Products();
+  echo $bd->getProductsEnabled();
+  break;
   default:
 }
 

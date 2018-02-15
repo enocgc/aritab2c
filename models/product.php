@@ -62,7 +62,34 @@ require_once ("../includes/constantes.php");
       //return $variable;
      return false;
     }# fin del metodo consulta
-
+    function getProductsEnabled(){
+      //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
+      $sql="SELECT a.id, b.product_id,b.name,b.language_id,a.service_id,a.country_id,a.location_id,a.enabled,c.name AS namecountrie,d.name As namelocation FROM products AS a, productdetails AS b,countrydetails As c,locationdetails AS d
+      WHERE a.id=b.product_id AND b.language_id=1 AND c.language_id=1 AND d.language_id=1 AND c.country_id=a.country_id AND d.location_id=a.location_id AND a.enabled=1 ORDER BY a.id";
+      $result = $this->cone->query($sql);
+      $array=array();
+      while($row = $result->fetch_assoc()){
+        $array[]=array(
+          'id'=>$row['id'],
+          'product_id'=>$row['product_id'],
+          'language_id'=>$row['language_id'],
+          'name'=> $row['name'],
+          'service_id'=>$row['service_id'],
+          'country_id'=>$row['country_id'],
+          'location_id'=>$row['location_id'],
+          'enabled'=>$row['enabled'],
+          'namecountry'=>$row['namecountrie'],
+          'namelocation'=>$row['namelocation']
+        );
+      }//fin del while
+      //return "texto";
+       if($result->num_rows > 0){
+      return json_encode($array);
+       }
+      $this->close();
+      //return $variable;
+     return false;
+    }# fin del metodo consulta
     function getLaguage($id){
       $sql="SELECT * FROM productdetails WHERE product_id=$id";
       $result = $this->cone->query($sql);
