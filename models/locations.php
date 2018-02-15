@@ -16,7 +16,7 @@ require_once ("../includes/constantes.php");
     while($row = $result->fetch_assoc()){
         $uno=$row['country_id'];
         $dos=$row['language_id'];
-        $sql2="SELECT name FROM countrydetails WHERE country_id=$uno AND language_id=1 AND language_id=1";
+        $sql2="SELECT name FROM countrydetails WHERE country_id=$uno AND language_id=1";
         $result2 = $this->cone->query($sql2);
         while($row2 = $result2->fetch_assoc()){
             $columnCountry=$row2['name'];
@@ -189,6 +189,70 @@ require_once ("../includes/constantes.php");
     $stmt->close();
     return "eliminar completo";
   }// end to delete
+
+  function getCountries(){
+    $sql="SELECT country_id,name FROM countrydetails WHERE language_id=1";
+    $result = $this->cone->query($sql);
+    $array=array();
+    while($row = $result->fetch_assoc()){
+      $array[]=array(
+        'country_id'=>$row['country_id'],
+        'name'=>$row['name']
+        );
+    }//fin del while
+     if($result->num_rows > 0){
+      $result->close();
+      return json_encode($array);
+     }
+    $result->close();
+    return false;
+  }// end to getCountries
+
+  function addLocation($country_id,$gpslat,$gpslong,$gpszoom,$enable,$media_id,$template_id,$position){
+
+     $stmt= $this->cone->prepare("INSERT INTO locations(country_id,gpslat,gpslong,gpszoom,enabled) VALUES(?,?,?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iiiii',$country_id,$gpslat,$gpslong,$gpszoom,$enable);
+    $stmt->execute();
+    $stmt->close();
+    //return true;
+    $sql="SELECT (MAX(id)) AS id FROM locations";
+    $result = $this->cone->query($sql);
+    $array=array();
+    while($row = $result->fetch_assoc()){
+              $stmt= $this->cone->prepare("INSERT INTO location_media(location_id,media_id,template_id,position) VALUES(?,?,?,?)");
+            if($stmt === FALSE){
+              die("prepare() fail: ". $this->cone->error);
+              return false;
+            }
+            $stmt->bind_param('iiii',$row['id'],$media_id,$template_id,$position);
+            $stmt->execute();
+            $stmt->close();
+            $array[]=array('location_id'=>$row['id']);
+    }//fin del while
+    if($result->num_rows > 0){
+      $result->close();
+      return json_encode($array);
+     }
+
+    $result->close();
+    return false;
+  }//end to addLocation
+  
+  function addLocationDetails($location_id,$language_id,$name,$description,$enabled){
+    $stmt= $this->cone->prepare("INSERT INTO locationdetails(location_id,language_id,name,description,enabled) VALUES(?,?,?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iissi',$location_id,$language_id,$name,$description,$enabled);
+    $stmt->execute();
+    $stmt->close();
+    return 1;
+  }//end to addCountryDetails
 
 }// fin de la clase
  ?>

@@ -33,22 +33,11 @@ require_once ("../includes/constantes.php");
       return 1;
     }# fin del metodo eliminar.
 
-    function editService($id,$language_id,$name){
-      $stmt=$this->cone->prepare("UPDATE servicedetails SET name=? WHERE service_id=? AND language_id=?");
-      if($stmt === FALSE){
-        die("prepare() fail modificar: ". $this->cone->error);
-        echo 0;
-      }
-      $stmt->bind_param('sss',$name,$id,$language_id);
-      //echo "id ".$id."idl ".$language_id."$name ".$name."$description ".$description;
-      $stmt->execute();
-      $stmt->close();
-      echo 1;
-    }# fin del metodo modificar.
 
     function getProduct(){
       //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
-      $sql="SELECT a.id, b.product_id,b.name,b.description,b.language_id,a.service_id,a.country_id,a.location_id,a.gpslat,a.gpslong,a.gpszoom,a.enabled FROM products AS a, productdetails AS b   WHERE a.id=b.product_id AND b.language_id=1  ORDER BY a.id";
+      $sql="SELECT a.id, b.product_id,b.name,b.language_id,a.service_id,a.country_id,a.location_id,a.enabled,c.name AS namecountrie,d.name As namelocation FROM products AS a, productdetails AS b,countrydetails As c,locationdetails AS d
+      WHERE a.id=b.product_id AND b.language_id=1 AND c.language_id=1 AND d.language_id=1 AND c.country_id=a.country_id AND d.location_id=a.location_id ORDER BY a.id";
       $result = $this->cone->query($sql);
       $array=array();
       while($row = $result->fetch_assoc()){
@@ -57,16 +46,12 @@ require_once ("../includes/constantes.php");
           'product_id'=>$row['product_id'],
           'language_id'=>$row['language_id'],
           'name'=> $row['name'],
-          'description'=>$row['description'],
           'service_id'=>$row['service_id'],
           'country_id'=>$row['country_id'],
           'location_id'=>$row['location_id'],
-          'gpslat'=>$row['gpslat'],
-          'gpslong'=>$row['gpslong'],
-          'gpszoom'=>$row['gpszoom'],
           'enabled'=>$row['enabled'],
-          'namecountry'=>'',
-          'namelocation'=>''
+          'namecountry'=>$row['namecountrie'],
+          'namelocation'=>$row['namelocation']
         );
       }//fin del while
       //return "texto";
@@ -100,32 +85,7 @@ require_once ("../includes/constantes.php");
      return false;
     }# fin del metodo consulta
 
-    //funcion obtener Tag por id
-    function getServicetoModal($id,$idlan,$short){
 
-      $sql="SELECT a.id,a.bylocation,a.byitinerary, b.name,b.language_id,c.short FROM services AS a, servicedetails AS b, languages AS c WHERE  c.short='$short' AND $id=b.service_id AND '$idlan'=b.language_id    ORDER BY c.id";
-      //  $sql="SELECT * FROM languages where id='$id'";
-    //  echo "short ".$short." id lang ".$idlan." id tag ".$id;
-      $result = $this->cone->query($sql);
-      $array=array();
-      while($row = $result->fetch_assoc()){
-        $array[]=array(
-          'id'=>$row['id'],
-          'bylocation'=>$row['bylocation'],
-          'language_id'=>  $row['language_id'],
-          'name'=> $row['name'],
-          'byitinerary'=> $row['byitinerary'],
-          'short'=> $row['short']
-        );
-      }//fin del while
-      //return "texto";
-       if($result->num_rows > 0){
-      return json_encode($array);
-       }
-       $this->close();
-       //return $variable;
-      return false;
-   }# fin del metodo consulta byid
 
    function getNameCountry($id){
       $sql="SELECT name FROM countrydetails WHERE country_id=$id AND language_id=1";

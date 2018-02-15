@@ -56,6 +56,31 @@ switch ($action) {
   $bd = new Locations();
   echo $bd->deleteLocation($id);
   break;
+  case 9:
+  $bd = new Locations();
+  echo $bd->getCountries();
+  break;
+  case 10:
+  $country_id= $data->country_id;
+  $gpslat= $data->gpslat;
+  $gpslong= $data->gpslong;
+  $gpszoom= $data->gpszoom;
+  $enable=1;
+  $template_id=$data->template_id;
+  $media_id=$data->media_id;
+  $position=$data->position;
+  $bd= new Locations();
+  echo $bd->addLocation($country_id,$gpslat,$gpslong,$gpszoom,$enable,$media_id,$template_id,$position);
+  break;
+  case 11:
+  $location_id= $data->location_id;
+  $language_id= $data->language_id;
+  $name= $data->name;
+  $description= $data->description;
+  $enabled=1;
+  $bd= new Locations();
+  echo $bd->addLocationDetails($location_id,$language_id,$name,$description,$enabled); 
+  break;
 
 
 }
