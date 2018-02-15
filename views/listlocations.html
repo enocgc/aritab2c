@@ -133,6 +133,13 @@ $(document).ready(function() {
                                 <input class="uk-input" type="text" ng-model="position" value="0"/>
                                 </div>
                               </div>
+                              <div class="uk-margin">
+                                 <label class="uk-form-label" for="form-stacked-text">Country</label>
+                                <div class="uk-form-controls">
+                                             <select class="uk-select" ng-model="dataCountrySelect" ng-options="opt as opt.name for opt in countrieslist ">
+                                            </select>
+                                </div>
+                         </div>
                           </div>
                           <!--mapa  -->
                            <div class="uk-width-1-2@m uk-text-center">

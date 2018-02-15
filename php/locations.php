@@ -39,8 +39,9 @@ switch ($action) {
   $media_id= $data->media_id;
   $template_id= $data->template_id;
   $position= $data->position;
+  $country_id= $data->country_id;
   $bd = new Locations();
-  echo $bd->updateLocation($id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position);
+  echo $bd->updateLocation($id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position,$country_id);
   break;
    case 7:
   // update countrydetails

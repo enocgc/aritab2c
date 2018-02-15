@@ -66,7 +66,7 @@ require_once ("../includes/constantes.php");
   }// end to delete
 
   function getLocation($id){
-    $sql="SELECT * FROM locations WHERE id=$id";
+    $sql="SELECT a.gpslat,a.gpslong,a.gpszoom,a.id,a.country_id,b.name,b.country_id AS bcountry_id FROM locations AS a,countrydetails AS b WHERE id=$id AND b.country_id=a.country_id AND b.language_id=1";
     $result = $this->cone->query($sql);
     $array=array();
     while($row = $result->fetch_assoc()){
@@ -75,7 +75,9 @@ require_once ("../includes/constantes.php");
         'gpslong'=>$row['gpslong'],
         'gpszoom'=>$row['gpszoom'],
         'id'=> $row['id'],
-        'country_id'=> $row['country_id']
+        'country_id'=> $row['country_id'],
+        'name'=> $row['name'],
+        'bcountry_id'=> $row['bcountry_id']
       );
     }//fin del while
      if($result->num_rows > 0){
@@ -128,13 +130,13 @@ require_once ("../includes/constantes.php");
   }// fin de getMedia
 
 
-  function updateLocation($id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position){
-     $stmt=$this->cone->prepare("UPDATE locations SET gpslat=?,gpslong=?,gpszoom=? WHERE id=?");
+  function updateLocation($id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position,$country_id){
+     $stmt=$this->cone->prepare("UPDATE locations SET country_id=?,gpslat=?,gpslong=?,gpszoom=? WHERE id=?");
       if($stmt === FALSE){
         die("prepare() fail modificar: ". $this->cone->error);
         echo 0;
       }
-      $stmt->bind_param('ssii',$gpslat,$gpslong,$gpszoom,$id);
+      $stmt->bind_param('sssii',$country_id,$gpslat,$gpslong,$gpszoom,$id);
       $stmt->execute();
       $stmt->close();
       $stmt=$this->cone->prepare("UPDATE location_media SET media_id=?,template_id=?,position=? WHERE location_id=?");

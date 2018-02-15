@@ -11,7 +11,7 @@ $scope.units = [
          {'id': 21, 'label': '800x600'},
       ];
 
-$scope.data= $scope.units[0]; // Set by default the value "test1"
+$scope.data= $scope.units[1]; // Set by default the value "test1"
 function getLocations(){
   console.log("locations");
   var action=1;
@@ -80,10 +80,20 @@ $scope.getEditLocation=function(id){
   $http.post('../php/locations.php',datos)
   .success(function(data){
     $scope.countrymap = data;
+    console.log(data);
     createMarker(data[0].gpslat,data[0].gpslong,data[0].gpszoom);
     $scope.latitude=data[0].gpslat;
     $scope.longitude=data[0].gpslong;
     $scope.zoom=data[0].gpszoom;
+    console.log($scope.countrieslist);
+    for(var i=0;i<$scope.countrieslist.length;i++){
+    console.log($scope.countrieslist[i].country_id);
+    var idvalue=$scope.countrieslist[i].country_id;
+      if(idvalue==data[0].bcountry_id){
+        console.log("el id seleccionado es "+i);
+        $scope.dataCountrySelect= $scope.countrieslist[i];
+      }
+    }//end to for
   }).error(function(response){
     alert("No se obtuvieron los countries");
   });
@@ -113,7 +123,6 @@ $scope.getEditLocation=function(id){
       $scope.position=0;
     }else{
     console.log(data);
-    alert("position is"+data);
     $scope.position=data[0].position;
     }
   }).error(function(response){
@@ -130,7 +139,8 @@ $scope.updateLocation= function(){
     'gpszoom':$scope.zoom,
     'media_id':30,
     'template_id':19,
-    'position':$scope.position
+    'position':$scope.position,
+    'country_id':$scope.dataCountrySelect.country_id
   };
   $http.post('../php/locations.php',datos)
   .success(function(data){
@@ -160,12 +170,12 @@ getLocations();
 
 
 $scope.countrieslist=[];
-$scope.datascountri= $scope.countrieslist[0]; 
 getCountries();
 function getCountries (){
   $http.post('../php/locations.php',{'action':9})
   .success(function(data){
     $scope.countrieslist=data;
+    $scope.dataCountrySelect= $scope.countrieslist[0]; 
   }).error(function(response){
     alert("No se obtuvieron los countries");
   });
