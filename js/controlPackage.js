@@ -91,7 +91,6 @@ appRouter.controller('controlPackage',function($scope,$http,$timeout,$rootScope)
   }
   $scope.days=[];
   $scope.cont=0;
-
   $scope.addDays= function(days){
     $scope.cont=  $scope.cont+days;
     $("#locationTitle").text("Location");
@@ -101,6 +100,23 @@ appRouter.controller('controlPackage',function($scope,$http,$timeout,$rootScope)
       //console.log($scope.days[i-1]);
     }
   }
+  appRouter.directive("dayOne", function() {
+      return {
+          template : "<div id='dia' class='uk-card uk-padding-small uk-margin-small uk-card-default'>"
+            +"<span class='days-da uk-background-primary'>Day 1</span>"
+            +"<p class='uk-h4'>Arrival</p>"
+              +"<div class='uk-margin'>"
+              +"<label class='uk-form-label' for='form-stacked-tex't>Arrival place</label>"
+            +  "<div class='uk-form-controls'>"
+              +  "  <input class='uk-input' type='text' placeholder='Ex. Juan Santamaria International Airport'>"
+              +  "</div>"
+            +"  </div>"
+            +"</div>"
+      };
+  });
+
+
+
   $scope.selectedTag;
   $scope.addPackage = function(){
     console.log($scope.selectedTag);
