@@ -79,13 +79,13 @@
 					<div class="uk-width-1-1@m uk-text-left">
 						<label class="uk-h4 uk-margin-small-right" for="">Tags:  </label>
 						<div class="uk-inline">
-							<label ng-repeat="tag in tags"><input class="uk-checkbox"  ng-true-value="'{{tag.id}}'" ng-false-value="'0'" type="checkbox" ng-change="'{{tag.id}}'" ng-model="selectedTag"/> {{tag.name}} {{selectedTag}}</label>
+							<label ng-repeat="tag in tags"><input class="uk-checkbox"  ng-true-value="'{{tag.id}}'" ng-false-value="'0'" type="checkbox" ng-change="'{{tag.id}}'" ng-model="selectedTag"/> {{tag.name}}</label>
 						</div>
 					</div><br>
 
 
 					<div class="uk-width-1-2@m uk-text-left">
-						<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger">7 Days</span></p>
+						<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger"><span  ng-if="days.length >= 1">{{days.length+3}}</span> Days</span></p>
 
 					</div>
 					<div class="uk-width-1-2@m uk-text-left">
@@ -153,16 +153,18 @@
 		<h2 class="uk-modal-title">Select a Product (Activity)</h2>
 		<div class="uk-child-width-1-2@m uk-grid-match" uk-grid >
 			<!-- CUADRO DE ACTIVIDADES -->
-			<div class=" " ng-repeat="product in products">
-				<a style="text-decoration:none;"><div class="uk-card uk-card-default uk-card-hover uk-card-body">
+			<div class=" " ng-repeat="product in products" ng-click="selectProduct(product.id);">
+				<a style="text-decoration:none;"><div id="products{{product.id}}" class="uk-card uk-card-default uk-card-hover uk-card-body productos">
 					<h3 class="uk-card-title">{{product.name}}</h3>
 					<p>{{product.description}}</p>
 				</div></a>
 			</div>
 		</div>
 		<p class="uk-text-right">
+			<input type="text" ng-model="idproduct" value="" hidden>
+			<input type="text" ng-model="daytoproduct" value="" hidden>
 			<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
-			<button class="uk-button uk-button-primary " type="button" ng-click="selectProduct(product.id);">Save</button>
+			<button class="uk-button uk-button-primary " type="button" ng-click="addProduct(idproduct,daytoproduct)">Save</button>
 		</p>
 	</div>
 </div>
