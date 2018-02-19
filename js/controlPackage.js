@@ -203,23 +203,29 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   $('.productos').click(function() {
     alert(this.id);
   });
+  //eliminar day
   $scope.deleteDay = function(day) {
     console.log(day);
   }
+
+  //seleccionar la location
   $scope.selectLocation = function(id) {
     $(".locaciones").css("background", "none");
     $("#locations" + id).css("background-color", "#c1e0ee");
     $scope.idlocation = id;
 
   }
+//seleccionar el producto y obtener el id
   $scope.selectProduct = function(id) {
     $(".productos").css("background", "none");
     $("#products" + id).css("background-color", "#c1e0ee");
     $scope.idproduct = id;
   }
+  //cargar el id al producto seleccionado
   $scope.daytoproduct = function(day) {
     $scope.daytoproduct = day;
   }
+//agregar producto al view
   $scope.addProduct = function(id,day) {
 
     function find(produ) {
