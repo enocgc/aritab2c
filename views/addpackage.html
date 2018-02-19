@@ -1,7 +1,7 @@
 
 <div class="uk-section uk-padding" data-ng-controller="controlPackage">
 	<div class="uk-background-muted uk-padding uk-panel">
-    	<div class="uk-container uk-container-expand">
+		<div class="uk-container uk-container-expand">
 			<h3>Add Package</h3>
 			<form method="post" class="uk-form-horizontal ">
 				<div uk-grid class="uk-child-width-1-1@m uk-grid-divider ">
@@ -10,22 +10,22 @@
 					</div>
 					<div>
 						<div class="uk-margin ">
-							 <label class="uk-form-label" >Name</label>
+							<label class="uk-form-label" >Name</label>
 							<div class="uk-form-controls">
 								<ul uk-tab>
-									  <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+									<li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
 								</ul>
 
 								<ul class="uk-switcher uk-margin">
-								  <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
+									<li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="name-{{language.short}}"></li>
 								</ul>
 							</div>
 						</div>
 						<div class="uk-margin">
-							 <label class="uk-form-label" for="form-stacked-text">Description</label>
+							<label class="uk-form-label" for="form-stacked-text">Description</label>
 							<div class="uk-form-controls">
 								<ul uk-tab>
-									  <li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+									<li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
 								</ul>
 
 								<ul class="uk-switcher uk-margin">
@@ -35,152 +35,118 @@
 						</div>
 					</div>
 
-					</div>
-
-<day-one></day-one>
-
-							<hr>
-
-						<div class="uk-width-1-1">
-
-							<!-- DIA DE INICIO -->
-						<day-one></day-one>
-
-
-							<div class="" id="locations" ng-if="days.length">
-								<!-- TRANSFER 01 -->
-								<div id="transfer" class="uk-card uk-padding-small uk-margin-small uk-card-transfer uk-text-center">
-									<span class="days-da uk-background-primary">Day 2</span>
-									<p class=""><span uk-icon="icon: forward"></span> Transfer to first location</p>
-								</div>
-         <h3 id="">locationTitle</h3>
-    				<div class="" ng-repeat="day in days">
-								<!-- DIA 03 -->
-								<div class="uk-card uk-padding-small uk-margin-small uk-card-default" >
-									<span class="days-da uk-background-primary">Day {{day.day}}</span>
-									<a href="#modal-activities" uk-toggle class="link-product">
-										<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add a Product (Activity)</span></div>
-									</a>
-								</div>
-								</div>
-				        <p class="uk-text-center" id="addDay"><a class="uk-button uk-button-danger" ng-click="addNewDay(1);"style="width:100%;">Add New Day</a> </p>
-
-								<!-- TRANSFER 02 -->
-
-							</div>
-
-							<!--ADD LOCATION 1-->
-
-							<div class="uk-margin" id="addlocation01">
-								<div id="dia" class=" uk-padding-small uk-margin-small ">
-									<a href="#modal-location" uk-toggle class="link-product">
-										<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add Location</span></div>
-									</a>
-								</div>
-
-							</div>
-							<!-- DIA FINAL -->
-
-							<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
-								<span class="days-da uk-background-primary">Day {{days.length+1}}</span>
-								<p class="uk-h4">Departure Location</p>
-							</div>
-							<div class="uk-width-1-1@m uk-text-left">
-								<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
-								<div class="uk-inline">
-									<label ng-repeat="transport in transports"><input class="uk-checkbox" ng-true-value="'{{transport.id}}'" ng-false-value="'0'" type="checkbox" ng-model="selectedTransport"/ > {{transport.name}} </label>
-								</div>
-
-							</div><br>
-							<div class="uk-width-1-1@m uk-text-left">
-								<label class="uk-h4 uk-margin-small-right" for="">Tags:  </label>
-								<div class="uk-inline">
-									<label ng-repeat="tag in tags"><input class="uk-checkbox"  ng-true-value="'{{tag.id}}'" ng-false-value="'0'" type="checkbox" ng-change="'{{tag.id}}'" ng-model="selectedTag"/> {{tag.name}} </label>
-								</div>
-							</div><br>
-
-
-							<div class="uk-width-1-2@m uk-text-left">
-								<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger">7 Days</span></p>
-
-							</div>
-							<div class="uk-width-1-2@m uk-text-left">
-								<div class="uk-margin">
-									<label class="uk-h3" for="">Price: </label>
-									<div class="uk-inline">
-													<span class="uk-form-icon" style="color: black;">$</span>
-										<input class="uk-input" type="number" placeholder="Ex.100">
-									</div>
-								</div>
-							</div>
-							<hr>
-						</div>
-					<div class="uk-width-1-1 uk-text-center">
-						<button class="uk-button uk-button-primary" type="submit" ng-click="addPackage();">Save</button>
-						<a href="#packageslist"class="uk-button uk-button-danger">Cancel</a>
-					</div>
 				</div>
-			</form>
-		</div>
+				<hr>
 
-		<!--MODAL LOCATION-->
-		<div  class="uk-modal-container"id="modal-location" uk-modal>
-			<div class="uk-modal-dialog uk-modal-body">
-				<h2 class="uk-modal-title">Select a Location</h2>
-				<div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
-					<!-- CUADRO DE ACTIVIDADES -->
+				<div class="uk-width-1-1">
+					<day-one></day-one>
+					<location></location>
 
-					<div class="" ng-repeat="location in locations" ng-click="selectLocation(location.id);">
-						<a style="text-decoration:none;"><div class="uk-card uk-card-default uk-card-hover uk-card-body">
-							<h3 class="uk-card-title">{{location.name}}</h3>
-							<p>{{location.description}}</p>
+					<!--ADD LOCATION 1-->
+
+					<div class="uk-margin" id="addlocation01">
+						<div id="dia" class=" uk-padding-small uk-margin-small ">
+							<a href="#modal-location" uk-toggle class="link-product">
+								<div class="uk-card uk-margin uk-text-center" style="padding: 20px; margin: 40px 0 0 0; "><span uk-icon="icon: plus-circle; ratio: 2;"></span><br><span class="uk-text-small">Add Location</span></div>
+							</a>
 						</div>
-						</a>
+
 					</div>
+					<!-- DIA FINAL -->
+
+					<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
+						<span class="days-da uk-background-primary">Day <span ng-if="days.length >= 1">{{days.length+2}}</span></span>
+						<p class="uk-h4">Departure Location</p>
+					</div>
+					<div class="uk-width-1-1@m uk-text-left">
+						<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
+						<div class="uk-inline">
+							<label ng-repeat="transport in transports"><input id="pruebacheckbox{{transport.id}}" class="uk-checkbox" ng-true-value="'{{transport.id}}'" ng-false-value="'0'" type="checkbox" ng-model="selectedTransport"/ > {{transport.name}} {{sele}}</label>
+						</div>
+
+					</div><br>
+					<div class="uk-width-1-1@m uk-text-left">
+						<label class="uk-h4 uk-margin-small-right" for="">Tags:  </label>
+						<div class="uk-inline">
+							<label ng-repeat="tag in tags"><input class="uk-checkbox"  ng-true-value="'{{tag.id}}'" ng-false-value="'0'" type="checkbox" ng-change="'{{tag.id}}'" ng-model="selectedTag"/> {{tag.name}} {{selectedTag}}</label>
+						</div>
+					</div><br>
+
+
+					<div class="uk-width-1-2@m uk-text-left">
+						<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger">7 Days</span></p>
+
+					</div>
+					<div class="uk-width-1-2@m uk-text-left">
+						<div class="uk-margin">
+							<label class="uk-h3" for="">Price: </label>
+							<div class="uk-inline">
+								<span class="uk-form-icon" style="color: black;">$</span>
+								<input class="uk-input" type="number" placeholder="Ex.100">
+							</div>
+						</div>
+					</div>
+					<hr>
 				</div>
-		<div class="" uk-grid>
-
-					<div class="uk-margin uk-width-2-5@m ">
-						 <label class="uk-h5 " for="form-stacked-text">Min Nights</label>
-						<div class="uk-form-controls">
-							<input class="uk-input" type="number"  value="3" ng-model="minNigts" placeholder="0"/>
-						</div>
-					</div>
-		<div class="uk-margin uk-width-3-5@m uk-text-right">
-		<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
-		<button class="uk-button uk-button-primary" type="button" ng-click="addDays(minNigts);">Add</button>
-		</div>
-		</div>
+				<div class="uk-width-1-1 uk-text-center">
+					<button class="uk-button uk-button-primary" type="submit" ng-click="addPackage();">Save</button>
+					<a href="#packageslist"class="uk-button uk-button-danger">Cancel</a>
+				</div>
 			</div>
-		</div>
-
-		<!-- MODAL Activity -->
-		<div class="uk-modal-container" id="modal-activities" uk-modal>
-			<div class="uk-modal-dialog uk-modal-body">
-				<h2 class="uk-modal-title">Select a Product (Activity)</h2>
-				<div class="uk-child-width-1-2@m uk-grid-match" uk-grid >
-					<!-- CUADRO DE ACTIVIDADES -->
-					<div class=" " ng-repeat="product in products">
-						<a style="text-decoration:none;"><div class="uk-card uk-card-default uk-card-hover uk-card-body">
-							<h3 class="uk-card-title">{{product.name}}</h3>
-							<p>{{product.description}}</p>
-						</div></a>
-					</div>
-				</div>
-				<p class="uk-text-right">
-					<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
-					<button class="uk-button uk-button-primary " type="button" ng-click="selectProduct">Save</button>
-				</p>
-			</div>
-		</div>
-
+		</form>
 	</div>
 
+	<!--MODAL LOCATION-->
+	<div  class="uk-modal-container"id="modal-location" uk-modal>
+		<div class="uk-modal-dialog uk-modal-body">
+			<h2 class="uk-modal-title">Select a Location</h2>
+			<div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
+				<!-- CUADRO DE ACTIVIDADES -->
 
-<script type="text/javascript">
-	$("#addloc").click(function(){
-		console.log("click add location");
-		$("#locations").show();
-		$("#addlocation01").hide();
-	});
-</script>
+				<div class="" ng-repeat="location in locations" ng-click="selectLocation(location.id);">
+					<a style="text-decoration:none;"><div class="uk-card uk-card-default uk-card-hover uk-card-body">
+						<h3 class="uk-card-title">{{location.name}}</h3>
+						<p>{{location.description}}</p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="" uk-grid>
+
+			<div class="uk-margin uk-width-2-5@m ">
+				<label class="uk-h5 " for="form-stacked-text">Min Nights</label>
+				<div class="uk-form-controls">
+					<input class="uk-input" type="number"  value="3" ng-model="minNigts" placeholder="0"/>
+				</div>
+			</div>
+			<div class="uk-margin uk-width-3-5@m uk-text-right">
+				<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
+				<button class="uk-button uk-button-primary" type="button" ng-click="addDays(minNigts);">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- MODAL Activity -->
+<div class="uk-modal-container" id="modal-activities" uk-modal>
+	<div class="uk-modal-dialog uk-modal-body">
+		<h2 class="uk-modal-title">Select a Product (Activity)</h2>
+		<div class="uk-child-width-1-2@m uk-grid-match" uk-grid >
+			<!-- CUADRO DE ACTIVIDADES -->
+			<div class=" " ng-repeat="product in products">
+				<a style="text-decoration:none;"><div class="uk-card uk-card-default uk-card-hover uk-card-body">
+					<h3 class="uk-card-title">{{product.name}}</h3>
+					<p>{{product.description}}</p>
+				</div></a>
+			</div>
+		</div>
+		<p class="uk-text-right">
+			<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
+			<button class="uk-button uk-button-primary " type="button" ng-click="selectProduct(product.id);">Save</button>
+		</p>
+	</div>
+</div>
+
+</div>

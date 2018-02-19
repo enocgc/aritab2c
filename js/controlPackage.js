@@ -82,43 +82,71 @@ appRouter.controller('controlPackage',function($scope,$http,$timeout,$rootScope)
       console.log("No se obtuvieron los products");
     });
   }
-  $scope.days;
-  $scope.addNewDay= function(day){
-    var last=$scope.days.length;
-    console.log("ultimo"+last);
-    $scope.days[last]={'day':$scope.days.length+1};
-    console.log($scope.days);
-  }
+
   $scope.days=[];
+  $scope.newlocations=[];
   $scope.cont=0;
-  $scope.addDays= function(days){
-    $scope.cont=  $scope.cont+days;
-    $("#locationTitle").text("Location");
-    for (var i=1; i <= $scope.cont; i++) {
-      $scope.days[i-1]={'day': i};
-      console.log($scope.days[i-1].day);
-      //console.log($scope.days[i-1]);
-    }
+  $scope.cont2=1;
+  $scope.currentDay=0;
+  $scope.currentDayF=1;
+
+  $scope.addNewDay= function(day,locationID){
+    $scope.days[$scope.currentDay]={'day':$scope.currentDayF+1,'locationID':locationID,'transfer':false};
+    $scope.currentDay++;
+      $scope.currentDayF++;
+    console.log($scope.days);
+     // ordenarByLocation();
+     ordenar();
   }
-  appRouter.directive("dayOne", function() {
-      return {
-          template : "<div id='dia' class='uk-card uk-padding-small uk-margin-small uk-card-default'>"
-            +"<span class='days-da uk-background-primary'>Day 1</span>"
-            +"<p class='uk-h4'>Arrival</p>"
-              +"<div class='uk-margin'>"
-              +"<label class='uk-form-label' for='form-stacked-tex't>Arrival place</label>"
-            +  "<div class='uk-form-controls'>"
-              +  "  <input class='uk-input' type='text' placeholder='Ex. Juan Santamaria International Airport'>"
-              +  "</div>"
-            +"  </div>"
-            +"</div>"
-      };
-  });
+  //esta funcion crea los location
 
+function ordenar(){
 
+    const l = $scope.days.length;
+    for (let i = 0; i < l; i++ ) {
+      for (let j = 0; j < l - 1 - i; j++ ) {
+        if ( $scope.days[ j ].locationID > $scope.days[ j + 1 ].locationID ) {
+          [ $scope.days[ j ].locationID, $scope.days[ j + 1 ].locationID ] = [ $scope.days[ j + 1 ].locationID, $scope.days[ j ].locationID ];
+        }
+      }
+    }
+    console.log($scope.days);
+}//fin metodo ordenamiento
+
+  $scope.addDays= function(days){
+    console.log($scope.newlocations);
+    $scope.newlocations[$scope.cont2-1]={'location': $scope.cont2};
+    console.log("locations");
+    console.log($scope.newlocations);
+    $scope.cont=  $scope.cont+days;
+    console.log("dias agregar "+ days+" al locations"+  $scope.cont2+" y el dia actual es "+ $scope.currentDay);
+
+    for (var i=0; i <= days; i++) {
+      $scope.currentDay++;
+      $scope.currentDayF++;
+      console.log("contador#2-> "+$scope.cont2);
+      console.log("Diay actaulF-> "+$scope.currentDayF);
+      console.log("dias length "+$scope.days.length);
+      if(i==0){
+        $scope.days[$scope.currentDay-1]={'day':$scope.currentDayF,'locationID':$scope.cont2,'transfer':true};
+      }else{
+        $scope.days[$scope.currentDay-1]={'day':$scope.currentDayF,'locationID':$scope.cont2,'transfer':false};
+      }
+    }//fin del for
+    console.log($scope.days);
+
+    $scope.cont2++;
+        ordenar();
+
+  }
+$('.uk-checkbox').click(function(){
+  alert(this.id);
+});
 
   $scope.selectedTag;
   $scope.addPackage = function(){
+
+
     console.log($scope.selectedTag);
     console.log($scope.selectedTransport);
   }
