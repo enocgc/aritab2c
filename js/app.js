@@ -31,7 +31,7 @@ appRouter.directive("day", function(){
     +"<div ng-if='day.transfer == true'>"
     +"<div id='transfer' class='uk-card uk-padding-small uk-margin-small uk-card-transfer uk-text-center'>"
     +"  <span class='days-da uk-background-primary'>Day {{day.day}}</span>"
-    +"<p ><span uk-icon='icon: forward'></span> Transfer to first location</p>"
+    +"<p ><span uk-icon='icon: forward'></span> Transfer to location</p>"
     +"</div>"
       +" <h3 >{{newlocation.name}}</h3>"
       +"</div>"

@@ -116,16 +116,16 @@ function ordenar(){
 
   $scope.addDays= function(days,id){
 
-//funion para encontrar nombre por id
-function esCereza(fruta) {
-    return fruta.id === id;
+//funcion para encontrar nombre por id
+function find(locat) {
+    return locat.id === id;
 }
-var name=($scope.locations.find(esCereza).name);
+var name=($scope.locations.find(find).name);
 console.log(name);
 
-    $scope.newlocations[$scope.cont2-1]={'location': $scope.cont2,'name':name};
+    $scope.newlocations[$scope.cont2-1]={'location': $scope.cont2,'name':name,'positon':$scope.position};
     //console.log("locations");
-    //console.log($scope.newlocations);
+    console.log($scope.newlocations);
     $scope.cont=  $scope.cont+days;
     //console.log("dias agregar "+ days+" al locations"+  $scope.cont2+" y el dia actual es "+ $scope.currentDay);
 
@@ -170,9 +170,12 @@ $('.uk-checkbox').click(function(){
       alert(this.id);
     });
     $scope.selectLocation= function(id){
-          $(".locaciones").css("border","none");
-          $("#locations"+id).css("border","solid #1e87f0 2px");
+          $(".locaciones").css("background","none");
+          $("#locations"+id).css("background-color","#c1e0ee");
           $scope.idlocation=id;
+
+    }
+    $scope.selectProduct = function(){
 
     }
   //
