@@ -52,16 +52,27 @@
 						</div>
 
 					</div>
-					<!-- DIA FINAL -->
+					<!-- DIAS FINALES -->
+					<div  ng-if="days.length" id='transfer' class='uk-card uk-padding-small uk-margin-small uk-card-transfer uk-text-center'>
+					<span class='days-da uk-background-primary'>Day {{days.length+2}}</span>
+					<p ><span uk-icon='icon: forward'></span> Transfer to departure location</p>
+					</div>
 
-					<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default">
-						<span class="days-da uk-background-primary">Day <span ng-if="days.length >= 1">{{days.length+2}}</span></span>
+					<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default" ng-if="days.length">
+						<span class="days-da uk-background-primary">Day <span ng-if="days.length >= 1">{{days.length+3}}</span></span>
 						<p class="uk-h4">Departure Location</p>
 					</div>
 					<div class="uk-width-1-1@m uk-text-left">
 						<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
 						<div class="uk-inline">
-							<label ng-repeat="transport in transports"><input id="pruebacheckbox{{transport.id}}" class="uk-checkbox" ng-true-value="'{{transport.id}}'" ng-false-value="'0'" type="checkbox" ng-model="selectedTransport"/ > {{transport.name}} {{sele}}</label>
+							<label ng-repeat="transport in transports track by $index">
+								<input id="pruebacheckbox{{transport.id}}"
+									class="uk-checkbox"
+									ng-true-value="'{{transport.id}}'"
+									ng-false-value="'0'"
+									type="checkbox"
+									ng-model="selectedTransport"
+									ng-click="cambiarEstado(transport.id,selectedTransport)"/> {{transport.name}} </label>
 						</div>
 
 					</div><br>
@@ -103,8 +114,8 @@
 			<div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
 				<!-- CUADRO DE ACTIVIDADES -->
 
-				<div class="" ng-repeat="location in locations" ng-click="selectLocation(location.id);">
-					<a style="text-decoration:none;"><div class="uk-card uk-card-default uk-card-hover uk-card-body">
+				<div  class="" ng-repeat="location in locations" id="div{{location.id}}" ng-click="selectLocation(location.id);">
+					<a style="text-decoration:none;"><div id="locations{{location.id}}" class="uk-card uk-card-default uk-card-hover uk-card-body locaciones">
 						<h3 class="uk-card-title">{{location.name}}</h3>
 						<p>{{location.description}}</p>
 					</div>
@@ -113,15 +124,22 @@
 		</div>
 		<div class="" uk-grid>
 
-			<div class="uk-margin uk-width-2-5@m ">
+			<div class="">
+				 <label  class="uk-h5 "  for="form-stacked-text">Position</label>
+				<div class="uk-form-controls">
+			<input class="uk-input" type="number"  ng-model="position" placeholder="0"/>
+				</div>
+			</div>
+			<div class="">
 				<label class="uk-h5 " for="form-stacked-text">Min Nights</label>
 				<div class="uk-form-controls">
 					<input class="uk-input" type="number"  value="3" ng-model="minNigts" placeholder="0"/>
 				</div>
 			</div>
 			<div class="uk-margin uk-width-3-5@m uk-text-right">
+				<input type="text" name=""ng-model="idlocation" value="" hidden>
 				<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
-				<button class="uk-button uk-button-primary" type="button" ng-click="addDays(minNigts);">Add</button>
+				<button class="uk-button uk-button-primary" type="button" ng-click="addDays(minNigts,idlocation);">Add</button>
 			</div>
 		</div>
 	</div>

@@ -159,6 +159,7 @@ console.log(action);
 $("#confirmdelete").click(function(){
 $http.post("../php/service.php",{'action':action,'id':id})
 .success(function(data){
+  console.log(data);
 setTimeout(function () {//para que actualice los campos de forma eficiente
 $scope.$apply(function () {
 

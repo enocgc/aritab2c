@@ -44,6 +44,7 @@ appRouter.controller('controlPackage',function($scope,$http,$timeout,$rootScope)
       console.log("No se get  tags");
     });
   }
+  $scope.locations;
   function getLocation(){
     var action=14;
     $http.post('../php/product.php', {'action':action})
@@ -113,20 +114,27 @@ function ordenar(){
     console.log($scope.days);
 }//fin metodo ordenamiento
 
-  $scope.addDays= function(days){
-    console.log($scope.newlocations);
-    $scope.newlocations[$scope.cont2-1]={'location': $scope.cont2};
-    console.log("locations");
-    console.log($scope.newlocations);
+  $scope.addDays= function(days,id){
+
+//funion para encontrar nombre por id
+function esCereza(fruta) {
+    return fruta.id === id;
+}
+var name=($scope.locations.find(esCereza).name);
+console.log(name);
+
+    $scope.newlocations[$scope.cont2-1]={'location': $scope.cont2,'name':name};
+    //console.log("locations");
+    //console.log($scope.newlocations);
     $scope.cont=  $scope.cont+days;
-    console.log("dias agregar "+ days+" al locations"+  $scope.cont2+" y el dia actual es "+ $scope.currentDay);
+    //console.log("dias agregar "+ days+" al locations"+  $scope.cont2+" y el dia actual es "+ $scope.currentDay);
 
     for (var i=0; i <= days; i++) {
       $scope.currentDay++;
       $scope.currentDayF++;
-      console.log("contador#2-> "+$scope.cont2);
-      console.log("Diay actaulF-> "+$scope.currentDayF);
-      console.log("dias length "+$scope.days.length);
+    //  console.log("contador#2-> "+$scope.cont2);
+    //  console.log("Diay actaulF-> "+$scope.currentDayF);
+    //  console.log("dias length "+$scope.days.length);
       if(i==0){
         $scope.days[$scope.currentDay-1]={'day':$scope.currentDayF,'locationID':$scope.cont2,'transfer':true};
       }else{
@@ -144,10 +152,28 @@ $('.uk-checkbox').click(function(){
 });
 
   $scope.selectedTag;
+  $scope.selectedTransport2=1;
   $scope.addPackage = function(){
-
-
     console.log($scope.selectedTag);
     console.log($scope.selectedTransport);
   }
+  // pruebacheckbox
+  $scope.disabled = 'false';
+    $scope.cambiarEstado = function (id,prueba){
+      if (prueba != 0) {
+        console.log(id);
+      }
+
+      //esta funcion la puse yo y si funca
+    }
+    $('.locaciones').click(function(){
+      alert(this.id);
+    });
+    $scope.selectLocation= function(id){
+          $(".locaciones").css("border","none");
+          $("#locations"+id).css("border","solid #1e87f0 2px");
+          $scope.idlocation=id;
+
+    }
+  //
 });
