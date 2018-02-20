@@ -54,8 +54,9 @@ appRouter.config(function($routeProvider) {
         templateUrl : "listtransport.html"
     }).when("/listocupation", {
         templateUrl : "listocupation.html"
+    }).when("/listpaxocupation", {
+        templateUrl : "listpaxocupation.html"
     }).otherwise({
-
 		templateUrl : 'home.html',
 		//controller : 'tablaMateriales'
 	});

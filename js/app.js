@@ -37,7 +37,7 @@ appRouter.directive("day", function(){
       +"</div>"
     +  "  <!-- DIA -->"
     +"<div class='uk-card uk-padding-small uk-margin-small uk-card-default' ng-if='day.transfer != true' uk-grid>"
-    +"<div class='uk-width-4-5'><span class='days-da uk-background-primary'>Day {{day.day}}</span></div><div class='uk-width-1-5 uk-text-right'> <span class='days-da2 uk-button uk-button-danger' ng-click='deleteDay(day.day);'><span uk-icon='icon: trash; ratio: 1;'></span></span></div>"
+    +"<div class='uk-width-4-5'><span class='days-da uk-background-primary'>Day {{day.day}}</span></div><div class='uk-width-1-5 uk-text-right'> <span class='days-da2 uk-button uk-button-danger' ng-click='deleteDay(day.day,day.locationID);'><span uk-icon='icon: trash; ratio: 1;'></span></span></div>"
     +"<div class='uk-width-1-1'><a href='#modal-activities' uk-toggle class='link-product'>"
     +" <div class='uk-card uk-margin uk-text-center' style='padding: 20px; margin: 40px 0 0 0; ' ng-click='daytoproduct(day.day);'><span uk-icon='icon: plus-circle; ratio: 2;'></span><br><span class='uk-text-small'>Add a Product (Activity)</span></div>"
     +  " </a></div>"

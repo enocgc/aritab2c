@@ -204,8 +204,8 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     alert(this.id);
   });
   //eliminar day
-  $scope.deleteDay = function(day) {
-    console.log(day);
+  $scope.deleteDay = function(day,location) {
+    console.log("day "+day+" location id "+location);
   }
 
   //seleccionar la location

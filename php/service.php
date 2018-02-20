@@ -45,10 +45,9 @@ switch ($action) {
   case 8:
   $id = $data->id;
   $bd = new Services();
-  //echo "id".$id;
+//  echo "id".$id;
   echo $bd->deleteService($id);
   break;
-  default:
 }
 
 ?>
