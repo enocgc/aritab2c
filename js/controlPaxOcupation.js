@@ -10,11 +10,10 @@ $scope.paxs;
     $http.post('../php/paxocupation.php', {'action':action})
     .success(function(data){
       $scope.paxs = data;
-      console.log(data);
-      //  console.log($scope.seasons);
-      // alert("get exitoso");
+      //console.log(data);
+console.log(" get  tax");
     }).error(function(response){
-      alert("No se get  tax");
+        console.log("No se get  tax");
     });
   }
 
@@ -24,15 +23,9 @@ $scope.paxs;
     $http.post('../php/ocupation.php', {'action':action})
     .success(function(data){
       $scope.ocupations = data;
-      console.log(data);
-      //console.log(data);
       console.log("get service");
-
-
-      //  console.log($scope.seasons);
-      // alert("get exitoso");
     }).error(function(response){
-      alert("No se get  tags");
+      console.log("No se get  tags");
     });
   }
 
@@ -44,64 +37,78 @@ $scope.paxs;
     $http.post('../php/paxocupation.php', {'action':action,'pax':$scope.pax,'occupation_id':$scope.selectedOcupation.id})//creo el tag
     .success(function(data){
       $scope.newPaxs = data;
-
+      $.toast({
+      heading: 'Success',
+      text: 'Add Pax Ocupation.',
+      showHideTransition: 'slide',
+      icon: 'success'
+    });
       setTimeout(function () {//para que actualice los campos de forma eficiente
           $scope.$apply(function () {
             getPaxOcupation();
-            console.log("se agrego nuevo pax");
           });
       }, 100);
 
-      // alert("get exitoso");
     }).error(function(response){
-      alert("No iserto tag");
+      $.toast({
+        heading: 'Error',
+        text: 'Not Add Pax Ocupation.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
     });
 }
 
 //funcion para mostrar datos en getLanguagetoModal
-$scope.ocupations2=[];
 
 $scope.getPaxOcupationtoModal=function(id){
+$scope.idpaxE=id;
 function find(produ) {
   return produ.id === id;
 }
 $scope.paxE= parseInt($scope.paxs.find(find).pax);
-var ocupation=($scope.paxs.find(find).occupation_id);
+
+var ocupation=($scope.paxs.find(find).occupation_id);//
+
 for(var i=0;i<$scope.ocupations.length;i++){
 console.log(i);
 console.log($scope.ocupations[i].id+"/"+ocupation);
-
 if ($scope.ocupations[i].id == ocupation ) {
   console.log(ocupation+" la posicion 1 es "+$scope.ocupations[i].id);
-  $scope.ocupations2[i]=$scope.ocupations[i];
+  $scope.selectedOcupationE=$scope.ocupations[i];
+}
+}//end to for
+
 }
 
-}//end to for
-console.log($scope.ocupations2);
-}/*
-$scope.editPaxOcupation =function(){
+$scope.editpax =function(){
   var action=6;
-  //console.log('edit'+langid);
-  $scope.contador=0;
-  for (var i = 0; i <  $lang.length; i++) {
-  //  console.log("entro "+i+$scope.languages[i].short);
-    var name= document.getElementById('nameE-'+$scope.languages[i].short).value;
-    var description= document.getElementById('descriptionE-'+$scope.languages[i].short).value;
-    var langid = $scope.languages[i].id;
-  $http.post('../php/tags.php', {'action':action,'id':$scope.idTagE,'language_id':langid,'name':name,'description':description})
-  .success(function(data){
-    console.log(data);
-    getTags();
-    console.log("actulizado exitosamente ");
-    if($lang.length==$scope.contador+1){
-      getLanguage()
-        console.log("guardado exitosamente");
-    }
-    $scope.contador++;
-  }).error(function(response){
-    console.log("No se actualizo ");
-  });
-}
+console.log($scope.idpaxE);
+$http.post('../php/paxocupation.php', {'action':action,'id':$scope.idpaxE,'pax':$scope.paxE,'occupation_id':$scope.selectedOcupationE.id})//creo el tag
+.success(function(data){
+console.log(data);
+
+  $.toast({
+  heading: 'Success',
+  text: 'Update Pax Ocupation.',
+  showHideTransition: 'slide',
+  icon: 'success'
+});
+  setTimeout(function () {//para que actualice los campos de forma eficiente
+      $scope.$apply(function () {
+        getPaxOcupation();
+      });
+  }, 100);
+
+}).error(function(response){
+  $.toast({
+    heading: 'Error',
+    text: 'Not Add Pax Ocupation.',
+    showHideTransition: 'fade',
+    icon: 'error'
+});
+});
+
 }//fin funcon edit*/
 //funcion para cambiar el estado
 $scope.changeenabled = function(id,enabled){
@@ -117,9 +124,19 @@ $scope.changeenabled = function(id,enabled){
   .success(function(data){
     console.log(data);
     getPaxOcupation();
-    console.log("actulizado exitosamente el estado");
+    $.toast({
+    heading: 'Success',
+    text: 'Estate has be change.',
+    showHideTransition: 'slide',
+    icon: 'success'
+});
   }).error(function(response){
-    console.log("No se actualizo el el estado");
+    $.toast({
+      heading: 'Error',
+      text: 'Not change state',
+      showHideTransition: 'fade',
+      icon: 'error'
+  });
   });
 }//fin funcioncambiar estado
 
@@ -130,13 +147,19 @@ $scope.deletePax = function(id){
   $("#confirmdelete").click(function(){
     $http.post("../php/paxocupation.php",{'action':action,'id':id})
     .success(function(data){
+      $.toast({
+        heading: 'Error',
+        text: 'Delete Pax Ocupation.',
+        showHideTransition: 'fade',
+        icon: 'error'
+  });
       setTimeout(function () {//para que actualice los campos de forma eficiente
           $scope.$apply(function () {
             if(data=1){
               getPaxOcupation();
-              console.log("se elimino exitosamente ");
+
             }else{
-                    console.log("Presento un error al eliminar ");
+
             }
 
           });

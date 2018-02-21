@@ -25,12 +25,11 @@ switch ($action) {
   break;
   case 6:
   $id = $data->id;
-  $language_id = $data->language_id;
-  $name= $data->name;
-  $description= $data->description;
+  $pax = $data->pax;
+  $occupation_id = $data->occupation_id;
   //echo $id." ".$language_id." ".$name." ".$description;
   $bd = new Paxs();
-    $bd->editTags($id,$language_id,$name,$description);
+    $bd->editPax($id,$pax,$occupation_id);
   break;
   case 7:
   $id = $data->id;

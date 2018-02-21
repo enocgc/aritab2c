@@ -45,7 +45,7 @@ $(document).ready(function() {
         </div>
     </div>
 
-    <!--MODAL DELETE USER-->
+    <!--MODAL DELETE-->
     <div id="modal-delete" uk-modal>
         <div class="uk-modal-dialog">
             <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -72,7 +72,7 @@ $(document).ready(function() {
                             <div class="uk-margin">
                 <label class="uk-form-label"  for="form-stacked-text">Pax</label>
                 <div class="uk-form-controls">
-                  <input class="uk-input" type="number"  ng-model="pax"  placeholder="0">
+                  <input class="uk-input" type="number"  min="0" max="99"   ng-model="pax"  placeholder="0">
                 </div>
               </div>
                             <div class="uk-margin ">
@@ -88,7 +88,7 @@ $(document).ready(function() {
 
 
     					<div class="uk-width-1-1 uk-text-center">
-    						<button class="uk-button uk-button-primary" ng-click="addpax();" type="button">Save</button>
+    						<button class="uk-button uk-button-primary " ng-click="addpax();" type="button">Save</button>
     						<button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
     					</div>
     				</div>
@@ -115,14 +115,14 @@ $(document).ready(function() {
                                 <div class="uk-margin ">
                       <label class="uk-form-label" >Ocupation</label>
                       <div class="uk-form-controls">
-                        <select  class="uk-select" id="form-horizontal-select"  ng-model="selectedOcupationE" ng-options="ocupation2.occupation_id for ocupation2 in ocupations2" >
+                        <select  class="uk-select" id="form-horizontal-select"  ng-model="selectedOcupationE" ng-options="ocupation.occupation_id for ocupation in ocupations" >
                   </select>
 
                       </div>
                     </div>
                             </div>
 
-
+<input type="text" ng-model="idpaxE" value="" hidden>
                             <div class="uk-width-1-1 uk-text-center">
                                 <button class="uk-button uk-button-primary" ng-click="editpax();" type="button">Save</button>
                                 <button class="uk-button uk-button-danger uk-modal-close" type="submit">Cancel</button>
