@@ -3,6 +3,7 @@ appRouter.controller('controlPaxOcupation',function($scope,$http,$timeout){
 
   getPaxOcupation();
 getOcupation();
+$scope.paxs;
   function getPaxOcupation(){
     var action=1;
     //  console.log(action);
@@ -56,42 +57,28 @@ getOcupation();
       alert("No iserto tag");
     });
 }
-/*
+
 //funcion para mostrar datos en getLanguagetoModal
-$scope.getPaxOcupationtoModal=function(lang,id){
-  getLanguage();
-  $scope.idTagE=id;
-  var action=5;
-  console.log(action);
-$scope.contador=0;
-$scope.vector=[];
-getTags();
-  for (var i = 0; i <  lang.length; i++) {
-    var langid = $scope.languages[i].id;
-    var short = $scope.languages[i].short;
-    //console.log($scope.languages[i].short);
-    $http.post('../php/tags.php', {'action':action,'id':id,'idlan':langid,'short':short})
-    .success(function(data){
-      $scope.TagsE = data;
-      var cont=$scope.contador;
-    //  console.log(data);
+$scope.ocupations2=[];
 
-         setTimeout(function () {//para que actualice los campos de forma eficiente
-             $scope.$apply(function () {
-               $("#nameE-"+data[0].short).val(data[0].name);
-                $("#descriptionE-"+data[0].short).val(data[0].description);
-             });
-         }, 300);
-
-      //usamos el contador para saber si todas las peticiones se hiceron
-      console.log("vector"+$scope.contador+" lang "+lang.length);
-      $scope.contador=$scope.contador+1;
-    }).error(function(response){
-      alert("No se get el tags");
-    });
-
-  }
+$scope.getPaxOcupationtoModal=function(id){
+function find(produ) {
+  return produ.id === id;
 }
+$scope.paxE= parseInt($scope.paxs.find(find).pax);
+var ocupation=($scope.paxs.find(find).occupation_id);
+for(var i=0;i<$scope.ocupations.length;i++){
+console.log(i);
+console.log($scope.ocupations[i].id+"/"+ocupation);
+
+if ($scope.ocupations[i].id == ocupation ) {
+  console.log(ocupation+" la posicion 1 es "+$scope.ocupations[i].id);
+  $scope.ocupations2[i]=$scope.ocupations[i];
+}
+
+}//end to for
+console.log($scope.ocupations2);
+}/*
 $scope.editPaxOcupation =function(){
   var action=6;
   //console.log('edit'+langid);

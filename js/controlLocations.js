@@ -175,7 +175,7 @@ function getCountries (){
   $http.post('../php/locations.php',{'action':9})
   .success(function(data){
     $scope.countrieslist=data;
-    $scope.dataCountrySelect= $scope.countrieslist[0]; 
+    $scope.dataCountrySelect= $scope.countrieslist[0];
   }).error(function(response){
     alert("No se obtuvieron los countries");
   });

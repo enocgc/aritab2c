@@ -35,7 +35,7 @@ $(document).ready(function() {
                     <tr ng-repeat="pax in paxs " role="row" class="odd">
 
                       <td > <a  ng-click="changeenabled(pax.id,pax.enabled)" class="toggle-eye0" ng-if="pax.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i>
-                      </a><a ng-click="changeenabled(pax.id,pax.enabled)" class="toggle-eye0" ng-if="pax.enabled == 1"><i class="fas fa-eye fa-lg"></i></a> <a ng-click="getTagtoModal(languages,tag.id)" href="#edit-pax" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a  ng-click="deletePax(pax.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
+                      </a><a ng-click="changeenabled(pax.id,pax.enabled)" class="toggle-eye0" ng-if="pax.enabled == 1"><i class="fas fa-eye fa-lg"></i></a> <a ng-click="getPaxOcupationtoModal(pax.id)" href="#edit-pax" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a> <a  ng-click="deletePax(pax.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
                       <td>{{pax.pax}} </td>
                       <td>{{pax.occupation_id}}</td>
 
@@ -109,14 +109,13 @@ $(document).ready(function() {
                                 <div class="uk-margin">
                     <label class="uk-form-label"  for="form-stacked-text">Pax</label>
                     <div class="uk-form-controls">
-                      <input class="uk-input" type="number"  ng-model="pax"  placeholder="0">
+                      <input class="uk-input"  min="0" max="99" type="number"   placeholder="0" ng-model="paxE" >
                     </div>
                   </div>
                                 <div class="uk-margin ">
                       <label class="uk-form-label" >Ocupation</label>
                       <div class="uk-form-controls">
-                        <select  class="uk-select" id="form-horizontal-select"  ng-model="selectedOcupation" ng-options="ocupation.occupation_id for ocupation in ocupations" >
-                          <option value="">-- Select a Ocupation</option>
+                        <select  class="uk-select" id="form-horizontal-select"  ng-model="selectedOcupationE" ng-options="ocupation2.occupation_id for ocupation2 in ocupations2" >
                   </select>
 
                       </div>
