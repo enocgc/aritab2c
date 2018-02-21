@@ -5,7 +5,6 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   getTags();
   getLocation();
   getService();
-  getProduct()
 
   function getLanguage() {
     var action = 2;
@@ -52,6 +51,8 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
         console.log("No se get  tags");
       });
   }
+
+
   $scope.locations;
 
   function getLocation() {
@@ -76,7 +77,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
         'action': action
       })
       .success(function(data) {
-        console.log(data);
+        //console.log(data);
         $scope.services = data;
         //console.log(data);
         console.log("get service");
@@ -85,19 +86,26 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
       });
   }
 
-  function getProduct() {
+  function getProduct(id) {
     console.log("Product");
-    var action = 18;
+    var action = 19;
     $http.post('../php/product.php', {
-        'action': action
+        'action': action,'id':id
       })
       .success(function(data) {
-        //  console.log(data);
+        console.log("location by id");
+         console.log(data);
         $scope.products = data;
       }).error(function(response) {
         console.log("No se obtuvieron los products");
       });
   }
+//cargar productos por location
+  $scope.loadProduct=function(id,day){
+      getProduct(id);
+      $scope.daytoproduct = day;
+  }
+
 
   $scope.days = [];
   $scope.newlocations = [];
@@ -118,6 +126,9 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     // ordenarByLocation();
     ordenar();
   }
+  $scope.addNewDayTransfer = function(day, locationID){
+    console.log("day "+day+" location "+locationID);
+  }
   //esta funcion crea los location
 
   function ordenar() {
@@ -134,20 +145,21 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   } //fin metodo ordenamiento
 
   $scope.addDays = function(days, id) {
-
     //funcion para encontrar nombre por id
     function find(locat) {
       return locat.id === id;
     }
     var name = ($scope.locations.find(find).name);
-    console.log(name);
-
+  //  console.log(name);
+    var idLocation= ($scope.locations.find(find).id);
+    //console.log(idLocation);
     $scope.newlocations[$scope.cont2 - 1] = {
       'location': $scope.cont2,
       'name': name,
+      'id': idLocation,
       'positon': $scope.position
     };
-    //console.log("locations");
+  //  console.log("locations");
     //console.log($scope.newlocations);
     $scope.cont = $scope.cont + days;
     //console.log("dias agregar "+ days+" al locations"+  $scope.cont2+" y el dia actual es "+ $scope.currentDay);
@@ -221,10 +233,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     $("#products" + id).css("background-color", "#c1e0ee");
     $scope.idproduct = id;
   }
-  //cargar el id al producto seleccionado
-  $scope.daytoproduct = function(day) {
-    $scope.daytoproduct = day;
-  }
+
 //agregar producto al view
   $scope.addProduct = function(id,day) {
 
@@ -232,6 +241,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
       return produ.id === id;
     }
     var name = ($scope.products.find(find).name);
+    console.log($scope.products.find(find));
     console.log("id dia " + day + " nombre product " + name);
   }
   //

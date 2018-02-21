@@ -122,6 +122,11 @@ switch ($action) {
   $bd = new Products();
   echo $bd->getProductsEnabled();
   break;
+  case 19:
+  $id= $data->id;
+  $bd = new Products();
+  echo $bd->getProductsEnabledid($id);
+  break;
   default:
 }
 

@@ -42,3 +42,13 @@ a.link-product div:hover { color: white; background: grey; }
 #contenedor-1 { height: calc(100vh - 80px) !important; }
 .contenedor-alto { min-height: calc(100vh - 80px) !important; }
 .card-menu { box-shadow: none !important; height: calc(100vh - 80px); padding: 20px 10px 0 60px; }
+
+
+.uk-button-success {
+  background-color: #659F3D;
+  color: white;
+}
+.uk-button-success:hover {
+  background-color: #209543;
+  color: white;
+}

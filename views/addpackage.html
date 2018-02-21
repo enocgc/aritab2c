@@ -52,16 +52,9 @@
 						</div>
 
 					</div>
-					<!-- DIAS FINALES -->
-					<div  ng-if="days.length" id='transfer' class='uk-card uk-padding-small uk-margin-small uk-card-transfer uk-text-center'>
-					<span class='days-da uk-background-primary'>Day {{days.length+2}}</span>
-					<p ><span uk-icon='icon: forward'></span> Transfer to departure location</p>
-					</div>
+					
+					<dayfinal></dayfinal>
 
-					<div id="dia" class="uk-card uk-padding-small uk-margin-small uk-card-default" ng-if="days.length">
-						<span class="days-da uk-background-primary">Day <span ng-if="days.length >= 1">{{days.length+3}}</span></span>
-						<p class="uk-h4">Departure Location</p>
-					</div>
 					<div class="uk-width-1-1@m uk-text-left">
 						<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
 						<div class="uk-inline">
