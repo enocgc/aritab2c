@@ -118,26 +118,79 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     $scope.days[$scope.currentDay] = {
       'day': $scope.currentDayF + 1,
       'locationID': locationID,
-      'transfer': false
+      'transfer': true
     };
     $scope.currentDay++;
     $scope.currentDayF++;
     console.log($scope.days);
-    // ordenarByLocation();
     ordenar();
+    updateLastTranfer(locationID);
   }
-  $scope.addNewDayTransfer = function(day, locationID){
+  //funcion para agregar primer transfer
+  $scope.addNewDayTransfer = function(day,locationID){
+    $(".titlelocate01-1").hide();
     console.log("day "+day+" location "+locationID);
+    $scope.days[$scope.currentDay] = {
+      'day': $scope.currentDayF + 1,
+      'locationID': locationID,
+      'transfer': true
+    };
+    $scope.days[0].transfer=true;
+    $scope.currentDay++;
+    $scope.currentDayF++;
+    ordenar();
+    updateLastTranfer(locationID);
+    $(".addtransfer").hide();
   }
+
+  function updateLastTranfer(id){
+
+    for(var i=0;i<$scope.days.length;i++){
+      // if($scope.days[i].locationID!=id){
+          var pos=getLastPostDay($scope.days[i].locationID);
+          $scope.days[pos-1].transfer=false;
+          $scope.days[pos].transfer=true;
+      // }//if1
+    }//for
+  }//updateLastTranfe
+  function getLastPostDay(id){
+    var postLastDayLocation;
+    for(var i=0;i<$scope.days.length;i++){
+        if($scope.days[i].locationID==id){
+          postLastDayLocation=i;
+        }
+    }
+    return postLastDayLocation;
+  }
+//funcion para cargar transfer despues de cada location location
+  function addTransferLastDayLocation(locationID){
+    var postLastDayLocation;
+    for(var i=0;i<$scope.days.length;i++){
+        if($scope.days[i].locationID==locationID){
+          postLastDayLocation=i;
+        }
+    }
+
+    $scope.days[$scope.currentDay] = {
+      'day': $scope.currentDayF + 1,
+      'locationID': locationID,
+      'transfer': false
+    };
+    $scope.currentDay++;
+    $scope.currentDayF++;
+    $scope.days[postLastDayLocation+1].transfer=true;
+  }// end to addTransferLastDayLocation
+
   //esta funcion crea los location
 
   function ordenar() {
-
+    console.log($scope.days);
     const l = $scope.days.length;
     for (let i = 0; i < l; i++) {
       for (let j = 0; j < l - 1 - i; j++) {
         if ($scope.days[j].locationID > $scope.days[j + 1].locationID) {
           [$scope.days[j].locationID, $scope.days[j + 1].locationID] = [$scope.days[j + 1].locationID, $scope.days[j].locationID];
+          [$scope.days[j].transfer, $scope.days[j + 1].transfer] = [$scope.days[j + 1].transfer, $scope.days[j].transfer];
         }
       }
     }
@@ -145,7 +198,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   } //fin metodo ordenamiento
 
   $scope.addDays = function(days, id) {
-    //funcion para encontrar nombre por id
+  $(".titlelocate01-1").show();
     function find(locat) {
       return locat.id === id;
     }
@@ -159,37 +212,33 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
       'id': idLocation,
       'positon': $scope.position
     };
-  //  console.log("locations");
-    //console.log($scope.newlocations);
+
+
+
     $scope.cont = $scope.cont + days;
     //console.log("dias agregar "+ days+" al locations"+  $scope.cont2+" y el dia actual es "+ $scope.currentDay);
 
-    for (var i = 0; i <= days; i++) {
+    for (var i = 0; i < days; i++) {
       $scope.currentDay++;
       $scope.currentDayF++;
-      //  console.log("contador#2-> "+$scope.cont2);
-      //  console.log("Diay actaulF-> "+$scope.currentDayF);
-      //  console.log("dias length "+$scope.days.length);
-      if (i == 0) {
-        $scope.days[$scope.currentDay - 1] = {
-          'day': $scope.currentDayF,
-          'locationID': $scope.cont2,
-          'transfer': true
-        };
-      } else {
         $scope.days[$scope.currentDay - 1] = {
           'day': $scope.currentDayF,
           'locationID': $scope.cont2,
           'transfer': false
         };
-      }
     } //fin del for
-    console.log($scope.days);
+    if($scope.newlocations.length == 1){
+        $(".titlelocate01-1").css("display","none");
+        $scope.titleLocation1=name;
+        $scope.idday=$scope.currentDayF;
+    }
 
+    console.log($scope.days);
+  addTransferLastDayLocation($scope.cont2);
     $scope.cont2++;
     ordenar();
-
   }
+
   $('.uk-checkbox').click(function() {
     alert(this.id);
   });

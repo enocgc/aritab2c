@@ -11,29 +11,34 @@ appRouter.directive("dayOne", function() {
     +  "<div class='uk-form-controls'>"
     +  "  <input class='uk-input' type='text' placeholder='Ex. Juan Santamaria International Airport'>"
     +  "</div>"
-    +"<center><span ng-click='addNewDayTransfer(1,0);' style='margin-top: 10px' class='uk-button uk-button-small uk-button-success'>Add transfer on Next Day</span></center>"
+    +"<center><span ng-click='addNewDayTransfer(1,1);' style='margin-top: 10px;' class='uk-button uk-button-small uk-button-success addtransfer'>Add transfer on Next Day</span></center>"
     +"  </div>"
     +"</div>"
   };
 });
+
 appRouter.directive("dayfinal", function() {
   return {
     template : "<div id='dia' class='uk-card uk-padding-small uk-margin-small uk-card-default' ng-if='days.length'>"
     + "<span class='days-da uk-background-primary'>Day <span ng-if='days.length >= 1'>{{days.length+2}}</span></span>"
     +  "<p class='uk-h4'>Departure Location</p>"
-    +"<center><span ng-click='addNewDayTransfer(days.length,days.length);' style='margin-top: 10px' class='uk-button uk-button-small uk-button-success'>Add transfer on Before Day</span></center>"
+    +"<center><span  ng-click='addNewDayTransfer(days.length,days.length);' style='margin-top: 10px' class='uk-button uk-button-small uk-button-success' >Add transfer on Before Day</span></center>"
 
     +"</div>"
   };
 });
+
 appRouter.directive("location", function() {
   return {
     template :"<div  id='locations' ng-repeat='newlocation in newlocations'>"
     +"<!-- TRANSFER 01 -->"
-
+      +" <input ng-model='titleLocation1' hidden></input>"
+        +" <input ng-model='idday'></input>"
+    +" <h3 ng-if='idday != 2 '>{{newlocation.name}}</h3>"
     +"<day ></day>"
   };
 });
+
 appRouter.directive("transfer", function() {
   return {
     template :"<div id='transfer' class='uk-card uk-padding-small uk-margin-small uk-card-transfer uk-text-center'>"
@@ -46,10 +51,10 @@ appRouter.directive("transfer", function() {
 appRouter.directive("day", function(){
   return{
     template:"<div   ng-repeat='day in days' ng-if='day.locationID == newlocation.location'>"
-    +"<div ng-if='day.transfer == true'>"
+    +"<div ng-if='day.transfer == true && newlocations.length>0'>"
     +"<transfer></transfer>"
-      +" <h3 >{{newlocation.name}}</h3>"
-      +"</div>"
+    +"</div>"
+      +" <h3 ng-if='day.day == 2'>{{titleLocation1}}</h3>"
     +  "  <!-- DIA -->"
     +"<div class='uk-card uk-padding-small uk-margin-small uk-card-default' ng-if='day.transfer != true' uk-grid>"
     +"<div class='uk-width-4-5'><span class='days-da uk-background-primary'>Day {{day.day}}</span></div><div class='uk-width-1-5 uk-text-right'> <span class='days-da2 uk-button uk-button-danger' ng-click='deleteDay(day.day,day.locationID);'><span uk-icon='icon: trash; ratio: 1;'></span></span></div>"

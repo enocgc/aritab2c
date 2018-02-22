@@ -101,7 +101,7 @@
                 </li>
               </ul>
               <div class="uk-navbar-item" id="">
-                <a  href="#form-contacto" uk-toggle class="uk-button uk-button-small uk-button-danger" type="button">Contact Support</a>
+                <a  href="#form-contacto" uk-toggle class="uk-button uk-button-small uk-button-danger" type="button" hidden>Contact Support</a>
               </div>
             </div>
           </nav>
@@ -154,14 +154,7 @@
                   <li><a href="#addlocation" id="addlocation"><span uk-icon="icon: plus-circle"></span> Create Location </a></li>
                 </ul>
               </li>
-              <li class="uk-parent">
-                <a href="#">Edition commands</a>
-                <ul class="uk-nav-sub">
-                  <li><a href="#"><span uk-icon="icon: pencil"></span> Edit Itinerary</a></li>
-                  <li><a href="#"><span uk-icon="icon: pencil"></span> Edit Product (Activity) </a></li>
-                  <li><a href="#"><span uk-icon="icon: pencil"></span> Edit Location </a></li>
-                </ul>
-              </li>
+
               <li class="uk-nav-header">Administration</li>
               <li><a href="#contrieslist"><span class="uk-margin-small-right" uk-icon="icon: location"></span> Countries</a></li>
               <li><a href="#locationlist"><span class="uk-margin-small-right" uk-icon="icon: image"></span> Locations</a></li>
@@ -211,11 +204,10 @@
   $("#addlocation").click(function(){
     location.reload();
   });
-$("a").click(function(){
+/*$("a").click(function(){
   console.log("click to href");
     location.reload();
-
-  });
+  });*/
   </script>
 
   <!-- agrege aqui -->
