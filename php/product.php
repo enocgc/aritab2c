@@ -116,7 +116,8 @@ switch ($action) {
   $name= $data->name;
   $description= $data->description;
   $bd = new Products();
-  echo $bd->updateProductDetails($product_id,$language_id,$name,$description);
+//  echo "datos details ".$product_id." ".$language_id." ".$name." ".$description;
+ echo $bd->updateProductDetails($product_id,$language_id,$name,$description);
   break;
   case 18:
   $bd = new Products();

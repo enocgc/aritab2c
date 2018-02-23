@@ -62,6 +62,7 @@ require_once ("../includes/constantes.php");
       //return $variable;
      return false;
     }# fin del metodo consulta
+
     function getProductsEnabled(){
       //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
       $sql="SELECT a.id, b.product_id,b.name,b.language_id,a.service_id,a.country_id,a.location_id,a.enabled,c.name AS namecountrie,d.name As namelocation FROM products AS a, productdetails AS b,countrydetails As c,locationdetails AS d
@@ -91,7 +92,7 @@ require_once ("../includes/constantes.php");
      return false;
     }# fin del metodo consulta
 
-    
+
     function getProductsEnabledid($id){
       //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
       $sql="SELECT a.id, b.product_id,b.name,b.language_id,a.service_id,a.country_id,a.location_id,a.enabled,c.name AS namecountrie,d.name As namelocation FROM products AS a, productdetails AS b,countrydetails As c,locationdetails AS d
@@ -334,6 +335,7 @@ require_once ("../includes/constantes.php");
      $stmt->close();
      return 1;
    }// end to addCountryMedia
+
    function updateProduct($id,$service_id,$country_id,$location_id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position){
       $stmt=$this->cone->prepare("UPDATE products SET service_id=?,country_id=?,location_id=?,gpslat=?,gpslong=?,gpszoom=? WHERE id=?");
        if($stmt === FALSE){
@@ -362,7 +364,7 @@ require_once ("../includes/constantes.php");
          die("prepare() fail modificar: ". $this->cone->error);
          echo 0;
        }
-       $stmt->bind_param('ssii',$name,$description,$country_id,$language_id);
+       $stmt->bind_param('ssss',$name,$description,$product_id,$language_id);
        $stmt->execute();
        $stmt->close();
        return true;

@@ -201,7 +201,7 @@ console.log("Presento un error al eliminar ");
 
 $scope.idEdit;
 $scope.getEditProduct=function(id){
-  $scope.idEdit=id;
+  $scope.idProductE=id;
   var datos={
     'action':7,
     'id':id
@@ -213,9 +213,41 @@ $scope.getEditProduct=function(id){
     createMarker(data[0].gpslat,data[0].gpslong,data[0].gpszoom);
     $scope.productsE=data;
 
-      //$("#serviceE").text(data[0].service_id);//Mae es un vector {id:'valor','label':titulo}
-    //$scope.selectedCountry=data[0].country_id;
-    //$scope.selectedLocation=data[0].location_id;
+    function findS(produ) {
+      return produ.id === id;
+    }
+    var idService= parseInt($scope.products.find(findS).service_id);
+
+    function findC(produ) {
+      return produ.id === id;
+    }
+    var idCounty= parseInt($scope.products.find(findC).country_id);
+
+    function findL(produ) {
+      return produ.id === id;
+    }
+    var idLocation= parseInt($scope.products.find(findL).country_id);
+
+    for(var i=0;i<$scope.locations.length;i++){
+
+    if ($scope.locations[i].id == idLocation ) {
+      $scope.selectedLocationE=$scope.locations[i];
+    }
+    }//end to for
+
+    for(var i=0;i<$scope.services.length;i++){
+
+    if ($scope.services[i].id == idService ) {
+      $scope.selectedServiceE=$scope.services[i];
+    }
+    }//end to for
+    for(var i=0;i<$scope.countries.length;i++){
+
+    if ($scope.countries[i].id == idCounty ) {
+      $scope.selectedCountryE=$scope.countries[i];
+    }
+    }//end to for
+
     $scope.latitude=data[0].gpslat;
     $scope.longitude=data[0].gpslong;
     $scope.zoom=data[0].gpszoom;
@@ -270,10 +302,10 @@ function markMap(lat,lng,zoom) {
 $scope.updateProduct=function(){
    var datos={
     'action':16,
-    'id':$scope.idEdit,
-    'service_id':$scope.selectedService.id,
-    'country_id':$scope.selectedCountry.id,
-    'location_id':$scope.selectedLocation.id,
+    'id':$scope.idProductE,
+    'service_id':$scope.selectedServiceE.id,
+    'country_id':$scope.selectedCountryE.id,
+    'location_id':$scope.selectedLocationE.id,
     'gpslat':$scope.latitude,
     'gpslong':$scope.longitude,
     'gpszoom':$scope.zoom,
@@ -292,15 +324,16 @@ $scope.updateProduct=function(){
 for (var i = 0; i <  $scope.languages.length; i++) {
    var datos={
     'action':17,
-    'product_id':$scope.idEdit,
+    'product_id':$scope.idProductE,
     'language_id':$scope.languages[i].id,
     'name':$("#nameP-"+$scope.languages[i].id).val(),
     'description':$("#descriptionP-"+$scope.languages[i].id).val()
   };
   $http.post('../php/product.php',datos)
   .success(function(data){
-    getProduct();
     console.log(data);
+    getProduct();
+
   }).error(function(response){
     alert("No se obtuvieron los Product");
   });

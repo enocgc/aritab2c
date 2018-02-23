@@ -33,9 +33,8 @@ appRouter.directive("location", function() {
     template :"<div  id='locations' ng-repeat='newlocation in newlocations'>"
     +"<!-- TRANSFER 01 -->"
       +" <input ng-model='titleLocation1' hidden></input>"
-        +" <input ng-model='idday'></input>"
-    +" <h3 ng-if='idday != 2 '>{{newlocation.name}}</h3>"
-    +"<day ></day>"
+    +" <h3>{{newlocation.name}}</h3>"
+    +"<day></day>"
   };
 });
 
@@ -54,7 +53,6 @@ appRouter.directive("day", function(){
     +"<div ng-if='day.transfer == true && newlocations.length>0'>"
     +"<transfer></transfer>"
     +"</div>"
-      +" <h3 ng-if='day.day == 2'>{{titleLocation1}}</h3>"
     +  "  <!-- DIA -->"
     +"<div class='uk-card uk-padding-small uk-margin-small uk-card-default' ng-if='day.transfer != true' uk-grid>"
     +"<div class='uk-width-4-5'><span class='days-da uk-background-primary'>Day {{day.day}}</span></div><div class='uk-width-1-5 uk-text-right'> <span class='days-da2 uk-button uk-button-danger' ng-click='deleteDay(day.day,day.locationID);'><span uk-icon='icon: trash; ratio: 1;'></span></span></div>"

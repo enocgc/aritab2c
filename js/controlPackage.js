@@ -212,12 +212,11 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
       'id': idLocation,
       'positon': $scope.position
     };
-
+console.log($scope.newlocations);
 
 
     $scope.cont = $scope.cont + days;
     //console.log("dias agregar "+ days+" al locations"+  $scope.cont2+" y el dia actual es "+ $scope.currentDay);
-
     for (var i = 0; i < days; i++) {
       $scope.currentDay++;
       $scope.currentDayF++;
@@ -230,7 +229,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     if($scope.newlocations.length == 1){
         $(".titlelocate01-1").css("display","none");
         $scope.titleLocation1=name;
-        $scope.idday=$scope.currentDayF;
+        $scope.idday=2;
     }
 
     console.log($scope.days);
