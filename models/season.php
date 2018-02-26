@@ -46,30 +46,19 @@ require_once ("../includes/constantes.php");
       return true;
     }# fin del metodo eliminar.
 
-    function editSeason($id,$stardate,$enddate){
-      //echo "id ".$id."name ".$name."short ".$short."icon ".$icon;
-      $stmt=$this->cone->prepare("UPDATE seasonperiods SET startdate=?,enddate=? WHERE id=?");
+    function editSeason($id,$season_id,$stardate,$enddate){
+    //echo "id".$id." star ".$stardate." end ".$enddate;
+      $stmt=$this->cone->prepare("UPDATE seasonperiods SET season_id=?,startdate=?,enddate=? WHERE id=?");
       if($stmt === FALSE){
         die("prepare() fail modificar: ". $this->cone->error);
         return false;
       }
-      $stmt->bind_param('sss',$stardate,$enddate,$id);
+      $stmt->bind_param('ssss',$season_id,$stardate,$enddate,$id);
       $stmt->execute();
       $stmt->close();
       return true;
     }# fin del metodo modificar.
 
-    function changeEnabled($id,$enabled){
-      $stmt=$this->cone->prepare("UPDATE languages SET enabled=? WHERE id=?");
-      if($stmt === FALSE){
-        die("prepare() fail modificar: ". $this->cone->error);
-        return false;
-      }
-      $stmt->bind_param('ss',$enabled,$id);
-      $stmt->execute();
-      $stmt->close();
-      return true;
-    }# fin del metodo modificar.
 
 
     function getSeason(){

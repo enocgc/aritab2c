@@ -10,32 +10,25 @@ appRouter.controller('controlSeason',function($scope,$http,$timeout){
     $http.post('../php/season.php', {'action':action})
     .success(function(data){
       $scope.seasons = data;
-
-    //  console.log($scope.seasons);
-      // alert("get exitoso");
     }).error(function(response){
-      alert("No se get el Season");
+        console.log("No se get el Season");
     });
   }
   $scope.years;
 
   function getYears(){
     var action=7;
-  //  console.log(action);
     $http.post('../php/season.php', {'action':action})
     .success(function(data){
       setTimeout(function () {//para que actualice los campos de forma eficiente
           $scope.$apply(function () {
             $scope.years = data;
-            //console.log(data);
           });
       }, 300);
 
-    //  console.log($scope.years);
-      // alert("get exitoso");
         getSeason();
     }).error(function(response){
-      alert("No se get el Season");
+        console.log("No se get el Season");
     });
   }
 
@@ -48,9 +41,19 @@ appRouter.controller('controlSeason',function($scope,$http,$timeout){
     .success(function(data){
       getSeason();
         getYears();
-      alert("Insertado exitosamente");
+        $.toast({
+        heading: 'Success',
+        text: 'Add Year.',
+        showHideTransition: 'slide',
+        icon: 'success'
+      });
     }).error(function(response){
-      alert("No se agrego el usuario");
+      $.toast({
+        heading: 'Error',
+        text: 'Not Add Year.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
     });
   }//fin funcion Language
   $scope.addSeasonPeriods = function() {
@@ -63,31 +66,50 @@ appRouter.controller('controlSeason',function($scope,$http,$timeout){
       $scope.enddate="";
       $scope.selectedYear.name="";
       getSeason();
-      alert("Insertado exitosamente");
+      $.toast({
+      heading: 'Success',
+      text: 'Add Season.',
+      showHideTransition: 'slide',
+      icon: 'success'
+    });
     }).error(function(response){
-      alert("No se agrego el usuario");
+      $.toast({
+        heading: 'Error',
+        text: 'Not Add Season.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
     });
   }//fin funcion Language
 
   //funcion getLanguagetoModal
   $scope.getSeasontoModal = function(id,id2){
     var action=6;
+    console.log(id);
+    $scope.idSeasonE=id2;
   //  console.log("id season: "+id+" id periods: "+id2);
   //  console.log(action);
     $http.post('../php/season.php', {'action':action,'id':id,'id2':id2})
     .success(function(data){
       $scope.seasonsE = data;
-      //console.log(data);
-      // $scope.idE=data[0].id;
-  //    console.log("edit");
+
+      function find(produ) {
+        return produ.id === id;
+      }
+      var year= parseInt($scope.years.find(find).name);
+      for (var i = 0; i < $scope.years.length; i++) {
+
+        if ($scope.years[i].name == year ) {
+            $scope.selectedYearE=$scope.years[i];
+        }
+      }
+
       $scope.nameE=data[0].name;
       $scope.startdateE=data[0].startdate;
       $scope.enddateE=data[0].enddate;
       $scope.idE=data[0].id;
-//console.log($scope.seasonsE);
-      // alert("get exitoso");
     }).error(function(response){
-      alert("No se get el usuario");
+        console.log("No se get el usuario");
     });
 
   }
@@ -95,27 +117,40 @@ appRouter.controller('controlSeason',function($scope,$http,$timeout){
   //funcion editLanguage
   $scope.editSeason = function(){
     var action=4;
-    $http.post('../php/season.php', {'action':action,'idE':$scope.idE,'startdateE': $scope.startdateE,'enddateE': $scope.enddateE})
+    $http.post('../php/season.php', {'action':action,'idE':$scope.idSeasonE,'season_id':$scope.selectedYearE.id,'startdateE': $scope.startdateE,'enddateE': $scope.enddateE})
     .success(function(data){
+      console.log(data);
       //  $("#edit-user").hide();
-      console.log("id "+$scope.idE+"start: "+ $scope.startdateE+"end: "+$scope.enddateE);
       getSeason();
-      alert("actulizado exitosamente season");
+      $.toast({
+      heading: 'Success',
+      text: 'Edit Season.',
+      showHideTransition: 'slide',
+      icon: 'success'
+    });
     }).error(function(response){
-      alert("No se actualizo el season");
+      $.toast({
+        heading: 'Error',
+        text: 'Not Update season.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
     });
   }
 
   //funcion para eliminar por id
   $scope.deleteSeason = function(id){
-      console.log("id season:  "+id);
     var action=2;
-    console.log(action);
     $("#confirmdelete").click(function(){
       $http.post("../php/season.php",{'action':action,'id':id})
       .success(function(data){
         //console.log("id season:  "+id);
-        console.log("se elimino exitosamente "+id);
+        $.toast({
+          heading: 'Success',
+          text: 'Delete Season.',
+          showHideTransition: 'fade',
+          icon: 'error'
+      });
         getSeason();
           getYears();
       });

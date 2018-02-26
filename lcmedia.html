@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!--CSS-->
+
+<!--CSS-->
+  <link rel="stylesheet" href="http://root.latinconnect.com/lc_media/assets/css/lcMedia.css">
+    <link rel="stylesheet" href="http://root.latinconnect.com/assets/plugins/magnific/magnific-popup.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://root.latinconnect.com/assets/css/style.css" rel="stylesheet"> <!-- MANDATORY -->
+    <link href="http://root.latinconnect.com/assets/css/theme.css" rel="stylesheet"> <!-- MANDATORY -->
+    <link href="http://root.latinconnect.com/assets/css/ui.css" rel="stylesheet"> <!-- MANDATORY -->
+    <link href="http://root.latinconnect.com/assets/css/custom.css" rel="stylesheet">
+    <link href="http://root.latinconnect.com/assets/plugins/datatables/dataTables.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+<div class="col-md-12" id="insert-media" data-files=""> </div>
+<button type="button" id="btnGetApiMediaA" name="button">btnGetApiMediaA</button>
+<button type="button" id="btnGetApiMediaB" name="button">btnGetApiMediaB</button>
+<button type="button" id="btnGetdataFilesA" name="button">btnGetdataFilesA</button>
+
+<script src="http://root.latinconnect.com/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/gsap/main-gsap.min.js"></script> <!-- HTML Animations -->
+<script src="http://root.latinconnect.com/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src='http://root.latinconnect.com/assets/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js' type='text/javascript'></script>
+<script src="http://root.latinconnect.com/assets/plugins/jquery-block-ui/jquery.blockUI.min.js"></script> <!-- simulate synchronous behavior when using AJAX -->
+<script src="http://root.latinconnect.com/assets/plugins/bootbox/bootbox.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script> <!-- Custom Scrollbar sidebar -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script> <!-- Show Dropdown on Mouseover -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> <!-- Animated Progress Bar -->
+<script src="http://root.latinconnect.com/assets/plugins/switchery/switchery.min.js"></script> <!-- IOS Switch -->
+<script src="http://root.latinconnect.com/assets/plugins/charts-sparkline/sparkline.min.js"></script> <!-- Charts Sparkline -->
+<script src="http://root.latinconnect.com/assets/plugins/retina/retina.min.js"></script>  <!-- Retina Display -->
+<script src="http://root.latinconnect.com/assets/plugins/jquery-cookies/jquery.cookies.js"></script> <!-- Jquery Cookies, for theme -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap/js/jasny-bootstrap.min.js"></script> <!-- File Upload and Input Masks -->
+<script src="http://root.latinconnect.com/assets/plugins/select2/select2.min.js"></script> <!-- Select Inputs -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-tags-input/bootstrap-tagsinput.min.js"></script> <!-- Select Inputs -->
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-loading/lada.min.js"></script> <!-- Buttons Loading State -->
+<script src="http://root.latinconnect.com/assets/plugins/timepicker/jquery-ui-timepicker-addon.min.js"></script> <!-- Time Picker -->
+<script src="http://root.latinconnect.com/assets/plugins/multidatepicker/multidatespicker.min.js"></script> <!-- Multi dates Picker -->
+<script src="http://root.latinconnect.com/assets/plugins/colorpicker/spectrum.min.js"></script> <!-- Color Picker -->
+<script src="http://root.latinconnect.com/assets/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script> <!-- A mobile and touch friendly input spinner component for Bootstrap -->
+
+<script src="http://root.latinconnect.com/assets/plugins/icheck/icheck.min.js"></script> <!-- Icheck -->
+
+<script src="http://root.latinconnect.com/assets/plugins/prettify/prettify.min.js"></script> <!-- Show html code -->
+<script src="http://root.latinconnect.com/assets/plugins/slick/slick.min.js"></script> <!-- Slider -->
+<script src="http://root.latinconnect.com/assets/plugins/countup/countUp.min.js"></script> <!-- Animated Counter Number -->
+<script src="http://root.latinconnect.com/assets/plugins/noty/jquery.noty.packaged.min.js"></script>  <!-- Notifications -->
+
+
+<script src="http://root.latinconnect.com/assets/plugins/bootstrap-slider/bootstrap-slider.js"></script> <!-- Bootstrap Input Slider -->
+<script src="http://root.latinconnect.com/assets/plugins/visible/jquery.visible.min.js"></script> <!-- Visible in Viewport -->
+<script src="http://root.latinconnect.com/assets/js/sidebar_hover.js"></script>
+<script src="http://root.latinconnect.com/assets/js/application.js"></script> <!-- Main Application Script -->
+<script src="http://root.latinconnect.com/assets/js/plugins.js"></script> <!-- Main Plugin Initialization Script -->
+
+
+<script src="http://root.latinconnect.com/assets/js/pages/search.js"></script> <!-- Search Script -->
+<!--<script src="http://root.latinconnect.com/assets/js/builder.js"></script>-->
+<!-- END PAGE SCRIPTS -->
+<script src="http://root.latinconnect.com/assets/js/custom.js"></script>
+
+
+
+
+<!-- END PAGE SPECIFIC SCRIPTS -->
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/magnific/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/content/tags/assets/js/apiTags.js" ></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/prettify/prettify.min.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/addon/edit/matchbrackets.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/css/css.js"></script>
+<script type="text/javascript" src="http://root.latinconnect.com/assets/plugins/codemirror/mode/clike/clike.js"></script>
+
+<script src="http://root.latinconnect.com/lc_media/assets/js/apiMedia.js" type="text/javascript"></script>
+<!--You need this Js for uploder (dropzone)-->
+<script src="http://root.latinconnect.com/assets/plugins/dropzone/dropzone.min.js"></script>
+<!--You need this cropper API(Cropping)-->
+<script src="http://root.latinconnect.com/assets/plugins/cropper/cropper.min.js"></script>
+<script src="http://root.latinconnect.com/lc_media/assets/js/customCropper.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    jQuery('button').tooltip();
+
+    /*Call LC Media*/
+    jQuery('#btnGetApiMediaA').click(function(){
+        jQuery('#insert-media').lcMedia({
+            ids:[],
+            selectedFiles:[73,50],
+            templates:[19,21],
+            multiselected: true,
+            language:1,
+            urls:true,
+            partner:[1],
+            callback: function(){
+            }
+        });
+    });
+
+    /*Call LC Media*/
+    jQuery('#btnGetApiMediaB').click(function(){
+        jQuery('#insert-media').lcMedia({
+            ids:[],
+            filetype:'all',
+            selectedFiles:[],
+            templates:[9,8],
+            multiselected: false,
+            language:1,
+            urls:true,
+            partner:[1],
+            callback: function(){
+            }
+        });
+    });
+
+    /*Get media selected*/
+    jQuery('#btnGetdataFilesA').click(function(){
+        var datos = jQuery('#insert-media').getMediaSelected();
+        console.log(datos);
+    });
+
+    /*Get media ids & urls*/
+    jQuery('#btnGetUrlA').click(function(){
+        datos = jQuery('#insert-media').getMediaURL({
+            ids:[73,72],
+            templates:[8,9]
+        });
+//console.log(datos);
+});
+
+        /*Get media ids & urls*/
+        jQuery('#btnGetPairDataFilesA').click(function(){
+            datos = jQuery('#insert-media').getMediaURL({
+                pairIds:[
+                {'id':1,'temp':8},
+                {'id':73,'temp':9}
+                ]
+            });
+            console.log(datos);
+        });
+
+        /*load uploader*/
+        jQuery('#btnGetUploaderA').click(function(){
+            jQuery('#insert-media').getMediaUploader({
+                templatesIds: [2,3],
+                partner: [0,1],
+                language:1
+            });
+        });
+        /*load uploader*/
+        jQuery('#btnGetUploaderB').click(function(){
+            var mediaUploadedMedia = jQuery('#insert-media').getUploadedMedia();
+            console.log(mediaUploadedMedia);
+        });
+  });
+</script>
+  </body>
+</html>

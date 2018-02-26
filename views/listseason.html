@@ -163,7 +163,9 @@ $(document).ready(function() {
               <div class="uk-margin ">
                 <label class="uk-form-label" >Year</label>
                 <div class="uk-form-controls">
-                  <input  class="uk-input" type="text" value="" name="name-en" ng-model="nameE" disabled>
+                  <select  class="uk-select" id="form-horizontal-select"  ng-model="selectedYearE" ng-options="year.name for year in years" >
+
+            </select>
                   <input  class="uk-input" type="text" value="" name="name-en" ng-model="idE" hidden>
                 </div>
               </div>
@@ -184,6 +186,7 @@ $(document).ready(function() {
                 <div class="uk-form-controls">
                   <input class="uk-input" type="text" ng-model="enddateE" id="datepicker4">
                 </div>
+                <input type="text" ng-model="idSeasonE" value="" hidden>
               </div>
             </div>
 

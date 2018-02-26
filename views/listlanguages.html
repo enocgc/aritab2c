@@ -9,7 +9,7 @@ $(document).ready(function() {
         <div class="uk-container uk-container-expand">
             <h3>Languages</h3>
             <div class="uk-margin-small">
-                <a href="#addlanguage" class="uk-button uk-button-primary uk-button-small" > <i class="fas fa-plus fa-lg"></i> Add Language</a>
+                <a href="#add-language" uk-toggle class="uk-button uk-button-primary uk-button-small" > <i class="fas fa-plus fa-lg"></i> Add Language</a>
             </div>
             <!--tabla datatables-->
             <table   datatable="ng" ng-if="languages.length" id="language" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt"  >
@@ -96,6 +96,46 @@ $(document).ready(function() {
           					</div>
           				</div>
           			</form>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL add Language-->
+
+    <div class="" id="add-language" uk-modal>
+        <div class="uk-background-muted uk-padding uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="">
+              <h3>Add Language</h3>
+              <form method="post" class="uk-form-horizontal ">
+                <div uk-grid class="uk-child-width-1-1 uk-grid-divider ">
+                  <div>
+                    <div class="uk-margin">
+                       <label class="uk-form-label" for="form-stacked-text">Name</label>
+                      <div class="uk-form-controls">
+                        <input class="uk-input" type="text" placeholder="Name" ng-model="name">
+                      </div>
+                    </div>
+                    <div class="uk-margin">
+                       <label class="uk-form-label" for="form-stacked-text">Short code</label>
+                      <div class="uk-form-controls">
+                        <input class="uk-input" type="text" placeholder="Ex. en-GB" ng-model="short">
+                      </div>
+                    </div>
+                    <div class="uk-margin">
+                      <label class="uk-form-label" for="form-stacked-text">Upload Flag</label>
+                      <div class="js-upload" uk-form-custom>
+                        <input type="file" multiple ng-model="icon">
+                        <button class="uk-button uk-button-default" type="file" tabindex="-1"><span uk-icon="icon: cloud-upload"></span> Select a file</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-width-1-1 uk-text-center">
+                    <button  ng-click="addLanguage();"class="uk-button uk-button-primary" type="button">Save</button>
+                    <a href="#listlanguage"class="uk-button uk-button-danger uk-modal-close" >Cancel</a>
+                  </div>
+                </div>
+              </form>
             </div>
         </div>
     </div>

@@ -23,10 +23,12 @@ switch ($action) {
   break;
   case 4:
   $id = $data->idE;
+  $season_id = $data->season_id;
   $stardate = $data->startdateE;
   $enddate = $data->enddateE;
+  //echo "id".$id." star ".$stardate." end ".$enddate;
   $bd = new Seasons();
-  $bd->editSeason($id,$stardate,$enddate);
+  $bd->editSeason($id,$season_id,$stardate,$enddate);
   break;
   case 5:
   $id= $data->idF;

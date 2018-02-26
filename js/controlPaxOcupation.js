@@ -10,10 +10,8 @@ $scope.paxs;
     $http.post('../php/paxocupation.php', {'action':action})
     .success(function(data){
       $scope.paxs = data;
-      //console.log(data);
-console.log(" get  tax");
     }).error(function(response){
-        console.log("No se get  tax");
+        console.log("No se get  pax");
     });
   }
 
@@ -23,7 +21,6 @@ console.log(" get  tax");
     $http.post('../php/ocupation.php', {'action':action})
     .success(function(data){
       $scope.ocupations = data;
-      console.log("get service");
     }).error(function(response){
       console.log("No se get  tags");
     });
@@ -33,7 +30,6 @@ console.log(" get  tax");
 //funcion para agregar detalles
   $scope.addpax = function(){
     var action=3;
-    console.log($scope.selectedOcupation.id);
     $http.post('../php/paxocupation.php', {'action':action,'pax':$scope.pax,'occupation_id':$scope.selectedOcupation.id})//creo el tag
     .success(function(data){
       $scope.newPaxs = data;

@@ -157,8 +157,8 @@ function addTagDetails($id,$language_id,$name,$description){
 
     //funcion obtener Tag por id
     function getTagtoModal($id,$idlan,$short){
-
-      $sql="SELECT a.id,a.enabled, b.language_id,b.name,b.description,c.short FROM tags AS a, tagdetails AS b, languages AS c WHERE  c.short='$short' AND $id=a.id AND '$idlan'=b.language_id    ORDER BY c.id";
+//echo "string".$id.$idlan.$short;
+      $sql="SELECT a.id,a.enabled, b.language_id,b.name,b.description,c.short FROM tags AS a, tagdetails AS b, languages AS c WHERE  c.short='$short' AND a.id=b.tag_id AND $id=b.tag_id AND '$idlan'=b.language_id    ORDER BY c.id";
       //  $sql="SELECT * FROM languages where id='$id'";
     //  echo "short ".$short." id lang ".$idlan." id tag ".$id;
       $result = $this->cone->query($sql);

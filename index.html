@@ -37,6 +37,8 @@
 									<input class="uk-input" type="password" placeholder="Password" ng-model="contrasena">
 								</div>
 							</div>
+              
+              <h4 ng-if="menssage == 0 "style="color:red;">Error in password or user.</h4>
 							<div class="uk-margin">
 									<a  ng-click="login();" class="uk-button uk-button-primary">Login</a>
 							</div>

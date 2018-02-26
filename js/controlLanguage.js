@@ -4,14 +4,13 @@ appRouter.controller('controlLanguage',function($scope,$http,$timeout){
  $scope.languages;
   function getLanguage(){
     var action=3;
-    console.log(action);
    $http.post('../php/language.php', {'action':action})
    .success(function(data){
     $scope.languages = data;
-     console.log($scope.languages);
+
      // alert("get exitoso");
    }).error(function(response){
-     alert("No se get el Language");
+
    });
   }
 
@@ -28,16 +27,25 @@ appRouter.controller('controlLanguage',function($scope,$http,$timeout){
         $scope.name="";
         $scope.short="";
         $scope.icon="";
-        alert("Insertado exitosamente");
+        $.toast({
+        heading: 'Success',
+        text: 'Add Language.',
+        showHideTransition: 'slide',
+        icon: 'success'
+      });
       }).error(function(response){
-        alert("No se agrego el usuario");
+        $.toast({
+          heading: 'Error',
+          text: 'Add Language.',
+          showHideTransition: 'fade',
+          icon: 'error'
+      });
       });
   }//fin funcion Language
 
   //funcion getLanguagetoModal
   $scope.getLanguagetoModal = function(id){
     var action=6;
-    console.log(action);
    $http.post('../php/language.php', {'action':action,'id':id})
    .success(function(data){
      $scope.languagesE = data;
@@ -46,10 +54,9 @@ appRouter.controller('controlLanguage',function($scope,$http,$timeout){
      $scope.nameE=data[0].name;
      $scope.shortE=data[0].short;
      $scope.iconE=data[0].icon;
-     console.log($scope.languagesE);
      // alert("get exitoso");
    }).error(function(response){
-     alert("No se get el usuario");
+    // console.log("No se get el usuario");
    });
 
   }
@@ -61,16 +68,25 @@ appRouter.controller('controlLanguage',function($scope,$http,$timeout){
       'iconE': $scope.iconE})
       .success(function(data){
         //  $("#edit-user").hide();
-        console.log($scope.idE+$scope.nameE+$scope.shortE+$scope.iconE);
         getLanguage();
-        alert("actulizado exitosamente language");
+        $.toast({
+        heading: 'Success',
+        text: 'Update Language.',
+        showHideTransition: 'slide',
+        icon: 'success'
+      });
       }).error(function(response){
-        alert("No se actualizo el language");
+        $.toast({
+          heading: 'Error',
+          text: 'Not Update Language',
+          showHideTransition: 'fade',
+          icon: 'error'
+      });
       });
   }
   //funcion para cambiar el estado
   $scope.changeenabled = function(id,enabled){
-    console.log(id+" id estado "+enabled);
+  //  console.log(id+" id estado "+enabled);
     if(enabled==0){
       var estado=1;
     }else{
@@ -86,9 +102,19 @@ appRouter.controller('controlLanguage',function($scope,$http,$timeout){
           });
       }, 300);
 
-      console.log("actulizado exitosamente el estado");
+      $.toast({
+      heading: 'Success',
+      text: 'Change state.',
+      showHideTransition: 'slide',
+      icon: 'success'
+    });
     }).error(function(response){
-      console.log("No se actualizo el el estado");
+      $.toast({
+        heading: 'Error',
+        text: 'Not Change state.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
     });
   }
   //funcion para eliminar por id
@@ -98,7 +124,12 @@ appRouter.controller('controlLanguage',function($scope,$http,$timeout){
     $("#confirmdelete").click(function(){
       $http.post("../php/language.php",{'action':action,'id':id})
       .success(function(data){
-        console.log("se elimino exitosamene");
+        $.toast({
+          heading: 'Success',
+          text: 'Delete Language.',
+          showHideTransition: 'fade',
+          icon: 'error'
+      });
         getLanguage();
       });
     });
