@@ -39,7 +39,7 @@ $(document).ready(function() {
                         </a><a ng-click="changeenabled(user.iduser,user.enabled)" class="toggle-eye0" ng-if="user.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
                         <a ng-click="getUsertoModal(user.iduser)" href="#edit-user" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a>
                      <a  ng-click="deleteUser(user.iduser)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
-                     <a  ng-click="getUsertoModal(user.iduser)"  href="#edit-pass" uk-toggle >  <i class="fas fa-lock fa-lg"></i></a>
+                     <a  ng-click="getUsertoModal(user.iduser)"  href="#edit-pass" uk-toggle >  <i class="fas fa-key fa-lg"></i></a>
                     </td>
                         <td>{{user.user}} </td>
                         <td>{{user.name}}</td>
@@ -130,33 +130,35 @@ $(document).ready(function() {
             <div class="uk-background-muted uk-padding uk-modal-dialog">
                 <button class="uk-modal-close-default" type="button" uk-close></button>
                 <div class="">
-                    <h3>Edit User</h3>
-                    <form method="post" class="uk-form-horizontal ">
+                    <h3>Edit Password</h3>
+                    <form method="post" class="uk-form-horizontal " name="myForm">
                         <div uk-grid class="uk-child-width-1-1@m uk-grid-divider ">
                             <div>
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-stacked-text">Actual Password</label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" type="password" ng-model="actualPass" placeholder="Actual Password" >
+                                        <input class="uk-input"  type="password" name="actualPass" ng-model="actualPass" placeholder="Actual Password" required>
                                         <input class="uk-input" type="text" ng-model="idUserE" hidden>
                                     </div>
                                 </div>
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-stacked-text">New Password</label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" type="password" ng-model="newPass" placeholder="Password" required>
+                                        <input class="uk-input" type="password"  name="newPass" ng-model="newPass"  placeholder="Password" required>
                                     </div>
                                 </div>
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-stacked-text"></label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" type="password" ng-model="reNewPass" placeholder="Repeat Password" required>
+                                        <input class="uk-input" type="password" name="reNewPass" ng-model="reNewPass"  placeholder="Repeat Password" required>
                                     </div>
                                 </div>
+                                  <center><h4 ng-if="myForm.actualPass.$valid && newPass != reNewPass "style="color:red;">Error Password and Repassword do not match.</h4></center>
                             </div>
 
                             <div class="uk-width-1-1 uk-text-center">
-                                <button class="uk-button uk-button-primary "  ng-click="editPassword();" type="button">Save</button>
+                                <!-- <button class="uk-button uk-button-primary "  ng-click="editPassword();" type="button" ng-disabled="actualPass.length  > 1 &&  newPass != reNewPass">Save</button> -->
+                                <button class="uk-button uk-button-primary "  ng-click="editPassword();" type="button" ng-disabled="!myForm.actualPass.$valid && !myForm.newPass.$valid || !myForm.actualPass.$valid || newPass != reNewPass || !myForm.newPass.$valid  " >Save</button>
                                 <a class="uk-button uk-button-danger uk-modal-close" type="button" >Cancel</a>
                             </div>
                         </div>

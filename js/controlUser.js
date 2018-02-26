@@ -8,10 +8,9 @@ appRouter.controller('controlUser',function($scope,$http,$timeout){
    $http.post('../php/users.php', {'action':action})
    .success(function(data){
     $scope.users = data;
-     console.log($scope.users);
      // alert("get exitoso");
    }).error(function(response){
-     alert("No se get el usuario");
+     console.log("No se get el usuario");
    });
   }
 
@@ -25,22 +24,49 @@ appRouter.controller('controlUser',function($scope,$http,$timeout){
       $http.post('../php/users.php', {'action':action,'name': $scope.name,'user': $scope.user,
       'password': $scope.password,'email': $scope.email,'phone': $scope.phone,'country': $scope.country,'company': $scope.company})
       .success(function(data){
-        getUser();
-        $scope.name="";
-        $scope.user="";
-        $scope.password="";
-        $scope.repassword="";
-        $scope.email="";
-        $scope.phone="";
-        $scope.country="";
-        $scope.company="";
-        alert("Insertado exitosamente");
+        if (data == 1) {
+          getUser();
+          $scope.name="";
+          $scope.user="";
+          $scope.password="";
+          $scope.repassword="";
+          $scope.email="";
+          $scope.phone="";
+          $scope.country="";
+          $scope.company="";
+          $.toast({
+          heading: 'Success',
+          text: 'Add User.',
+          showHideTransition: 'slide',
+          icon: 'success'
+        });
+        }else{
+          $scope.name="";
+          $scope.user="";
+          $scope.password="";
+          $scope.repassword="";
+          $scope.email="";
+          $scope.phone="";
+          $scope.country="";
+          $scope.company="";
+          $.toast({
+            heading: 'Error',
+            text: 'User already exist.',
+            showHideTransition: 'fade',
+            icon: 'error'
+        });
+        }
       }).error(function(response){
-        alert("No se agrego el usuario");
+        $.toast({
+          heading: 'Error',
+          text: 'Not add user.',
+          showHideTransition: 'fade',
+          icon: 'error'
+      });
       });
 
     }else{
-      alert("password y repasword diferentes");
+      console.log("password y repasword diferentes");
     }
   }//fin funcion AGREGAR
   //funcion
@@ -60,14 +86,12 @@ appRouter.controller('controlUser',function($scope,$http,$timeout){
      $scope.phoneE=data[0].phone;
      $scope.countryE=data[0].country;
      $scope.companyE=data[0].company;
-     console.log($scope.usersE);
      // alert("get exitoso");
    }).error(function(response){
-     alert("No se get el usuario");
+     console.log("error to load data in modal");
    });
 
   }
-
   //funcion editar
   $scope.editUser = function(){
 
@@ -77,32 +101,62 @@ appRouter.controller('controlUser',function($scope,$http,$timeout){
       .success(function(data){
         //  $("#edit-user").hide();
         getUser();
-        alert("actulizado exitosamente");
+        $.toast({
+        heading: 'Success',
+        text: 'Update User.',
+        showHideTransition: 'slide',
+        icon: 'success'
+      });
       }).error(function(response){
-        alert("No se actualizo el usuario");
+        $.toast({
+          heading: 'Error',
+          text: 'Update User.',
+          showHideTransition: 'fade',
+          icon: 'error'
+      });
       });
   }
   //funcion para actualizar el password
   $scope.editPassword = function(){
     if ($scope.newPass == $scope.reNewPass) {
-      console.log("pass y repass correcto");
       var action=7;
       //console.log($scope.idUserE+$scope.actualPass+ $scope.newPass+$scope.reNewPass);
       $http.post('../php/users.php', {'action':action,'idUserE':$scope.idUserE,'actualPass':$scope.actualPass,'newPass':$scope.newPass})
       .success(function(data){
-          console.log($scope.idUserE+$scope.actualPass+ $scope.newPass+$scope.reNewPass);
-        console.log(data);
-
+        if (data==1) {
         $scope.actualPass="";
         $scope.newPass="";
         $scope.reNewPass="";
         getUser();
-        alert("actulizado exitosamente");
+        $.toast({
+        heading: 'Success',
+        text: 'Update Password.',
+        showHideTransition: 'slide',
+        icon: 'success'
+      });
+
+    }else{
+      $scope.actualPass="";
+      $scope.newPass="";
+      $scope.reNewPass="";
+      $.toast({
+        heading: 'Error',
+        text: 'Password not exist.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
+    }
+
       }).error(function(response){
-        alert("No se actualizo el usuario");
+        console.log("No se actualizo el usuario");
       });
     }else{
-        console.log("paas y repas incorrecto");
+      $.toast({
+        heading: 'Error',
+        text: 'Update password.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
     }
 
   }
@@ -119,9 +173,19 @@ appRouter.controller('controlUser',function($scope,$http,$timeout){
     .success(function(data){
       console.log(estado);
       getUser();
-      console.log("actulizado exitosamente el estado");
+      $.toast({
+      heading: 'Success',
+      text: 'Update state.',
+      showHideTransition: 'slide',
+      icon: 'success'
+    });
     }).error(function(response){
-      console.log("No se actualizo el el estado");
+      $.toast({
+        heading: 'Error',
+        text: 'Not change state.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
     });
   }
   //funcion para eliminar por id
@@ -131,6 +195,12 @@ appRouter.controller('controlUser',function($scope,$http,$timeout){
     $("#confirmdelete").click(function(){
       $http.post("../php/users.php",{'action':action,'iduser':iduser})
       .success(function(data){
+        $.toast({
+          heading: 'Succes',
+          text: 'Delete User.',
+          showHideTransition: 'fade',
+          icon: 'error'
+      });
         getUser();
       });
     });

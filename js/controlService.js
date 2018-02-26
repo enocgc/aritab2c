@@ -13,11 +13,8 @@ appRouter.controller('controlService',function($scope,$http,$timeout){
       //console.log(data);
       console.log("get service");
 
-
-      //  console.log($scope.seasons);
-      // alert("get exitoso");
     }).error(function(response){
-      alert("No se get  tags");
+      console.log("No se get  tags");
     });
   }
   //languages
@@ -32,7 +29,7 @@ appRouter.controller('controlService',function($scope,$http,$timeout){
       //  console.log($scope.languages);
       // alert("get exitoso");
     }).error(function(response){
-      alert("No se get el Language");
+      console.log("No se get el Language");
     });
   }
   //funcion para agregar detalles
@@ -65,7 +62,7 @@ appRouter.controller('controlService',function($scope,$http,$timeout){
           //console.log(data);
           console.log("se agrego service detail correctamente");
         }).error(function(response){
-          alert("No iserto service detail");
+          console.log("No iserto service detail");
         });
       }//fin del for
       setTimeout(function () {//para que actualice los campos de forma eficiente
@@ -77,7 +74,7 @@ appRouter.controller('controlService',function($scope,$http,$timeout){
 
       // alert("get exitoso");
     }).error(function(response){
-      alert("No iserto service");
+      console.log("No iserto service");
     });
   }
 
@@ -115,7 +112,7 @@ appRouter.controller('controlService',function($scope,$http,$timeout){
         console.log("vector"+$scope.contador+" lang "+lang.length);
         $scope.contador=$scope.contador+1;
       }).error(function(response){
-        alert("No se get el tags");
+        console.log("No se get el tags");
       });
 
     }

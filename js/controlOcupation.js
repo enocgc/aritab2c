@@ -13,12 +13,8 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
       console.log(data);
       //console.log(data);
       console.log("get service");
-
-
-      //  console.log($scope.seasons);
-      // alert("get exitoso");
     }).error(function(response){
-      alert("No se get  tags");
+        console.log("No se get  tags");
     });
   }
   //languages
@@ -33,7 +29,7 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
       //  console.log($scope.languages);
       // alert("get exitoso");
     }).error(function(response){
-      alert("No se get el Language");
+        console.log("No se get el Language");
     });
   }
   //funcion para agregar detalles
@@ -53,7 +49,7 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
           console.log(data);
           console.log("se agrego ocupation detail correctamente");
         }).error(function(response){
-          alert("No iserto ocupation detail");
+            console.log("No iserto ocupation detail");
         });
       }//fin del for
       setTimeout(function () {//para que actualice los campos de forma eficiente
@@ -65,7 +61,7 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
 
       // alert("get exitoso");
     }).error(function(response){
-      alert("No iserto ocupation");
+        console.log("No iserto ocupation");
     });
   }
 
@@ -102,7 +98,7 @@ appRouter.controller('controlOcupation',function($scope,$http,$timeout){
         //console.log("vector"+$scope.contador+" lang "+lang.length);
         $scope.contador=$scope.contador+1;
       }).error(function(response){
-        alert("No se get el tags");
+          console.log("No se get el tags");
       });
 
     }
@@ -121,10 +117,9 @@ $http.post('../php/ocupation.php', {'action':action,'idE':$scope.idE,'persons':$
     var langid = $scope.languages[i].id;
     $http.post('../php/ocupation.php', {'action':7,'idE': $scope.idE,'language_id':langid,'description':description})
     .success(function(data){
-      console.log(data);
       console.log("se actualizo ocupation detail correctamente");
     }).error(function(response){
-      alert("No iserto ocupation detail");
+        console.log("No iserto ocupation detail");
     });
   }//fin del for
   setTimeout(function () {//para que actualice los campos de forma eficiente
@@ -136,7 +131,7 @@ $http.post('../php/ocupation.php', {'action':action,'idE':$scope.idE,'persons':$
 
   // alert("get exitoso");
 }).error(function(response){
-  alert("No iserto ocupation");
+    console.log("No iserto ocupation");
 });
 }//fin funcon edit
 

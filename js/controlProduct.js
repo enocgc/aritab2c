@@ -142,7 +142,7 @@ getLocation();
 
       // alert("get exitoso");
     }).error(function(response){
-      alert("No iserto product");
+      console.log("No iserto product");
     });
   }//fin del add product
 
@@ -252,7 +252,7 @@ $scope.getEditProduct=function(id){
     $scope.longitude=data[0].gpslong;
     $scope.zoom=data[0].gpszoom;
   }).error(function(response){
-    alert("No se obtuvieron los Product");
+    console.log("No se obtuvieron los Product");
   });
   // language
   datos={
@@ -267,7 +267,7 @@ $scope.getEditProduct=function(id){
       $("#descriptionP-"+data[i].language_id).val(data[i].description);
     }
   }).error(function(response){
-    alert("No se obtuvieron los Product");
+    console.log("No se obtuvieron los Product");
   });
 
   datos={
@@ -279,7 +279,7 @@ $scope.getEditProduct=function(id){
     //console.log(data);
     $scope.positionE=data[0].position;
   }).error(function(response){
-    alert("No se obtuvieron los Product");
+    console.log("No se obtuvieron los Product");
   });
 
 }//end to getEditCoutnry
@@ -318,7 +318,7 @@ $scope.updateProduct=function(){
     getCountries();
     console.log(data);
   }).error(function(response){
-    alert("No se obtuvieron los Product");
+    console.log("No se obtuvieron los Product");
   });
 // $country_id,$language_id,$name,$description
 for (var i = 0; i <  $scope.languages.length; i++) {
@@ -335,7 +335,7 @@ for (var i = 0; i <  $scope.languages.length; i++) {
     getProduct();
 
   }).error(function(response){
-    alert("No se obtuvieron los Product");
+    console.log("No se obtuvieron los Product");
   });
 }//end to for
 

@@ -38,9 +38,9 @@ appRouter.controller('controlTags',function($scope,$http,$timeout){
 
         $http.post('../php/tags.php', {'action':4,'id': $scope.newTag[0].id,'language_id':langid,'name':name,'description':description})//creo el tag
         .success(function(data){
-          console.log("se agrego el tag correctamente");
+          //console.log("se agrego el tag correctamente");
         }).error(function(response){
-            console.log("No inserto tag");
+          //  console.log("No inserto tag");
         });
       }//fin del for
       setTimeout(function () {//para que actualice los campos de forma eficiente
@@ -69,7 +69,7 @@ appRouter.controller('controlTags',function($scope,$http,$timeout){
 //funcion para mostrar datos en getLanguagetoModal
 $scope.getTagtoModal=function(lang,id){
   getLanguage();
-  console.log(id);
+  //console.log(id);
   $scope.idTagE=id;
   var action=5;
 $scope.contador=0;
@@ -81,7 +81,7 @@ getTags();
     //console.log($scope.languages[i].short);
     $http.post('../php/tags.php', {'action':action,'id':id,'idlan':langid,'short':short})
     .success(function(data){
-      console.log(data);
+      //console.log(data);
       $scope.TagsE = data;
       var cont=$scope.contador;
     //  console.log(data);
@@ -121,7 +121,6 @@ $scope.editTag =function($lang){
       showHideTransition: 'slide',
       icon: 'success'
     });
-    $("#edit-tags").hide();
     }
 
     if($lang.length==$scope.contador+1){

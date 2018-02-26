@@ -239,7 +239,7 @@ console.log($scope.newlocations);
   }
 
   $('.uk-checkbox').click(function() {
-    alert(this.id);
+      console.log(this.id);
   });
 
   $scope.selectedTag;
@@ -258,10 +258,10 @@ console.log($scope.newlocations);
     //esta funcion la puse yo y si funca
   }
   $('.locaciones').click(function() {
-    alert(this.id);
+      console.log(this.id);
   });
   $('.productos').click(function() {
-    alert(this.id);
+      console.log(this.id);
   });
   //eliminar day
   $scope.deleteDay = function(day,location) {

@@ -40,7 +40,7 @@ $scope.data= $scope.units[0]; // Set by default the value "test1"
         .success(function(data){
           console.log("se agrego el country details correctamente"+data);
         }).error(function(response){
-          alert("No agrego el countrie details");
+            console.log("No agrego el countrie details");
         });
       }//fin del for
 
@@ -56,7 +56,7 @@ $scope.data= $scope.units[0]; // Set by default the value "test1"
         .success(function(data){
           console.log("se agrego el country media correctamente"+data);
         }).error(function(response){
-          alert("No agrego el country media");
+            console.log("No agrego el country media");
         });
 
       setTimeout(function () {//para que actualice los campos de forma eficiente
@@ -65,10 +65,9 @@ $scope.data= $scope.units[0]; // Set by default the value "test1"
             console.log("final");
           });
       }, 100);
-
-      // alert("get exitoso");
+       console.log("get exitoso");
     }).error(function(response){
-      alert("No iserto tag");
+        console.log("No iserto tag");
     });
 }
 
@@ -81,7 +80,7 @@ function getCountries(){
     console.log(data);
     console.log("peticion finalizada datos arriba para renderizar");
   }).error(function(response){
-    alert("No se obtuvieron los countries");
+      console.log("No se obtuvieron los countries");
   });
 }
 
@@ -92,7 +91,7 @@ function getLanguage(){
   .success(function(data){
     $scope.languages = data;
   }).error(function(response){
-    alert("No se get el Language");
+      console.log("No se get el Language");
   });
 }
 
@@ -125,7 +124,7 @@ $scope.confirmdelete=function(){
     $scope.countries = data;
     getCountries();
   }).error(function(response){
-    alert("No se obtuvieron los countries");
+      console.log("No se obtuvieron los countries");
   });
 }
 $scope.idEdit;
@@ -143,7 +142,7 @@ $scope.getEditCountry=function(id){
     $scope.longitude=data[0].gpslong;
     $scope.zoom=data[0].gpszoom;
   }).error(function(response){
-    alert("No se obtuvieron los countries");
+      console.log("No se obtuvieron los countries");
   });
   // language
   datos={
@@ -157,7 +156,7 @@ $scope.getEditCountry=function(id){
       $("#descriptionE-"+data[i].language_id).val(data[i].description);
     }
   }).error(function(response){
-    alert("No se obtuvieron los countries");
+      console.log("No se obtuvieron los countries");
   });
 
   datos={
@@ -169,7 +168,7 @@ $scope.getEditCountry=function(id){
     console.log(data);
     $scope.position=data[0].position;
   }).error(function(response){
-    alert("No se obtuvieron los countries");
+      console.log("No se obtuvieron los countries");
   });
 
 }//end to getEditCoutnry
@@ -205,7 +204,7 @@ $scope.updateCountry=function(){
     getCountries();
     console.log(data);
   }).error(function(response){
-    alert("No se obtuvieron los countries");
+      console.log("No se obtuvieron los countries");
   });
 // $country_id,$language_id,$name,$description
 for (var i = 0; i <  $scope.languages.length; i++) {
@@ -221,7 +220,7 @@ for (var i = 0; i <  $scope.languages.length; i++) {
     getCountries();
     console.log(data);
   }).error(function(response){
-    alert("No se obtuvieron los countries");
+      console.log("No se obtuvieron los countries");
   });
 }//end to for
 

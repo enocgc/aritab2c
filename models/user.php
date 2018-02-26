@@ -9,6 +9,15 @@ require_once ("../includes/constantes.php");
      parent::__construct(__HOST__, __USER__, __PASSWD__, __DB_NAME__);
 	}//fin del constructor
   function addUser($name,$user,$passwordEncript,$email,$phone,$country,$company,$enabled){
+    $sql="SELECT * FROM user where name='$name'";
+    $result = $this->cone->query($sql);
+    $array=array();
+    //return "texto";
+     if($result->num_rows > 0){
+
+       return 0;
+     }
+     //return $variable;
       $stmt= $this->cone->prepare("INSERT INTO user(name,user,password,email,phone,country,company,enabled) VALUES(?,?,?,?,?,?,?,?)");
 
       if($stmt === FALSE){
@@ -18,7 +27,7 @@ require_once ("../includes/constantes.php");
       $stmt->bind_param('ssssssss',$name,$user,$passwordEncript,$email,$phone,$country,$company,$enabled);
       $stmt->execute();
       $stmt->close();
-      return true;
+      return 1;
     }#fin del metodo incluirusuario
 
 
@@ -67,11 +76,11 @@ function changePass($iduser,$newPassEnc,$actualPassEnc){
      //UPDATE user SET password='enoc' WHERE iduser='30'
      $sql="UPDATE user SET password='$newPassEnc' WHERE iduser='$iduser'";
      $result = $this->cone->query($sql);
-     return true;
+     return 1;
    }
    $this->close();
    //return $variable;
-  return false;
+   return 0;
    //return false;
 }
 

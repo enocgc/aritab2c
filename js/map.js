@@ -4,7 +4,7 @@
 // *
 
 // Required variables.
-console.log("entro");
+//console.log("entro");
 var map="";
 var marker;
 
@@ -14,7 +14,7 @@ function initialize() {
       zoom: 8,
       mapTypeId: 'roadmap'
    };
-   
+
    mapaI();
    function mapaI(){
       console.log("load map");
@@ -93,5 +93,5 @@ function getCoords(lat, lng, zoom) {
    $('#lat').val(lat).trigger('input').trigger('change');
    $('#zoom').val(zoom).trigger('input').trigger('change');
    $('#lng').val(lng).trigger('input').trigger('change');
-  
+
 }

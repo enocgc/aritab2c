@@ -7,7 +7,7 @@ require_once ("../models/user.php");
 switch ($action) {
   case 1:
     # code
-    $iduser = $data->iduser;
+    //$iduser = $data->iduser;
     $name = $data->name;
     $user = $data->user;
     $password = $data->password;
