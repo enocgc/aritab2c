@@ -39,7 +39,7 @@
 				<hr>
 
 				<div class="uk-width-1-1">
-					<day-one></day-one>
+
 					<location></location>
 
 					<!--ADD LOCATION 1-->
@@ -53,7 +53,6 @@
 
 					</div>
 
-					<dayfinal></dayfinal>
 
 					<div class="uk-width-1-1@m uk-text-left">
 						<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
@@ -76,19 +75,8 @@
 						</div>
 					</div><br>
 
-
 					<div class="uk-width-1-2@m uk-text-left">
 						<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger"><span  ng-if="days.length >= 1">{{days.length+2}}</span> Days</span></p>
-
-					</div>
-					<div class="uk-width-1-2@m uk-text-left">
-						<div class="uk-margin">
-							<label class="uk-h3" for="">Price: </label>
-							<div class="uk-inline">
-								<span class="uk-form-icon" style="color: black;">$</span>
-								<input class="uk-input" type="number" placeholder="Ex.100">
-							</div>
-						</div>
 					</div>
 					<hr>
 				</div>
@@ -117,16 +105,22 @@
 		</div>
 		<div class="" uk-grid>
 
-			<div class="">
+			<div class="uk-width-1-5@m">
 				 <label  class="uk-h5 "  for="form-stacked-text">Position</label>
 				<div class="uk-form-controls">
-			<input class="uk-input" type="number"  ng-model="position" placeholder="0"/>
+					<input class="uk-input" type="number"  ng-model="position" placeholder="0"/>
 				</div>
 			</div>
-			<div class="">
+			<div class="uk-width-1-5@m">
 				<label class="uk-h5 " for="form-stacked-text">Min Nights</label>
 				<div class="uk-form-controls">
 					<input class="uk-input" type="number"  min="0" max="99" value="3" ng-model="minNigts" placeholder="0"/>
+				</div>
+			</div>
+			<div class="uk-width-3-5@m">
+				<label class="uk-h5" for="form-stacked-text">Acomodation</label>
+				<div class="">
+					<select class='uk-select' ng-model='acomodation' ng-options='acomodation as acomodation.name for acomodation in acomodations' style='width: 100%;'>  <option value=''>-- Select Acomodation</option> </select>
 				</div>
 			</div>
 			<div class="uk-margin uk-width-3-5@m uk-text-right">

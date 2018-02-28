@@ -126,7 +126,12 @@ switch ($action) {
   case 19:
   $id= $data->id;
   $bd = new Products();
-  echo $bd->getProductsEnabledid($id);
+  echo $bd->getProductAcomodation($id);
+  break;
+  case 20:
+  $id= $data->id;
+  $bd = new Products();
+  echo $bd->getProductsEnabledidP($id);
   break;
   default:
 }

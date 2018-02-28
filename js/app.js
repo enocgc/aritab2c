@@ -1,39 +1,14 @@
 
 var appRouter = angular.module("aritab2c", ["ngRoute","ui.utils"]);
 
-appRouter.directive("dayOne", function() {
-  return {
-    template : "<div id='dia' class='uk-card uk-padding-small uk-margin-small uk-card-default'>"
-    +"<span class='days-da uk-background-primary'>Day 1</span>"
-    +"<p class='uk-h4'>Arrival</p>"
-    +"<div class='uk-margin'>"
-    +"<label class='uk-form-label' for='form-stacked-tex't>Arrival place</label>"
-    +  "<div class='uk-form-controls'>"
-    +  "  <input class='uk-input' type='text' placeholder='Ex. Juan Santamaria International Airport'>"
-    +  "</div>"
-    +"<center><span ng-click='addNewDayTransfer(1,1);' style='margin-top: 10px;' class='uk-button uk-button-small uk-button-success addtransfer'>Add transfer on Next Day</span></center>"
-    +"  </div>"
-    +"</div>"
-  };
-});
-
-appRouter.directive("dayfinal", function() {
-  return {
-    template : "<div id='dia' class='uk-card uk-padding-small uk-margin-small uk-card-default' ng-if='days.length'>"
-    + "<span class='days-da uk-background-primary'>Day <span ng-if='days.length >= 1'>{{days.length+2}}</span></span>"
-    +  "<p class='uk-h4'>Departure Location</p>"
-    +"<center><span  ng-click='addNewDayTransfer(days.length,days.length);' style='margin-top: 10px' class='uk-button uk-button-small uk-button-success' >Add transfer on Before Day</span></center>"
-
-    +"</div>"
-  };
-});
 
 appRouter.directive("location", function() {
   return {
     template :"<div  id='locations' ng-repeat='newlocation in newlocations'>"
     +"<!-- TRANSFER 01 -->"
       +" <input ng-model='titleLocation1' hidden></input>"
-    +" <h3>{{newlocation.name}}</h3>"
+    +" <h2><span uk-icon='icon: location'></span> {{newlocation.name}}</h2>"
+      +"<h3><i class='fas fa-h-square'></i> {{newlocation.hotel}}</h3>"
     +"<day></day>"
   };
 });

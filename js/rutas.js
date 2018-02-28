@@ -68,7 +68,11 @@ appRouter.config(function($routeProvider) {
     }).when("/listpaxocupation", {
         templateUrl : "listpaxocupation.html",
         controller  : 'controlPaxOcupation'
-    }).otherwise({
+    }).when("/price", {
+        templateUrl : "price.html",
+        controller  : 'controlPrice'
+    })
+    .otherwise({
 		templateUrl : 'home.html',
 		//controller : 'tablaMateriales'
 	});
