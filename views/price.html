@@ -3,50 +3,51 @@ $(document).ready(function() {
     $('#price').DataTable();
 } );
 </script>
-<div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlPrice">
+<div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlPackage">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Prices</h3>
 
             <!--tabla datatables-->
-    <table  datatable="ng" ng-if="convinations.length" id="price" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
-         <thead>
-                    <tr>
-                        <th>Service</th>
-                        <th>Pax Ocupation</th>
-                        <th>Pax</th>
-                        <th>Transports</th>
-                        <th>Years</th>
-                        <th>StarDate</th>
-                        <th>EndDate</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Service</th>
-                        <th>Pax Ocupation</th>
-                        <th>Pax</th>
-                        <th>Transports</th>
-                        <th>Years</th>
-                        <th>StarDate</th>
-                        <th>EndDate</th>
-                        <th>Price</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr ng-repeat="convination in convinations">
-                        <td>{{convination.name}}</td>
-                        <td>{{convination.occupation}}</td>
-                        <td>{{convination.pax}}</td>
-                        <td>{{convination.name1}}</td>
-                        <td>{{convination.name2}}</td>
-                        <td>{{convination.startdate}}</td>
-                        <td>{{convination.enddate}}</td>
-                        <td><input class="uk-input" type="text" ng-model="convination.price" value="0"/></td>
-                    </tr>
-                </tbody>
-            </table>
+            <table  datatable="ng" ng-if="convinations.length" id="price" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
+          <!-- <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%"> -->
+          <thead>
+          <tr>
+              <th>Service</th>
+              <th>Pax Ocupation</th>
+              <th>Pax</th>
+              <th>Transports</th>
+              <th>Years</th>
+              <th>StarDate</th>
+              <th>EndDate</th>
+              <th>Price</th>
+          </tr>
+          </thead>
+          <tfoot>
+          <tr>
+              <th>Service</th>
+              <th>Pax Ocupation</th>
+              <th>Pax</th>
+              <th>Transports</th>
+              <th>Years</th>
+              <th>StarDate</th>
+              <th>EndDate</th>
+              <th>Price</th>
+          </tr>
+          </tfoot>
+          <tbody>
+              <tr ng-repeat="convination in convinations">
+                  <td>{{convination.name}}</td>
+                  <td>{{convination.occupation}}</td>
+                  <td>{{convination.pax}}</td>
+                  <td>{{convination.name1}}</td>
+                  <td>{{convination.name2}}</td>
+                  <td>{{convination.startdate}}</td>
+                  <td>{{convination.enddate}}</td>
+                  <td><input class="uk-input" type="text" ng-model="convination.price" value="0"/></td>
+              </tr>
+          </tbody>
+          </table>
         </div>
     </div>
 </div>

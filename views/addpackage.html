@@ -1,4 +1,12 @@
-
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+		$( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+});
+</script>
 <div class="uk-section uk-padding" data-ng-controller="controlPackage">
 	<div class="uk-background-muted uk-padding uk-panel">
 		<div class="uk-container uk-container-expand">
@@ -36,10 +44,10 @@
 					</div>
 
 				</div>
-				<hr>
+
 
 				<div class="uk-width-1-1">
-
+		<hr>
 					<location></location>
 
 					<!--ADD LOCATION 1-->
@@ -53,36 +61,32 @@
 
 					</div>
 
-
+					<div class="uk-width-1-2@m uk-text-left">
+						<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger"><span  ng-if="days.length >= 1">{{days.length}}</span> Days</span></p>
+					</div>
+					<hr>
 					<div class="uk-width-1-1@m uk-text-left">
 						<label class="uk-h4 uk-margin-small-right" for="">Transport type:  </label>
-						<div class="uk-inline">
-							<label ng-repeat="transport in transports track by $index">
-								<input id="pruebacheckbox{{transport.id}}"
-									class="uk-checkbox"
-									ng-true-value="'{{transport.id}}'"
-									ng-false-value="'0'"
-									type="checkbox"
-									ng-model="selectedTransport"
-									ng-click="cambiarEstado(transport.id,selectedTransport)"/> {{transport.name}} </label>
+						<div class="uk-inline" style="width:100%;margin-top:20px;">
+							<select  class="uk-select js-example-basic-multiple"  ng-model="dataTransport" name="states[]" multiple="multiple" ng-options="transport as transport.name for transport in transports ">
+							</select>
 						</div>
 
 					</div><br>
 					<div class="uk-width-1-1@m uk-text-left">
 						<label class="uk-h4 uk-margin-small-right" for="">Tags:  </label>
-						<div class="uk-inline">
-							<label ng-repeat="tag in tags"><input class="uk-checkbox"  ng-true-value="'{{tag.id}}'" ng-false-value="'0'" type="checkbox" ng-change="'{{tag.id}}'" ng-model="selectedTag"/> {{tag.name}}</label>
+						<div class="uk-inline" style="width:100%;margin-top:20px;">
+							<select  class="uk-select js-example-basic-multiple"  ng-model="dataTag" name="states[]" multiple="multiple" ng-options="tag as tag.name for tag in tags ">
+							</select>
+
 						</div>
 					</div><br>
 
-					<div class="uk-width-1-2@m uk-text-left">
-						<p class="uk-h3">Duration: <span class="uk-h3 uk-text-danger"><span  ng-if="days.length >= 1">{{days.length+2}}</span> Days</span></p>
-					</div>
 					<hr>
 				</div>
 				<div class="uk-width-1-1 uk-text-center">
 					<button class="uk-button uk-button-primary" type="submit" ng-click="addPackage();">Save</button>
-					<a href="#packageslist"class="uk-button uk-button-danger">Cancel</a>
+					<a href="#packageslist"class="uk-button uk-button-danger">Close</a>
 				</div>
 			</div>
 		</form>
@@ -125,7 +129,7 @@
 			</div>
 			<div class="uk-margin uk-width-3-5@m uk-text-right">
 				<input type="text" name=""ng-model="idlocation" value="" hidden>
-				<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
+				<button class="uk-button uk-button-danger uk-modal-close" type="button">Close</button>
 				<button class="uk-button uk-button-primary" type="button" ng-click="addDays(minNigts,idlocation);">Add</button>
 			</div>
 		</div>
@@ -150,8 +154,8 @@
 		<p class="uk-text-right">
 			<input type="text" ng-model="idproduct" value="" hidden>
 			<input type="text" ng-model="daytoproduct" value="" hidden>
-			<button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
-			<button class="uk-button uk-button-primary " type="button" ng-click="addProduct(idproduct,daytoproduct)">Save</button>
+			<button class="uk-button uk-button-danger uk-modal-close" type="button">Close</button>
+			<button class="uk-button uk-button-primary " type="button" ng-click="addProduct(idproduct,daytoproduct)">Add</button>
 		</p>
 	</div>
 </div>
