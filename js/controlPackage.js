@@ -146,7 +146,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
       for (let j = 0; j < l - 1 - i; j++) {
         if ($scope.days[j].locationID > $scope.days[j + 1].locationID) {
           [$scope.days[j].locationID, $scope.days[j + 1].locationID] = [$scope.days[j + 1].locationID, $scope.days[j].locationID];
-          [$scope.days[j].transfer, $scope.days[j + 1].transfer] = [$scope.days[j + 1].transfer, $scope.days[j].transfer];
+          [$scope.days[j].product, $scope.days[j + 1].product] = [$scope.days[j + 1].product, $scope.days[j].product];
         }
       }
     }
