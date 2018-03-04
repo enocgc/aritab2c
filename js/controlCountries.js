@@ -20,7 +20,7 @@ $scope.data= $scope.units[0]; // Set by default the value "test1"
         'gpslong':$scope.longitude,
         'gpszoom':$scope.zoom
       };
-    $http.post('../php/countries.php',data)//creo el tag
+    $http.post('../php/countries.php',data)//creo el conuntrie
     .success(function(data){
       $scope.newTag = data;
       for (var i = 0; i <  $lang.length; i++) {

@@ -41,7 +41,7 @@ appRouter.directive("day", function(){
     +  "</div>"
     +  "</div>"
     +"  </div>"
-    +  "  <p class='uk-text-center' id='addDay'><a class='uk-button uk-button-success' ng-click='addNewDay(1,newlocation.location);'style='width:100%;'><span uk-icon='icon: plus-circle; ratio: 1;'></span> Add New Day</a> </p>"
+    +  "  <p class='uk-text-center' id='addDay'><a class='uk-button uk-button-success' ng-click='addNewDay(1,newlocation.location,newlocation.idproduct);'style='width:100%;'><span uk-icon='icon: plus-circle; ratio: 1;'></span> Add New Day</a> </p>"
     +"<!-- TRANSFER 02 -->"
     +"</div>"
     +"</li></div></ul><hr>"
