@@ -10,46 +10,46 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     var action = 2;
     //console.log(action);
     $http.post('../php/tags.php', {
-      'action': action
-    })
-    .success(function(data) {
-      $scope.languages = data;
-    }).error(function(response) {
-      console.log("No se get el Language");
-    });
+        'action': action
+      })
+      .success(function(data) {
+        $scope.languages = data;
+      }).error(function(response) {
+        console.log("No se get el Language");
+      });
   }
 
   function getTransport() {
     var action = 1;
     //  console.log(action);
     $http.post('../php/transport.php', {
-      'action': action
-    })
-    .success(function(data) {
-      $scope.transports = data;
-      //console.log(data);
+        'action': action
+      })
+      .success(function(data) {
+        $scope.transports = data;
+        //console.log(data);
 
-      //  console.log($scope.seasons);
-      // alert("get exitoso");
-    }).error(function(response) {
-      console.log("No se get  transport");
-    });
+        //  console.log($scope.seasons);
+        // alert("get exitoso");
+      }).error(function(response) {
+        console.log("No se get  transport");
+      });
   }
 
   function getTags() {
     var action = 9;
     //  console.log(action);
     $http.post('../php/tags.php', {
-      'action': action
-    })
-    .success(function(data) {
-      $scope.tags = data;
-      //console.log(data);
-      //  console.log($scope.seasons);
-      // alert("get exitoso");
-    }).error(function(response) {
-      console.log("No se get  tags");
-    });
+        'action': action
+      })
+      .success(function(data) {
+        $scope.tags = data;
+        //console.log(data);
+        //  console.log($scope.seasons);
+        // alert("get exitoso");
+      }).error(function(response) {
+        console.log("No se get  tags");
+      });
   }
 
 
@@ -58,57 +58,55 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   function getLocation() {
     var action = 14;
     $http.post('../php/product.php', {
-      'action': action
-    })
-    .success(function(data) {
-      //  console.log(data);
-      $scope.locations = data;
-      //console.log("peticion finalizada datos arriba para renderizar");
-    }).error(function(response) {
-    });
+        'action': action
+      })
+      .success(function(data) {
+        //  console.log(data);
+        $scope.locations = data;
+        //console.log("peticion finalizada datos arriba para renderizar");
+      }).error(function(response) {});
   }
 
   function getService() {
     var action = 12;
     //  console.log(action);
     $http.post('../php/product.php', {
-      'action': action
-    })
-    .success(function(data) {
-      //console.log(data);
-      $scope.services = data;
-    }).error(function(response) {
-    });
+        'action': action
+      })
+      .success(function(data) {
+        //console.log(data);
+        $scope.services = data;
+      }).error(function(response) {});
   }
   //funcion para obtener los acomodation
   function getProductAcomodation(id) {
     var action = 19;
     $http.post('../php/product.php', {
-      'action': action,
-      'id': id
-    })
-    .success(function(data) {
+        'action': action,
+        'id': id
+      })
+      .success(function(data) {
 
-      $scope.acomodations = data;
-    }).error(function(response) {
-      console.log("No se obtuvieron los products");
-    });
+        $scope.acomodations = data;
+      }).error(function(response) {
+        console.log("No se obtuvieron los products");
+      });
   }
   //funcion para obtener las excursiones
   function getProduct(id) {
     //  console.log("Product");
     var action = 20;
     $http.post('../php/product.php', {
-      'action': action,
-      'id': id
-    })
-    .success(function(data) {
-      //  console.log("location by id");
-      //  console.log(data);
-      $scope.products = data;
-    }).error(function(response) {
-      //  console.log("No se obtuvieron los products");
-    });
+        'action': action,
+        'id': id
+      })
+      .success(function(data) {
+        //  console.log("location by id");
+        //  console.log(data);
+        $scope.products = data;
+      }).error(function(response) {
+        //  console.log("No se obtuvieron los products");
+      });
   }
   //cargar productos por location
   $scope.loadProduct = function(id, day) {
@@ -154,9 +152,9 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     //  console.log($scope.days);
   } //fin metodo ordenamiento
 
-  function renameNumber(){
+  function renameNumber() {
     for (var i = 0; i < $scope.days.length; i++) {
-      $scope.days[i].day=i+1;
+      $scope.days[i].day = i + 1;
     }
   }
 
@@ -201,34 +199,34 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   //eliminar day
   $scope.deleteDay = function(day, location) {
     for (var i = 0; i < $scope.days.length; i++) {
-      if ($scope.days[i].day == day ) {
-        console.log("spplice "+ i+ " day  scope"+$scope.days[i].day+" dia"+ day);
-        $scope.days.splice(i,0);
-        var elementoEliminado = $scope.days.splice(i,1);
+      if ($scope.days[i].day == day) {
+        console.log("spplice " + i + " day  scope" + $scope.days[i].day + " dia" + day);
+        $scope.days.splice(i, 0);
+        var elementoEliminado = $scope.days.splice(i, 1);
         renameNumber();
         ordenar();
         // console.log("eliminado");
         // console.log(elementoEliminado);
       }
-    }    //fin del for
+    } //fin del for
     console.log("despues");
     console.log($scope.days);
     // console.log("currentday"+$scope.currentDay);
     // console.log("currentdayF"+$scope.currentDayF);
-    $scope.currentDay = $scope.currentDay-1;
-    $scope.currentDayF = $scope.currentDayF-1;
+    $scope.currentDay = $scope.currentDay - 1;
+    $scope.currentDayF = $scope.currentDayF - 1;
     console.log("day " + day + " location id " + location);
 
   }
 
   //eliminar actividad por dia
-  $scope.removeProduct=function(day,){
+  $scope.removeProduct = function(day, ) {
     for (var i = 0; i < $scope.days.length; i++) {
       if ($scope.days[i].day == day) {
         console.log("entro al if");
-        $scope.days[i].product = null ;
+        $scope.days[i].product = null;
       }
-    }//fin del for
+    } //fin del for
   }
 
   //seleccionar la location
@@ -257,181 +255,210 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     for (var i = 0; i < $scope.days.length; i++) {
       if ($scope.days[i].day == day) {
         console.log("entro al if");
-        $scope.days[i].product = name ;
-        $scope.days[i].idproduct = id ;
+        $scope.days[i].product = name;
+        $scope.days[i].idproduct = id;
       }
     }
-  }//fin add product por dia
+  } //fin add product por dia
 
 
   //funcion para agregar paquete
   $scope.addPackage = function() {
 
-    var action=1;
-    $http.post('../php/package.php',{'action':action})//creo el tag
-    .success(function(data){
-      $scope.addPackageDetails(data);
-      $scope.addpackagetransport(data);
-      $scope.addpackagetag(data);
+    var action = 1;
+    $http.post('../php/package.php', {
+        'action': action
+      }) //creo el tag
+      .success(function(data) {
+        $scope.addPackageDetails(data);
+        $scope.addpackagetransport(data);
+        $scope.addpackagetag(data);
         $scope.packageroutes(data);
-    }).error(function(response){
-      console.log("No iserto package");
-    });
-  }//fin del add paquete
+      }).error(function(response) {
+        console.log("No iserto package");
+      });
+  } //fin del add paquete
 
-  $scope.addPackageDetails=function(data){
+  $scope.addPackageDetails = function(data) {
     console.log(data);
     $scope.newPackage = data;
     for (var i = 0; i < $scope.languages.length; i++) {
-      var name= document.getElementById('name-'+$scope.languages[i].short).value;
-      var description= document.getElementById('description-'+$scope.languages[i].short).value;
+      var name = document.getElementById('name-' + $scope.languages[i].short).value;
+      var description = document.getElementById('description-' + $scope.languages[i].short).value;
       var langid = $scope.languages[i].id;
-      var datos={
-        'action':2,
-        'package_id':$scope.newPackage[0].id,
-        'language_id':langid,
-        'name':name,
-        'description':description
+      var datos = {
+        'action': 2,
+        'package_id': $scope.newPackage[0].id,
+        'language_id': langid,
+        'name': name,
+        'description': description
       };
       // console.log("agregando en id "+$scope.newPackage[0].id);
 
-      $http.post('../php/package.php',datos)//creo el tag
-      .success(function(data){
+      $http.post('../php/package.php', datos) //creo el tag
+        .success(function(data) {
 
-      }).error(function(response){
-        console.log("No agrego el package details");
-      });
+        }).error(function(response) {
+          console.log("No agrego el package details");
+        });
     }
-  }// end to addPackageDetails
+  } // end to addPackageDetails
 
   //funcion para agrgar el paquete de transporte
-  $scope.addpackagetransport=function(data){
-    var action=3;
+  $scope.addpackagetransport = function(data) {
+    var action = 3;
     $scope.newPackage = data;
     for (var i = 0; i < $scope.dataTransport.length; i++) {
       $scope.dataTransport[i].id;
-      $http.post('../php/package.php',{'action':action,'package_id':$scope.newPackage[0].id,'transporttype_id':$scope.dataTransport[i].id})
-      .success(function(data){
+      $http.post('../php/package.php', {
+          'action': action,
+          'package_id': $scope.newPackage[0].id,
+          'transporttype_id': $scope.dataTransport[i].id
+        })
+        .success(function(data) {
 
-      }).error(function(response){
-        console.log("No iserto package");
-      });
+        }).error(function(response) {
+          console.log("No iserto package");
+        });
     }
   }
 
   //funcion para agrgar el paquete de tags
-  $scope.addpackagetag=function(data){
-    var action=4;
-  $scope.newPackage = data;
+  $scope.addpackagetag = function(data) {
+    var action = 4;
+    $scope.newPackage = data;
     for (var i = 0; i < $scope.dataTag.length; i++) {
       $scope.dataTransport[i].id;
-      $http.post('../php/package.php',{'action':action,'package_id':$scope.newPackage[0].id,'tag_id':$scope.dataTransport[i].id})
-      .success(function(data){
-        console.log(data);
-      }).error(function(response){
-        console.log("No iserto package");
-      });
+      $http.post('../php/package.php', {
+          'action': action,
+          'package_id': $scope.newPackage[0].id,
+          'tag_id': $scope.dataTransport[i].id
+        })
+        .success(function(data) {
+          // console.log(data);
+        }).error(function(response) {
+          console.log("No iserto package");
+        });
     }
   }
-//funcion para obtener minnigth por location
-  $scope.getCountDays=function(id){
-    var cont=0;
-   for (var j = 0; j < $scope.days.length; j++) {
-     if ($scope.days[j].locationID == id) {
+  //funcion para obtener minnigth por location
+  $scope.getCountDays = function(id) {
+    var cont = 0;
+    for (var j = 0; j < $scope.days.length; j++) {
+      if ($scope.days[j].locationID == id) {
         cont++;
-     }//fin del if
-   }//fin for days
-   return cont;
-  }//end to getCountDays
+      } //fin del if
+    } //fin for days
+    return cont;
+  } //end to getCountDays
 
   //funcion para cantidad de excursiones por locacion
-    $scope.getCountProductEx=function(id){
-      var cont=0;
-     for (var j = 0; j < $scope.days.length; j++) {
+  $scope.getCountProductEx = function(id) {
+    var cont = 0;
+    for (var j = 0; j < $scope.days.length; j++) {
 
-       if ($scope.days[j].locationID == id && $scope.days[j].idproduct != null) {
+      if ($scope.days[j].locationID == id && $scope.days[j].idproduct != null) {
 
-          cont++;
-       }//fin del if
-     }//fin for days
-     return cont;
-    }//end to getCountDays
+        cont++;
+      } //fin del if
+    } //fin for days
+    return cont;
+  } //end to getCountDays
 
   //funcion para agregar packageroutes
-  $scope.packageroutes=function(data){
+  $scope.packageroutes = function(data) {
     $scope.newPackage = data;
-    var action=5;
+    var action = 5;
     var canditidadDias
     //console.log(data);
     for (var i = 0; i < $scope.newlocations.length; i++) {
       $scope.newlocations[i];
       //console.log($scope.newlocations[i]);
-      canditidadDias=$scope.getCountDays($scope.newlocations[i].location);
+      canditidadDias = $scope.getCountDays($scope.newlocations[i].location);
       // console.log("dias "+canditidadDias);
-      $http.post('../php/package.php',
-      {'action':action,
-      'package_id':$scope.newPackage[0].id,
-      'location_id':$scope.newlocations[i].id,
-      'position':$scope.newlocations[i].position,
-      'minnights':canditidadDias,
-      'acomodationid':$scope.newlocations[i].acomodationid
-    })
-      .success(function(data){
-        var id=$scope.idpackageroute=data;
-        $scope.packageroute_services($scope.idpackageroute[0].id);
-        $scope.packageroute_products($scope.idpackageroute[0].id,$scope.idpackageroute[0].acomodationid,$scope.idpackageroute[0].location_id);
-      }).error(function(response){
-        console.log("No iserto package");
-      });
-      //post
-    }//fin for locations
-  }
-//funcion insert packageroute_services
-  $scope.packageroute_services= function(id){
-    var action=6;
-      for (var i = 0; i < $scope.newlocations.length; i++) {
-          $scope.getCountProductEx($scope.newlocations[i].location);
-          var quantityAcomodation=$scope.getCountDays($scope.newlocations[i].location);
-         var quantity=($scope.getCountProductEx($scope.newlocations[i].location));
-
-         $http.post('../php/package.php',{'action':action,'packageroute_id':id,'quantityAcomodation':quantityAcomodation,'quantity':quantity})
-         .success(function(data){
-           // console.log(data);
-         }).error(function(response){
-           console.log("No iserto packageroute_services");
-         });
-
+      var position = $scope.newlocations[i].position;
+      if ($scope.newlocations[i].position == null) {
+        position = 0;
       }
-  }//fin de packageroute_services
-//funcion insert packageroute_products
-  $scope.packageroute_products=function(id,idacomodation,location_id){
-    var action=7;
+      $http.post('../php/package.php', {
+          'action': action,
+          'package_id': $scope.newPackage[0].id,
+          'location_id': $scope.newlocations[i].id,
+          'id_location': $scope.newlocations[i].location,
+          'position': position,
+          'minnights': canditidadDias,
+          'acomodationid': $scope.newlocations[i].acomodationid
+        })
+        .success(function(data) {
+          console.log(data);
+          var id = $scope.idpackageroute = data;
+          $scope.packageroute_services($scope.idpackageroute[0].id);
+          $scope.packageroute_products($scope.idpackageroute[0].id, $scope.idpackageroute[0].acomodationid, $scope.idpackageroute[0].id_location);
+        }).error(function(response) {
+          console.log("No iserto package");
+        });
+      //post
+    } //fin for locations
+  }
+  //funcion insert packageroute_services
+  $scope.packageroute_services = function(id) {
+    var action = 6;
+    for (var i = 0; i < $scope.newlocations.length; i++) {
+      $scope.getCountProductEx($scope.newlocations[i].location);
+      var quantityAcomodation = $scope.getCountDays($scope.newlocations[i].location);
+      var quantity = ($scope.getCountProductEx($scope.newlocations[i].location));
 
-for (var i = 0; i < $scope.days.length; i++) {
+      $http.post('../php/package.php', {
+          'action': action,
+          'packageroute_id': id,
+          'quantityAcomodation': quantityAcomodation,
+          'quantity': quantity
+        })
+        .success(function(data) {
+          // console.log(data);
+        }).error(function(response) {
+          console.log("No iserto packageroute_services");
+        });
 
-var idProduct=$scope.days[i].idproduct;
-if(idProduct==null)
-    idProduct=0;
-var day=$scope.days[i].day;
-// console.log("dia"+day);
-
-var datos={
-    'action':action,
-    'day':day,
-    'idProduct':idProduct,
-    'packageroutes':id,
-    'idacomodation':idacomodation
-}
-if(location_id==day){
-$http.post('../php/package.php',datos)
-.success(function(data){
-  console.log(data);
-}).error(function(response){
-  console.log("No iserto packageroute_services");
-});//post
-}//if
-}
-  }//fin funcion insert packageroute_products
-
+    }
+  } //fin de packageroute_services
+  //funcion insert packageroute_products
+  var peticiones = 0;
+  $scope.packageroute_products = function(id, idacomodation, id_location) {
+    var action = 7;
+    // console.log("PACKAGEID "+id+" ID ACOMODATION "+idacomodation+" location_id "+ id_location);
+    for (var i = 0; i < $scope.days.length; i++) {
+      if ($scope.days[i].locationID == id_location) {
+        peticiones++;
+        var datos = {
+          'action': action,
+          'day': $scope.days[i].day,
+          'packageroutes': id,
+          'idacomodation': idacomodation
+        }
+        $http.post('../php/package.php', datos)
+          .success(function(data) {
+            console.log(data);
+          }).error(function(response) {
+            console.log("No iserto packageroute_services");
+          }); //post
+        console.log("agregar packageroute" + id + " service_id" + 2 + " product_id " + idacomodation + " day " + $scope.days[i].day);
+        if ($scope.days[i].idproduct != null) {
+          $http.post('../php/package.php', {
+              'action': 8,
+              'day': $scope.days[i].day,
+              'idProduct': $scope.days[i].idproduct,
+              'packageroutes': id,
+            })
+            .success(function(data) {
+              console.log(data);
+            }).error(function(response) {
+              console.log("No iserto packageroute_services");
+            }); //post
+          console.log("agregar packageroute" + id + " service_id" + 3 + " product_id " + $scope.days[i].idproduct + " day " + $scope.days[i].day);
+        }
+      }
+    }
+  } //fin funcion insert packageroute_products
 
 });

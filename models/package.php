@@ -97,58 +97,59 @@ class Package extends Conexion
     $stmt->close();
     return 1;
   }
-//funcion para agregar addPackageroute
-function addPackageroute($package_id,$location_id,$position,$minnights,$acomodationid){
-  $stmt= $this->cone->prepare("INSERT IGNORE INTO packageroutes(package_id,location_id,position,minnights) VALUES(?,?,?,?)");
-  if($stmt === FALSE){
-    die("prepare() fail: ". $this->cone->error);
+  //funcion para agregar addPackageroute
+  function addPackageroute($package_id,$location_id,$id_location,$position,$minnights,$acomodationid){
+    $stmt= $this->cone->prepare("INSERT IGNORE INTO packageroutes(package_id,location_id,position,minnights) VALUES(?,?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iiii',$package_id,$location_id,$position,$minnights);
+    $stmt->execute();
+    $stmt->close();
+    $sql="SELECT (MAX(id)) AS id  FROM packageroutes";
+    $result = $this->cone->query($sql);
+    $array=array();
+    while($row = $result->fetch_assoc()){
+      $array[]=array(
+        'id'=>$row['id'],
+        'acomodationid'=>$acomodationid,
+        'location_id'=>$location_id,
+        'id_location'=>$id_location,
+      );
+    }//fin del while
+    if($result->num_rows > 0){
+      return json_encode($array);
+    }
+    $this->close();
     return false;
   }
-  $stmt->bind_param('iiii',$package_id,$location_id,$position,$minnights);
-  $stmt->execute();
-  $stmt->close();
-  $sql="SELECT (MAX(id)) AS id  FROM packageroutes";
-  $result = $this->cone->query($sql);
-  $array=array();
-  while($row = $result->fetch_assoc()){
-    $array[]=array(
-      'id'=>$row['id'],
-      'acomodationid'=>$acomodationid,
-      'location_id'=>$location_id,
-    );
-  }//fin del while
-  if($result->num_rows > 0){
-    return json_encode($array);
-  }
-  $this->close();
-  return false;
-}
 
-//funcion add addpackageroute_servicesAcomodation
-function addpackageroute_services($packageroute_id,$service_id,$quantity){
-  $stmt= $this->cone->prepare("INSERT IGNORE INTO packageroute_services(packageroute_id,service_id,quantity) VALUES(?,?,?)");
-  if($stmt === FALSE){
-    die("prepare() fail: ". $this->cone->error);
-    return false;
-  }
-  $stmt->bind_param('iii',$packageroute_id,$service_id,$quantity);
-  $stmt->execute();
-  $stmt->close();
-  return 1;
-}//fin de addpackageroute_services
+  //funcion add addpackageroute_servicesAcomodation
+  function addpackageroute_services($packageroute_id,$service_id,$quantity){
+    $stmt= $this->cone->prepare("INSERT IGNORE INTO packageroute_services(packageroute_id,service_id,quantity) VALUES(?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iii',$packageroute_id,$service_id,$quantity);
+    $stmt->execute();
+    $stmt->close();
+    return 1;
+  }//fin de addpackageroute_services
 
-//funcion add addpackageroute_products
-function addpackageroute_products($packageroutes,$service_id,$product_id,$day){
-  $stmt= $this->cone->prepare("INSERT IGNORE INTO packageroute_products(packageroute_id,service_id,product_id,day) VALUES(?,?,?,?)");
-  if($stmt === FALSE){
-    die("prepare() fail: ". $this->cone->error);
-    return false;
+  //funcion add addpackageroute_products
+  function addpackageroute_products($packageroutes,$service_id,$product_id,$day){
+    $stmt= $this->cone->prepare("INSERT IGNORE INTO packageroute_products(packageroute_id,service_id,product_id,day) VALUES(?,?,?,?)");
+    if($stmt === FALSE){
+      die("prepare() fail: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('iiii',$packageroutes,$service_id,$product_id,$day);
+    $stmt->execute();
+    $stmt->close();
+    return 1;
   }
-  $stmt->bind_param('iiii',$packageroutes,$service_id,$product_id,$day);
-  $stmt->execute();
-  $stmt->close();
-  return 1;
-}
 
 }//fin
 

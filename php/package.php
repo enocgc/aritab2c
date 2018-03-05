@@ -32,12 +32,13 @@ switch ($action) {
   case 5:
   $package_id= $data->package_id;
   $location_id= $data->location_id;
+  $id_location= $data->id_location;
   $position= $data->position;
   $minnights = $data->minnights;
   $acomodationid = $data->acomodationid;
   //echo "id ".$package_id." ".$location_id." ".$position." ".$minnights;
   $bd = new Package();
-  echo $bd->addPackageroute($package_id,$location_id,$position,$minnights,$acomodationid);
+  echo $bd->addPackageroute($package_id,$location_id,$id_location,$position,$minnights,$acomodationid);
   break;
   case 6:
   $packageroute_id= $data->packageroute_id;
@@ -49,13 +50,19 @@ switch ($action) {
   echo $bd->addpackageroute_services($packageroute_id,3,$quantity);
   break;
   case 7:
-  $idProduct= $data->idProduct;
   $day= $data->day;
   $packageroutes= $data->packageroutes;
   $idacomodation= $data->idacomodation;
-  echo "idProduct ".$idProduct." day ". $day."packageroutes ".$packageroutes." idacomodation ".$idacomodation;
+  //echo " day ". $day."packageroutes ".$packageroutes." idacomodation ".$idacomodation;
   $bd = new Package();
   echo $bd->addpackageroute_products($packageroutes,2,$idacomodation,$day);
+  break;
+  case 8:
+  $idProduct= $data->idProduct;
+  $day= $data->day;
+  $packageroutes= $data->packageroutes;
+  //echo "idProduct ".$idProduct." day ". $day."packageroutes ".$packageroutes;
+  $bd = new Package();
   echo $bd->addpackageroute_products($packageroutes,3,$idProduct,$day);
   break;
   default:
