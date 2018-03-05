@@ -65,6 +65,21 @@ switch ($action) {
   $bd = new Package();
   echo $bd->addpackageroute_products($packageroutes,3,$idProduct,$day);
   break;
+  case 9:
+  $bd = new Package();
+  echo $bd->getPackage();
+  break;
+  case 10:
+  $id = $data->id;
+  $enabled = $data->enabled;
+  $bd = new Package();
+  echo $bd->changeEnabled($id,$enabled);
+  break;
+  case 11:
+  $id = $data->id;
+  $bd = new Package();
+  $bd->deletePackage($id);
+  break;
   default:
 }
 

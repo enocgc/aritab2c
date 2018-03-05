@@ -9,20 +9,9 @@ class Package extends Conexion
     parent::__construct(__HOST__, __USER__, __PASSWD__, __DB_NAME__);
   }//fin del constructor
 
-  function changeEnabled($id,$enabled){
-    $stmt=$this->cone->prepare("UPDATE products SET enabled=? WHERE id=?");
-    if($stmt === FALSE){
-      die("prepare() fail modificar: ". $this->cone->error);
-      return false;
-    }
-    $stmt->bind_param('ss',$enabled,$id);
-    $stmt->execute();
-    $stmt->close();
-    return true;
-  }# fin del metodo modificar.
 
-  function deleteProduct($id){
-    $stmt=$this->cone->prepare("DELETE FROM products WHERE id=?");
+  function deletePackage($id){
+    $stmt=$this->cone->prepare("DELETE FROM packages WHERE id=?");
     if($stmt === FALSE){
       die("prepare() fail eliminar: ". $this->cone->error);
       return 0;
@@ -33,6 +22,63 @@ class Package extends Conexion
     return 1;
   }# fin del metodo eliminar.
 
+  function changeEnabled($id,$enabled){
+    $stmt=$this->cone->prepare("UPDATE packages SET enabled=? WHERE id=?");
+    if($stmt === FALSE){
+      die("prepare() fail modificar: ". $this->cone->error);
+      return false;
+    }
+    $stmt->bind_param('ss',$enabled,$id);
+    $stmt->execute();
+    $stmt->close();
+    return true;
+  }# fin del metodo modificar.
+
+  function getPackage(){
+    //SELECT a.name,a.id, b.startdate,b.enddate FROM seasons AS a, seasonperiods AS b WHERE a.id=b.season_id ORDER BY a.id
+    $sql="SELECT DISTINCT
+  packagedetails.name,
+  packagedetails.description,
+  countrydetails.name AS name1,
+  packages.id,
+  packages.enabled,
+  Count(DISTINCT packageroute_products.day) AS Count_day
+FROM
+  packages
+  INNER JOIN packagedetails ON packagedetails.package_id = packages.id
+  INNER JOIN packageroutes ON packageroutes.package_id = packages.id
+  INNER JOIN locations ON packageroutes.location_id = locations.id
+  INNER JOIN countrydetails ON countrydetails.country_id = locations.country_id
+  INNER JOIN packageroute_products ON packageroute_products.packageroute_id = packageroutes.id
+WHERE
+  packagedetails.language_id = 1 AND
+  countrydetails.language_id = 1
+GROUP BY
+  packagedetails.name,
+  packagedetails.description,
+  countrydetails.name,
+  packages.id,
+  packages.enabled";
+    $result = $this->cone->query($sql);
+    $array=array();
+    while($row = $result->fetch_assoc()){
+      $array[]=array(
+        'id'=>$row['id'],
+        'name'=>$row['name'],
+        'country'=>$row['name1'],
+        'description'=> $row['description'],
+          'enabled'=> $row['enabled'],
+            'days'=> $row['Count_day'],
+      );
+    }//fin del while
+    //return "texto";
+     if($result->num_rows > 0){
+    return json_encode($array);
+     }
+    $this->close();
+    //return $variable;
+   return false;
+  }# fin del metodo consulta
 
   //funcion para insertar y obtener id
   function addPackage(){

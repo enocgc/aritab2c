@@ -5,7 +5,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   getTags();
   getLocation();
   getService();
-
+  getPackage();
   function getLanguage() {
     var action = 2;
     //console.log(action);
@@ -17,6 +17,77 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
       }).error(function(response) {
         console.log("No se get el Language");
       });
+  }
+
+  function getPackage(){
+    var action=9;
+    //  console.log(action);
+    $http.post('../php/package.php', {'action':action})
+    .success(function(data){
+      $scope.packages = data;
+      console.log(data);
+      //console.log(data);
+      console.log("get package");
+    }).error(function(response){
+        console.log("No se get  package");
+    });
+  }
+
+  $scope.changeenabled = function(id,enabled){
+    var estado;
+    if(enabled==0){
+       estado=1;
+    }else{
+       estado=0;
+    }
+    var action=10;
+      console.log("ID" +id+" enabled "+estado);
+    $http.post('../php/package.php', {'action':action,'id':id,'enabled':estado})
+    .success(function(data){
+      getPackage();
+      $.toast({
+      heading: 'Success',
+      text: 'Change state.',
+      showHideTransition: 'slide',
+      icon: 'success'
+    });
+    }).error(function(response){
+      $.toast({
+        heading: 'Error',
+        text: 'Not Change state.',
+        showHideTransition: 'fade',
+        icon: 'error'
+    });
+    });
+  }//fin funcioncambiar estado
+
+  //funcion para eliminar por id
+  $scope.deletePackage = function(id){
+      console.log("id package:  "+id);
+    var action=11;
+    console.log(action);
+    $("#confirmdelete").click(function(){
+      $http.post("../php/package.php",{'action':action,'id':id})
+      .success(function(data){
+        setTimeout(function () {//para que actualice los campos de forma eficiente
+            $scope.$apply(function () {
+              if(data=1){
+                getPackage();
+                $.toast({
+                  heading: 'Success',
+                  text: 'Delete Package.',
+                  showHideTransition: 'fade',
+                  icon: 'error'
+              });
+              }else{
+                      console.log("Presento un error al eliminar ");
+              }
+
+            });
+        }, 300);
+        //console.log("id season:  "+id);
+      });
+    });
   }
 
   function getTransport() {
