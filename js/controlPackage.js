@@ -345,6 +345,13 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
         $scope.addpackagetransport(data);
         $scope.addpackagetag(data);
         $scope.packageroutes(data);
+        $.toast({
+        heading: 'Success',
+        text: 'Add Package.',
+        showHideTransition: 'slide',
+        icon: 'success'
+      });
+      getPackage();
       }).error(function(response) {
         console.log("No iserto package");
       });

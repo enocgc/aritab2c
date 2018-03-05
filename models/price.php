@@ -16,7 +16,8 @@ require_once ("../includes/constantes.php");
   transporttypedetail.name AS name1,
   seasons.name AS name2,
   seasonperiods.startdate,
-  seasonperiods.enddate
+  seasonperiods.enddate,
+  prices.price
 FROM
   prices
   INNER JOIN servicedetails ON servicedetails.service_id = prices.service_id
@@ -29,7 +30,8 @@ FROM
   INNER JOIN packages ON package_transportoptions.package_id = packages.id
 WHERE
   servicedetails.language_id = 1 AND
-  transporttypedetail.language_id = 1";
+  transporttypedetail.language_id = 1 AND
+  packages.id = 1";
       $result = $this->cone->query($sql);
       $array=array();
       while($row = $result->fetch_assoc()){
@@ -41,6 +43,7 @@ WHERE
           'name2'=>$row['name2'],
           'startdate'=>$row['startdate'],
           'enddate'=>$row['enddate'],
+          'price'=>$row['price'],
         );
       }//fin del while
       //return "texto";

@@ -7,7 +7,7 @@ var action=1;
  $http.post('../php/price.php', {'action':action})
  .success(function(data){
   $scope.convinations = data;
- console.log(data);
+ // console.log(data);
  }).error(function(response){
 
  });
