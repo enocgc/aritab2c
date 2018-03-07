@@ -10,6 +10,7 @@ $scope.paxs;
     $http.post('../php/paxocupation.php', {'action':action})
     .success(function(data){
       $scope.paxs = data;
+      console.log(data);
     }).error(function(response){
         console.log("No se get  pax");
     });

@@ -106,6 +106,17 @@ require_once ("../includes/constantes.php");
     return 1;
   }// end to addCountryMedia
 
+function updateCountryMedia($country_id,$media_id,$template_id,$position){
+   $stmt= $this->cone->prepare("INSERT INTO country_media(country_id,media_id,template_id,position) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE country_id=?");
+   if($stmt === FALSE){
+     die("prepare() fail: ". $this->cone->error);
+     return false;
+   }
+   $stmt->bind_param('iiiii',$country_id,$media_id,$template_id,$position,$country_id);
+   $stmt->execute();
+   $stmt->close();
+}// end to addCountryMedia
+
   function getCountry($id){
     $sql="SELECT * FROM countries WHERE id=$id";
     $result = $this->cone->query($sql);
@@ -164,7 +175,7 @@ require_once ("../includes/constantes.php");
     return true;
   }// fin de getCountry
 
-  function updateCountry($id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position){
+  function updateCountry($id,$gpslat,$gpslong,$gpszoom){
      $stmt=$this->cone->prepare("UPDATE countries SET gpslat=?,gpslong=?,gpszoom=? WHERE id=?");
       if($stmt === FALSE){
         die("prepare() fail modificar: ". $this->cone->error);
@@ -174,15 +185,6 @@ require_once ("../includes/constantes.php");
       $stmt->execute();
       $stmt->close();
 
-
-      $stmt=$this->cone->prepare("UPDATE country_media SET media_id=?,template_id=?,position=? WHERE country_id=?");
-      if($stmt === FALSE){
-        die("prepare() fail modificar: ". $this->cone->error);
-        echo 0;
-      }
-      $stmt->bind_param('iiii',$media_id,$template_id,$position,$id);
-      $stmt->execute();
-      $stmt->close();
       return true;
   }//end to updateCountry
   function updateCountryDetails($country_id,$language_id,$name,$description){

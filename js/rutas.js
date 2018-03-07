@@ -1,5 +1,4 @@
-appRouter.config(function($routeProvider) {
-
+appRouter.config(function ($routeProvider) {
     $routeProvider
     .when("/listproduct", {
         templateUrl : "listproduct.html",
@@ -12,6 +11,9 @@ appRouter.config(function($routeProvider) {
     .when("/contrieslist", {
         templateUrl : "listcountries.html",
          controller  : 'controlCountries'
+    }).when("/editcountry/:id", {
+        templateUrl : "editcountry.html",
+        controller  : 'controlCountries'
     })
     .when("/locationlist", {
         templateUrl : "listlocations.html",
@@ -39,8 +41,16 @@ appRouter.config(function($routeProvider) {
         templateUrl : "addlocation.html",
          controller  : 'controlLocations'
     })
+    .when("/editlocation/:id", {
+        templateUrl : "editlocation.html",
+         controller  : 'controlLocations'
+    })
 		.when("/addproduct", {
         templateUrl : "addproduct.html",
+           controller  : 'controlProduct'
+    })
+    .when("/editproduct/:id", {
+        templateUrl : "editproduct.html",
            controller  : 'controlProduct'
     })
 		.when("/addpackage", {
@@ -68,7 +78,7 @@ appRouter.config(function($routeProvider) {
     }).when("/listpaxocupation", {
         templateUrl : "listpaxocupation.html",
         controller  : 'controlPaxOcupation'
-    }).when("/price", {
+    }).when("/price/:id", {
         templateUrl : "price.html",
         controller  : 'controlPrice'
     })

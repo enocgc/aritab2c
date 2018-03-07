@@ -35,10 +35,10 @@
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Media</label>
 							<div class="uk-form-controls">
-								<img src="http://fakeimg.pl/120x120/" alt="" id="img">
+								<img src="http://fakeimg.pl/120x120/" alt="" id="imgCountry" width="140" style="max-width:140px;heigth:auto;">
 								&nbsp;&nbsp;
 								<!-- <button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button> -->
-								<button class="uk-button" type="button" onclick="alert('Boton media')"id="btnGetApiMediaB" ><span uk-icon="icon: image"></span> Select Media</button>
+								<button class="uk-button" type="button" id="btnGetApiMediaB" ng-click="lcMedia()" ><span uk-icon="icon: image"></span> Select Media</button>
 							</div>
 						</div>
 						<div class="uk-margin">
@@ -51,7 +51,7 @@
 						<div class="uk-margin">
 							 <label class="uk-form-label" for="form-stacked-text">Position</label>
 							<div class="uk-form-controls">
-							<input class="uk-input" type="text" ng-model="position" value="0"/>
+							<input class="uk-input" type="number" min="0" ng-model="position" value="0"/>
 							</div>
 						</div>
 					</div>
@@ -89,5 +89,7 @@
 	</div>
 	<script type="text/javascript">
 		initialize();
+
+
 	</script>
 </div>

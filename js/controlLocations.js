@@ -1,4 +1,4 @@
-appRouter.controller('controlLocations',function($scope,$http,$timeout){
+appRouter.controller('controlLocations',function($scope,$http,$timeout,$routeParams){
 $scope.locations;
 $scope.languages;
 $scope.countries;
@@ -219,5 +219,9 @@ $scope.addLocation=function(){
       console.log("No se obtuvieron los countries");
   });
 }//end o addLocation
+if($routeParams.id!=null){
+  $scope.idLocation=$routeParams.id;
+  $scope.getEditLocation($scope.idLocation);
 
+}
 });// FIN  del controlador

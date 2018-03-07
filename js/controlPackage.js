@@ -4,7 +4,6 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
   getTransport();
   getTags();
   getLocation();
-  getService();
   getPackage();
   function getLanguage() {
     var action = 2;
@@ -25,7 +24,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     $http.post('../php/package.php', {'action':action})
     .success(function(data){
       $scope.packages = data;
-      console.log(data);
+    //  console.log(data);
       //console.log(data);
       console.log("get package");
     }).error(function(response){
@@ -138,17 +137,6 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
       }).error(function(response) {});
   }
 
-  function getService() {
-    var action = 12;
-    //  console.log(action);
-    $http.post('../php/product.php', {
-        'action': action
-      })
-      .success(function(data) {
-        //console.log(data);
-        $scope.services = data;
-      }).error(function(response) {});
-  }
   //funcion para obtener los acomodation
   function getProductAcomodation(id) {
     var action = 19;
@@ -332,7 +320,10 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
     }
   } //fin add product por dia
 
+$scope.gotoprice=function(id){
 
+  window.location.replace("#price/"+id);
+}
   //funcion para agregar paquete
   $scope.addPackage = function() {
 
@@ -352,6 +343,10 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
         icon: 'success'
       });
       getPackage();
+      //$scope.idTansport=data[0].id; enviar  id a otra
+
+       //$rootScope.appName=data[0].id;
+        window.location.replace("#price/"+data[0].id);
       }).error(function(response) {
         console.log("No iserto package");
       });
@@ -469,7 +464,7 @@ appRouter.controller('controlPackage', function($scope, $http, $timeout, $rootSc
         })
         .success(function(data) {
           console.log(data);
-          var id = $scope.idpackageroute = data;
+          // var id = $scope.idpackageroute = data;
           $scope.packageroute_services($scope.idpackageroute[0].id);
           $scope.packageroute_products($scope.idpackageroute[0].id, $scope.idpackageroute[0].acomodationid, $scope.idpackageroute[0].id_location);
         }).error(function(response) {

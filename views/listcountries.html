@@ -1,11 +1,6 @@
 
 
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#countries').DataTable();
-} );
 
-</script>
 
 <div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlCountries">
     <div class="uk-background-muted uk-padding uk-panel">
@@ -44,7 +39,7 @@ $(document).ready(function() {
                     <td >
                       <a ng-click="changeenabled(country.id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 0"><i class="fas fa-eye-slash fa-lg"></i></a>
                       <a ng-click="changeenabled(country.id,country.enabled)" class="toggle-eye0" ng-if="country.enabled == 1"><i class="fas fa-eye fa-lg"></i></a>
-                      <a ng-click="getEditCountry(country.id)" href="#edit-country" uk-toggle>  <i class="fas fa-edit fa-lg" ></i></a>
+                      <a ng-click="getEditCountry(country.id)" href="#editcountry/{{country.id}}"  >  <i class="fas fa-edit fa-lg" ></i></a>
                       <a ng-click="deleteCountry(country.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a>
                     </td>
                     <td>
@@ -74,105 +69,6 @@ $(document).ready(function() {
             </div>
         </div>
     </div><!-- fin del modal -->
-
-  <!--MODAL UPDATE Country-->
-    <div class="uk-modal-container" id="edit-country" uk-modal>
-        <div class="uk-background-muted uk-padding uk-modal-dialog">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="">
-                <h3>Edit Country</h3>
-                <form method="post" class="uk-form-horizontal ">
-                    <div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
-                        <div>
-                            <div class="uk-margin ">
-                               <label class="uk-form-label" >Name</label>
-                              <div class="uk-form-controls">
-                                <ul uk-tab>
-                                  <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
-                                </ul>
-                                <ul class="uk-switcher uk-margin">
-                                  <li  ng-repeat="language in languages">
-                                    <input class="uk-input" type="text" placeholder="{{language.name}}" id="nameE-{{language.id}}">
-                                  </li>
-
-                                </ul>
-                              </div>
-                            </div>
-                            <div class="uk-margin">
-                                <label class="uk-form-label" for="form-stacked-text">Description</label>
-                                <div class="uk-form-controls">
-                                  <ul uk-tab>
-                                    <li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
-                                  </ul>
-                                  <ul class="uk-switcher uk-margin">
-                                    <li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="descriptionE-{{language.id}}"></textarea></li>
-                                  </ul>
-
-                                </div>
-                            </div>
-                           
-                        </div>
-                           <div>
-                              <div class="uk-margin">
-                                 <label class="uk-form-label" for="form-stacked-text">Media</label>
-                                <div class="uk-form-controls">
-                                  <img src="http://fakeimg.pl/120x120/" alt="" id="img">
-                                  &nbsp;&nbsp;
-                                  <!-- <button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button> -->
-                                  <button class="uk-button" type="button" onclick="alert('Boton media')"><span uk-icon="icon: image"></span> Select Media</button>
-                                </div>
-                              </div>
-                              <div class="uk-margin">
-                                 <label class="uk-form-label" for="form-stacked-text">Template</label>
-                                <div class="uk-form-controls">
-                                             <select class="uk-select" ng-model="data" ng-options="opt as opt.label for opt in units ">
-                                            </select>
-                                </div>
-                              </div>
-                              <div class="uk-margin">
-                                 <label class="uk-form-label" for="form-stacked-text">Position</label>
-                                <div class="uk-form-controls">
-                                <input class="uk-input" type="text" ng-model="position" value="0"/>
-                                </div>
-                              </div>
-                          </div>
-                          <!--mapa  -->
-                          <div class="uk-width-1-2@m uk-text-center">
-                            <label class="uk-form-label" for="form-stacked-text">Latitude</label>
-                          <div class="uk-form-controls">
-                            <input id="lat" class="uk-input" type="text" ng-model="latitude" value="0"/>
-                          </div>
-                          </div>
-                          <div class="uk-width-1-2@m uk-text-center">
-                            <label class="uk-form-label" for="form-stacked-text">Longitude</label>
-                           <div class="uk-form-controls">
-                             <input id="lng" class="uk-input" type="text" ng-model="longitude" value="0"/>
-                           </div>
-                          </div>
-                          <div class="uk-width-1-2@m uk-text-center">
-                            <label class="uk-form-label" for="form-stacked-text">Zoom</label>
-                           <div class="uk-form-controls">
-                             <input id="zoom" class="uk-input" type="text" ng-model="zoom" value="0"/>
-                           </div>
-                          </div>
-                          <div class="uk-width-1-1 uk-text-center">
-                            <div class="contenedormapa">
-                                <div id="map-canvas"/>
-                              </div>
-                        </div>
-                        <script type="text/javascript">
-                        initialize();
-                        </script>
-                          <!-- endmapa -->
-                        <div class="uk-width-1-1 uk-text-center">
-                            <button class="uk-button uk-button-primary "  ng-click="updateCountry();" type="button">Save</button>
-                            <a class="uk-button uk-button-danger uk-modal-close" type="button" >Cancel</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 <!-- ultima etiqueta -->
 </div>

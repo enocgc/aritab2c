@@ -14,6 +14,12 @@ appRouter.controller('controlSeason',function($scope,$http,$timeout){
         console.log("No se get el Season");
     });
   }
+
+  $scope.getyear=function(){
+    var year = (new Date()).getFullYear();
+  $scope.name=year;
+    $("#year2").attr('value',year);
+  }
   $scope.years;
 
   function getYears(){

@@ -1,9 +1,5 @@
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#price').DataTable();
-} );
-</script>
-<div class="uk-section uk-padding" id="contenedor-1" data-ng-controller="controlPackage">
+
+<div class="uk-section uk-padding" data-ng-controller="controlPackage">
     <div class="uk-background-muted uk-padding uk-panel">
         <div class="uk-container uk-container-expand">
             <h3>Prices</h3>
@@ -12,6 +8,31 @@ $(document).ready(function() {
             <table  datatable="ng" ng-if="convinations.length" id="price" class="display uk-table uk-table-striped" cellspacing="0" width="100%"  ui-jq="dataTable" ui-options="dataTableOpt">
           <!-- <table id="example" class="display uk-table uk-table-striped" cellspacing="0" width="100%"> -->
           <thead>
+              <tr style="background-color: #82becc21;">
+                  <td ><center><a  ng-click="addPrice(selectedService.id,dataPax.id,dataTransport.packtransid,dataSeason.id,price)" >  <i class="fas fa-plus fa-lg"></i></a></center></td>
+                  <td><select class="uk-select" id="selectedService"ng-model="selectedService" ng-options="service.name for service in services">
+                      <option value="">service</option>
+                  </select></td>
+                  <td><select class="uk-select" ng-model="dataPax" ng-options="pax as pax.occupation_id for pax in paxs ">
+                      <option value="">Pax Occupation</option>
+                  </select></td>
+                  <td><select class="uk-select" ng-model="dataPax" ng-options="pax as pax.pax for pax in paxs ">
+                      <option value="">Pax</option>
+                  </select></td>
+                  <td><select class="uk-select" ng-model="dataTransport" ng-options="transportP as transportP.name for transportP in transportPs ">
+                      <option value="">Transport</option>
+                  </select></td>
+                  <td><select class="uk-select" ng-model="dataSeason" ng-options="season as season.name for season in seasons ">
+                      <option value="">Year</option>
+                  </select></td>
+                  <td><select class="uk-select" ng-model="dataSeason" ng-options="season as season.startdate for season in seasons ">
+                      <option value="">StarDate</option>
+                  </select></td>
+                  <td><select class="uk-select" ng-model="dataSeason" ng-options="season as season.enddate for season in seasons ">
+                      <option value="">EndDate</option>
+                  </select></td>
+                  <td><input class="uk-input" min="0"type="number" ng-model="price" placeholder="$"/></td>
+              </tr>
           <tr>
               <th>Actions</th>
               <th>Service</th>
@@ -39,9 +60,8 @@ $(document).ready(function() {
           </tfoot>
           <tbody>
               <tr ng-repeat="convination in convinations">
-                  <td ><a ng-click="savePrice(product.id)" href="#edit-product" uk-toggle>  <i class="fas fa-save fa-lg" ></i></a>
-           <a ng-click="editPrice(product.id)">  <i class="fas fa-edit fa-lg" ></i></a>
-           <a  ng-click="deletePrice(package.id)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
+                  <td ><a ng-click="savePrice(convination.serviceid,convination.paxocupationid,convination.packagetransportid,convination.seasonperiodid,convination.price)">  <i class="fas fa-save fa-lg" ></i></a>
+           <a  ng-click="deletePrice(convination.serviceid,convination.paxocupationid,convination.packagetransportid,convination.seasonperiodid)" href="#modal-delete" uk-toggle >  <i class="fas fa-trash fa-lg"></i></a></td>
                   <td>{{convination.name}}</td>
                   <td>{{convination.occupation}}</td>
                   <td>{{convination.pax}}</td>
@@ -49,10 +69,25 @@ $(document).ready(function() {
                   <td>{{convination.name2}}</td>
                   <td>{{convination.startdate}}</td>
                   <td>{{convination.enddate}}</td>
-                  <td><input class="uk-input" type="text" ng-model="convination.price" /></td>
+                  <td><input class="uk-input" min="0" type="text" ng-model="convination.price" value=""/></td>
               </tr>
           </tbody>
           </table>
         </div>
     </div>
+
+    <!--MODAL DELETE -->
+    <div id="modal-delete" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <a  id="confirmdelete" class="uk-button uk-button-danger  uk-modal-close"><i class="fas fa-trash-alt fa-lg"></i> Delete</a>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button"><i class="fas fa-times fa-lg" ></i> Cancel</button>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -9,7 +9,7 @@ require_once ("../includes/constantes.php");
      parent::__construct(__HOST__, __USER__, __PASSWD__, __DB_NAME__);
 	}//fin del constructor
   function addSeason($name){
-      $stmt= $this->cone->prepare("INSERT INTO seasons(name) VALUES(?)");
+      $stmt= $this->cone->prepare("INSERT IGNORE INTO seasons(name) VALUES(?)");
 
       if($stmt === FALSE){
         die("prepare() fail: ". $this->cone->error);
@@ -22,7 +22,7 @@ require_once ("../includes/constantes.php");
     }#fin del metodo incluirusuario
 
     function addSeasonPeriods($id,$stardate,$enddate){
-        $stmt= $this->cone->prepare("INSERT INTO seasonperiods(season_id,startdate,enddate) VALUES(?,?,?)");
+        $stmt= $this->cone->prepare("INSERT IGNORE INTO seasonperiods(season_id,startdate,enddate) VALUES(?,?,?)");
 
         if($stmt === FALSE){
           die("prepare() fail: ". $this->cone->error);

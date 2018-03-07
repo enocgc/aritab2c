@@ -41,7 +41,6 @@
 <script src="http://root.latinconnect.com/assets/plugins/select2/select2.min.js"></script> <!-- Select Inputs -->
 <script src="http://root.latinconnect.com/assets/plugins/bootstrap-tags-input/bootstrap-tagsinput.min.js"></script> <!-- Select Inputs -->
 <script src="http://root.latinconnect.com/assets/plugins/bootstrap-loading/lada.min.js"></script> <!-- Buttons Loading State -->
-<script src="http://root.latinconnect.com/assets/plugins/timepicker/jquery-ui-timepicker-addon.min.js"></script> <!-- Time Picker -->
 <script src="http://root.latinconnect.com/assets/plugins/multidatepicker/multidatespicker.min.js"></script> <!-- Multi dates Picker -->
 <script src="http://root.latinconnect.com/assets/plugins/colorpicker/spectrum.min.js"></script> <!-- Color Picker -->
 <script src="http://root.latinconnect.com/assets/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script> <!-- A mobile and touch friendly input spinner component for Bootstrap -->
@@ -94,19 +93,29 @@ jQuery(document).ready(function(){
     jQuery('button').tooltip();
 
     /*Call LC Media*/
-    jQuery('#btnGetApiMediaA').click(function(){
-        jQuery('#insert-media').lcMedia({
-            ids:[],
-            selectedFiles:[73,50],
-            templates:[19,21],
-            multiselected: true,
-            language:1,
-            urls:true,
-            partner:[1],
-            callback: function(){
-            }
-        });
-    });
+    /*Call LC Media*/
+      var arregloids=[];
+          jQuery('#btnGetApiMediaA').click(function(){
+              jQuery('#insert-media').lcMedia({
+                  ids:[],
+                  selectedFiles:[73,50],
+                  templates:[19,21],
+                  multiselected: true,
+                  language:1,
+                  urls:true,
+                  partner:[1],
+                  callback: function(){
+
+  		    /*Evento para poder captar los ids seleccionados*/
+                      jQuery('[id^="returnMedia"]').click(function(){
+                          console.log(jQuery('#LC_MediaModal').attr('data-selectedfiles'));
+arregloids=(jQuery('#LC_MediaModal').attr('data-selectedfiles')).split(",")
+console.log(arregloids);
+                      });
+
+                  }
+              });
+          });
 
     /*Call LC Media*/
     jQuery('#btnGetApiMediaB').click(function(){
@@ -120,10 +129,23 @@ jQuery(document).ready(function(){
             urls:true,
             partner:[1],
             callback: function(){
-            }
-        });
-    });
+              /*Evento para poder captar los ids seleccionados*/
+                          jQuery('[id^="returnMedia"]').click(function(){
+                            var id=(jQuery('#LC_MediaModal').attr('data-selectedfiles'));
+    arregloids=(jQuery('#LC_MediaModal').attr('data-selectedfiles')).split(",");
+      datos = jQuery('#insert-media').getMediaURL({
+          pairIds:[
+          {'id':id,'temp':21},
+          {'id':id,'temp':19}
+          ]
+      });
+      console.log(datos);
 
+                          });
+
+                      }
+                  });
+              });
     /*Get media selected*/
     jQuery('#btnGetdataFilesA').click(function(){
         var datos = jQuery('#insert-media').getMediaSelected();

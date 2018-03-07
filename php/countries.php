@@ -70,11 +70,8 @@ switch ($action) {
   $gpslat= $data->gpslat;
   $gpslong= $data->gpslong;
   $gpszoom= $data->gpszoom;
-  $media_id= $data->media_id;
-  $template_id= $data->template_id;
-  $position= $data->position;
   $bd = new Countries();
-  echo $bd->updateCountry($id,$gpslat,$gpslong,$gpszoom,$media_id,$template_id,$position);
+  echo $bd->updateCountry($id,$gpslat,$gpslong,$gpszoom);
   break;
   case 11:
   // update countrydetails
@@ -85,7 +82,15 @@ switch ($action) {
   $bd = new Countries();
   echo $bd->updateCountryDetails($country_id,$language_id,$name,$description);
   break;
-
+  case 12:
+  // update countrydetails
+  $country_id= $data->country_id;
+  $media_id = $data->media_id;
+  $template_id= $data->template_id;
+  $position= $data->position;
+  $bd = new Countries();
+  echo $bd->updateCountryMedia($country_id,$media_id,$template_id,$position);
+  break;
 }
 
 ?>

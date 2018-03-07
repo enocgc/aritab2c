@@ -1,5 +1,5 @@
 //cree los controladores
-appRouter.controller('controlProduct',function($scope,$http,$timeout){
+appRouter.controller('controlProduct',function($scope,$http,$timeout,$routeParams){
   console.log("products run");
   getProduct();
   getLanguage();
@@ -341,5 +341,10 @@ for (var i = 0; i <  $scope.languages.length; i++) {
 
 }// end to update country
 
+if($routeParams.id!=null){
+  $scope.idProduct=$routeParams.id;
+  $scope.getEditProduct($scope.idProduct);
+
+}
 
 });

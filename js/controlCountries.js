@@ -1,9 +1,98 @@
-appRouter.controller('controlCountries',function($scope,$http,$timeout){
+appRouter.controller('controlCountries',function($scope,$http,$timeout,$routeParams){
 $scope.countries;
 $scope.languages;
 
 getCountries();
 getLanguage();
+/*Call LC Media*/
+$scope.mediaid;
+$scope.template;
+$scope.lcMediaE=function(id){
+  console.log("edit media");
+  jQuery('#insert-media').lcMedia({
+    ids:[],
+    filetype:'all',
+    selectedFiles:[id],
+    templates:[19,21],
+    multiselected: false,
+    language:1,
+    urls:true,
+    partner:[1],
+    callback: function(){
+      /*Evento para poder captar los ids seleccionados*/
+      jQuery('[id^="returnMedia"]').click(function(){
+      var select=parseInt(jQuery('#LC_MediaModal').attr('data-selectedfiles'));
+      $scope.mediaidE=select;
+      console.log(select);
+      var id=(jQuery('#LC_MediaModal').attr('data-selectedfiles')).split(",");
+      $scope.templateE=21;
+      //arregloids=(id+","+template).split(",");
+      // $scope.media=arregloids;
+      jQuery('#insert-media').sendTemplatesToImage({
+          id:select,
+          templateIds:[21],
+          callback: function(){
+              values = JSON.parse(jQuery('#insert-media').attr('data-templatesToImage'));
+              console.log('File id: '+values[0].id+'\n');
+              console.log('Template id: '+values[0].template_id+'\n');
+              console.log('Url: '+values[0].url+'\n');
+              $("#imgCountryE").attr("src",values[0].url);
+          }
+      });
+
+      var datos = jQuery('#insert-media').getMediaURL({
+        pairIds:[
+        {'id':select,'temp':21}
+        ]
+      });
+      console.log(datos);
+      });
+
+    }
+  });
+}
+$scope.lcMedia=function(){
+  jQuery('#insert-media').lcMedia({
+    ids:[],
+    filetype:'all',
+    selectedFiles:[],
+    templates:[19,21],
+    multiselected: false,
+    language:1,
+    urls:true,
+    partner:[1],
+    callback: function(){
+      /*Evento para poder captar los ids seleccionados*/
+      jQuery('[id^="returnMedia"]').click(function(){
+      var select=parseInt(jQuery('#LC_MediaModal').attr('data-selectedfiles'));
+      console.log(select);
+        var id=(jQuery('#LC_MediaModal').attr('data-selectedfiles')).split(",");
+        $scope.template=21;
+      //arregloids=(id+","+template).split(",");
+      // $scope.media=arregloids;
+      jQuery('#insert-media').sendTemplatesToImage({
+          id:select,
+          templateIds:[21],
+          callback: function(){
+              values = JSON.parse(jQuery('#insert-media').attr('data-templatesToImage'));
+              console.log('File id: '+values[0].id+'\n');
+              console.log('Template id: '+values[0].template_id+'\n');
+              console.log('Url: '+values[0].url+'\n');
+              $("#imgCountry").attr("src",values[0].url);
+          }
+      });
+
+      var datos = jQuery('#insert-media').getMediaURL({
+        pairIds:[
+        {'id':select,'temp':21}
+        ]
+      });
+      console.log(datos);
+      });
+
+    }
+  });
+}
 
 $scope.units = [
          {'id': 19, 'label': '200x100'},
@@ -48,11 +137,11 @@ $scope.data= $scope.units[0]; // Set by default the value "test1"
       var datos={
           'action':6,
           'country_id':$scope.newTag[0].id,
-          'media_id':777,
-          'template_id':$scope.data.id,
+          'media_id': $scope.mediaid,
+          'template_id':$scope.template,
           'position':$scope.position
         };
-        $http.post('../php/countries.php',datos)//creo el tag
+        $http.post('../php/countries.php',datos)
         .success(function(data){
           console.log("se agrego el country media correctamente"+data);
         }).error(function(response){
@@ -166,6 +255,20 @@ $scope.getEditCountry=function(id){
   $http.post('../php/countries.php',datos)
   .success(function(data){
     console.log(data);
+        $scope.positionE=parseInt(data[0].position);
+    $scope.mediaidE=data[0].media_id;
+    jQuery('#insert-media').sendTemplatesToImage({
+        id:data[0].media_id,
+        templateIds:[21],
+        callback: function(){
+            values = JSON.parse(jQuery('#insert-media').attr('data-templatesToImage'));
+            console.log('File id: '+values[0].id+'\n');
+            console.log('Template id: '+values[0].template_id+'\n');
+            console.log('Url: '+values[0].url+'\n');
+            $("#imgCountryE").attr("src",values[0].url);
+        }
+    });
+    console.log(data);
     $scope.position=data[0].position;
   }).error(function(response){
       console.log("No se obtuvieron los countries");
@@ -194,10 +297,7 @@ $scope.updateCountry=function(){
     'id':$scope.idEdit,
     'gpslat':$scope.latitude,
     'gpslong':$scope.longitude,
-    'gpszoom':$scope.zoom,
-    'media_id':30,
-    'template_id':19,
-    'position':$scope.position
+    'gpszoom':$scope.zoom
   };
   $http.post('../php/countries.php',datos)
   .success(function(data){
@@ -222,8 +322,28 @@ for (var i = 0; i <  $scope.languages.length; i++) {
   }).error(function(response){
       console.log("No se obtuvieron los countries");
   });
+
+  var datos={
+      'action':12,
+      'country_id':$scope.idEdit,
+      'media_id': $scope.mediaidE,
+      'template_id':$scope.templateE,
+      'position':$scope.positionE
+    };
+    $http.post('../php/countries.php',datos)
+    .success(function(data){
+      console.log("se agrego el country media correctamente"+data);
+    }).error(function(response){
+        console.log("No agrego el country media");
+    });
 }//end to for
 
 }// end to update country
+
+if($routeParams.id!=null){
+  $scope.idCountryEdit=$routeParams.id;
+  $scope.getEditCountry($scope.idCountryEdit);
+
+}
 
 });// FIN  del controlador

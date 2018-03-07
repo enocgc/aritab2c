@@ -1,16 +1,11 @@
 
-<script type="text/javascript">
-$(document).ready(function() {
-  $('#season').DataTable();
 
-} );
-</script>
 <div class="uk-section uk-padding" data-ng-controller="controlSeason">
   <div class="uk-background-muted uk-padding uk-panel">
     <div class="uk-container uk-container-expand">
       <h3>Seasons</h3>
       <div class="uk-margin-small">
-        <button uk-toggle="target: #add-season" class="uk-button uk-button-danger uk-button-small" type="submit"> <i class="fas fa-plus fa-lg"></i> Add Season</button>
+        <button uk-toggle="target: #add-season" class="uk-button uk-button-danger uk-button-small" type="button" ng-click="getyear()"> <i class="fas fa-plus fa-lg"></i> Add Season</button>
         <button uk-toggle="target: #add-seasonPeriods" class="uk-button uk-button-primary uk-button-small" type="submit"> <i class="fas fa-plus fa-lg"></i> Add Periods</button>
       </div>
       <!--tabla datatables-->
@@ -127,9 +122,8 @@ $(document).ready(function() {
             <div>
               <div class="uk-margin ">
                 <script>
-                $(document).ready(function() {
-                  $year = (new Date()).getFullYear();
-                  $("#year2").attr('value',$year);
+                jQuery(document).ready(function() {
+
                 });
                 </script>
                 <label class="uk-form-label" >Year</label>

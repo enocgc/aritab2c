@@ -1,0 +1,105 @@
+
+<!--MODAL UPDATE location-->
+<div class="uk-section uk-padding"  data-ng-controller="controlLocations">
+    <div class="uk-background-muted uk-padding uk-panel">
+            <div class="">
+                <h3>Edit Location</h3>
+                <form method="post" class="uk-form-horizontal ">
+                    <div uk-grid class="uk-child-width-1-2@m uk-grid-divider ">
+                        <div>
+                            <div class="uk-margin ">
+                               <label class="uk-form-label" >Name</label>
+                              <div class="uk-form-controls">
+                                <ul uk-tab>
+                                  <li  ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                                </ul>
+                                <ul class="uk-switcher uk-margin">
+                                  <li  ng-repeat="language in languages"><input class="uk-input" type="text" placeholder="{{language.name}}" id="nameE-{{language.id}}"></li>
+
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                                <div class="uk-form-controls">
+                                  <ul uk-tab>
+                                    <li ng-repeat="language in languages"><a href="#">{{language.name}}</a></li>
+                                  </ul>
+                                  <ul class="uk-switcher uk-margin">
+                                    <li ng-repeat="language in languages"><textarea class="uk-textarea" rows="4" placeholder="{{language.name}}..." id="descriptionE-{{language.id}}"></textarea></li>
+                                  </ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+                           <div>
+                              <div class="uk-margin">
+                                 <label class="uk-form-label" for="form-stacked-text">Media</label>
+                                <div class="uk-form-controls">
+                                  <img src="http://fakeimg.pl/120x120/" alt="" id="img">
+                                  &nbsp;&nbsp;
+                                  <!-- <button class="uk-button" type="button" uk-toggle="target: #modal-media"><span uk-icon="icon: image"></span> Select Media</button> -->
+                                  <button class="uk-button" type="button" onclick="alert('Boton media')"><span uk-icon="icon: image"></span> Select Media</button>
+                                </div>
+                              </div>
+                              <div class="uk-margin">
+                                 <label class="uk-form-label" for="form-stacked-text">Template</label>
+                                <div class="uk-form-controls">
+                                             <select class="uk-select" ng-model="data" ng-options="opt as opt.label for opt in units ">
+                                            </select>
+                                </div>
+                              </div>
+                              <div class="uk-margin">
+                                 <label class="uk-form-label" for="form-stacked-text">Position</label>
+                                <div class="uk-form-controls">
+                                <input class="uk-input" type="text" ng-model="position" value="0"/>
+                                </div>
+                              </div>
+                              <div class="uk-margin">
+                                 <label class="uk-form-label" for="form-stacked-text">Country</label>
+                                <div class="uk-form-controls">
+                                             <select class="uk-select" ng-model="dataCountrySelect" ng-options="opt as opt.name for opt in countrieslist ">
+                                            </select>
+                                </div>
+                         </div>
+                          </div>
+                          <!--mapa  -->
+                           <div class="uk-width-1-2@m uk-text-center">
+                            <label class="uk-form-label" for="form-stacked-text">Latitude</label>
+                          <div class="uk-form-controls">
+                            <input id="lat" class="uk-input" type="text" ng-model="latitude" value="0"/>
+                          </div>
+                          </div>
+                          <div class="uk-width-1-2@m uk-text-center">
+                            <label class="uk-form-label" for="form-stacked-text">Longitude</label>
+                           <div class="uk-form-controls">
+                             <input id="lng" class="uk-input" type="text" ng-model="longitude" value="0"/>
+                           </div>
+                          </div>
+                          <div class="uk-width-1-2@m uk-text-center">
+                            <label class="uk-form-label" for="form-stacked-text">Zoom</label>
+                           <div class="uk-form-controls">
+                             <input id="zoom" class="uk-input" type="text" ng-model="zoom" value="0"/>
+                           </div>
+                          </div>
+                          <div class="uk-width-1-1 uk-text-center">
+                            <div class="contenedormapa">
+                                <div id="map-canvas"/>
+                              </div>
+                        </div>
+                        <script type="text/javascript">
+                        initialize();
+                        </script>
+                          <!-- endmapa -->
+                        <div class="uk-width-1-1 uk-text-center">
+                            <button class="uk-button uk-button-primary "  ng-click="updateLocation();" type="button">Save</button>
+                            <a href="#locationlist"class="uk-button uk-button-danger" type="button" >Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- fin de modal editar -->
+</div>
